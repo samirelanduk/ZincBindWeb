@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Nav extends React.Component {
 
@@ -20,16 +21,16 @@ class Nav extends React.Component {
 	render() {
 		return (
 			<nav>
-				<div className="logo">ZincBind</div>
+				<Link className="logo" to="/">ZincBind</Link>
 				<div className="mobile-menu" onClick={this.toggleMenu}>
 					<div><div></div><div></div><div></div></div>
 				</div>
 				<div className="nav-links">
-					<a>Search</a>
-					<a>Predict</a>
-					<a>Data</a>
-					<a>About</a>
-					<a>Help</a>
+					<Link to="/search/">Search</Link>
+					<Link to="/predict/">Predict</Link>
+					<Link to="/data/">Data</Link>
+					<Link to="/about/">About</Link>
+					<Link to="/help/">Help</Link>
 				</div>
 			</nav>
 		);
