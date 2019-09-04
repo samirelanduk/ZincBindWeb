@@ -1,0 +1,80 @@
+nav {
+	background-color: $purple-5;
+	color: white;
+	display: flex;
+	position: relative;
+	height: $navheight;
+	align-items: center;
+	padding: 0px $gap-4;
+	box-shadow: $box-shadow-1;
+	left: 0;
+	right:0;
+
+	.logo {
+		display: block;
+		font-family: "Exo 2";
+		font-size: $font-size-8;
+	}
+
+	.mobile-menu {
+		display: flex;
+		justify-content: flex-end;
+		flex-grow: 5;
+
+		div {
+			cursor: pointer;
+
+			div {
+				width: 20px;
+				height: 3px;
+				background-color: #fff;
+				margin: $gap-1 0px;
+			}
+		}
+	}
+
+	.nav-links {
+		position: absolute;
+		top: $navheight;
+		width: 100%;
+		background-color: $purple-4;
+		height: 0px;
+		overflow: hidden;
+		margin-left: -$gap-4;
+		transition-property: height;
+		transition-duration: 0.2s;
+		transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+		a {
+			display: block;
+			height: auto;
+			width: 100%;
+			line-height: 2.5;
+			padding-left: $gap-4;
+			font-size: $font-size-5;
+		}
+	}
+}
+
+@media (min-width: 600px) {
+	nav {
+		.mobile-menu {
+			display: none;
+		}
+
+		.nav-links {
+			height: $navheight;
+			align-items: center;
+			width: auto;
+			position: absolute;
+			display: flex;
+			flex-grow: 5;
+			justify-content: flex-end;
+			top: 0;
+			right: 0;
+			background-color: #ffffff00;
+			margin-right: $gap-4;
+		}
+	}
+
+}
