@@ -1,4 +1,6 @@
-@import "style/reset";
 @import "style/presets";
+@import "style/reset";
+@import "style/core";
 
-@import "components/style/Nav.scss"
+@import "components/style/Nav.scss";
+@import "components/style/Home.scss";
