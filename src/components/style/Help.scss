@@ -1,0 +1,18 @@
+.help {
+
+    .box {
+        width: 100%;
+        max-width: 600px;
+        margin: $gap-3 auto;
+    }
+
+    h2 {
+        font-size: $font-size-7;
+        margin-bottom: $gap-3;
+    }
+
+    p {
+        line-height: 1.8;
+        margin-bottom: $gap-2;
+    }
+}

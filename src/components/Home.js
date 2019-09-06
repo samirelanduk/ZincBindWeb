@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import zincsite from '../images/zincsite.png';
 
 class Home extends Component {
@@ -15,7 +16,7 @@ class Home extends Component {
                         <p>ZincBind is a database of zinc binding sites, automatically generated from the Protein Data Bank. There are currently 6,458 unique sites, with 31,753 representatives across 14,657 PDB files.</p>
                     </div>
                     <div className="home-cell site-search">
-                        <div className="small-links"><a href="/data/all/">Browse all sites</a></div>
+                        <div className="small-links"><Link to="/data/all/">Browse all sites</Link></div>
                         <form action="/search">
                             <input autocomplete="off" name="q" placeholder="PDB code, description, etc." type="text" />
                             <input type="submit" value="Search" />
