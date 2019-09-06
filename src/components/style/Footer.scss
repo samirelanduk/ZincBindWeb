@@ -1,0 +1,60 @@
+footer {
+    background-color: $purple-5;
+    color: $purple-3;
+    font-size: $font-size-4;
+    letter-spacing: 0.8px;
+    box-shadow: $box-shadow-1;
+
+    a {
+        color: $purple-3;
+        text-decoration: underline;
+        font-weight: 300;
+    } 
+
+    .links {
+        text-align: center;
+        padding: $gap-4;
+        display: grid;
+        grid-gap: $gap-4;
+
+        h3 {
+            margin-bottom: $gap-3;
+            text-transform: uppercase;
+        }
+
+        a {
+            display: block;
+            font-size: $font-size-3;
+            margin-bottom: $gap-2;
+        }
+    }
+
+    .attribution {
+        background-color: $purple-6;
+        text-align: center;
+        padding: $gap-4;
+    }
+}
+
+@media (min-width: 500px) {
+    footer {
+        font-size: $font-size-5;
+
+        .links {
+            grid-template-columns: 1fr 1fr;
+            padding: $gap-6;
+
+            .useful {
+                margin-left: calc(100vw / 2 - 300px);
+            }
+
+            .related {
+                margin-right: calc(100vw / 2 - 300px);
+            }
+
+            a {
+                font-size: $font-size-4;
+            }
+        }
+    }
+}

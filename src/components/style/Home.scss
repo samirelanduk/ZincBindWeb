@@ -81,6 +81,7 @@
         .site-info {
             text-align: center;
             padding: $gap-4;
+            padding-bottom: $gap-7;
     
             h2 {
                 margin-bottom: $gap-3;
@@ -140,6 +141,7 @@
         .home-2 {
             .site-info {
                 display: flex;
+                padding-bottom: inherit;
                 flex-direction: column;
                 justify-content: center;
 

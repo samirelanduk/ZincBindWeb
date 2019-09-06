@@ -8,6 +8,7 @@ import Predict from "./Predict";
 import Data from "./Data";
 import About from "./About";
 import Help from "./Help";
+import Footer from "./Footer";
 
 class App extends React.Component {
 	render() {
@@ -22,6 +23,7 @@ class App extends React.Component {
 					<Route path="/about" exact component={About} />
 					<Route path="/help" exact component={Help} />
 				</Switch>
+				<Footer />
 			</BrowserRouter>
 		);
 	}
