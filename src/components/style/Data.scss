@@ -1,0 +1,32 @@
+.data {
+
+    .box {
+        width: 100%;
+        max-width: 1000px;
+        margin: $gap-3 auto;
+
+        p {
+            line-height: 2;
+        }
+    }
+
+    .charts {
+        display: grid;
+        grid-gap: $gap-3;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0px auto;
+
+        .box {
+            margin: 0px;
+        }
+    }
+}
+
+@media (min-width: 800px) {
+    .data {
+        .charts {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
