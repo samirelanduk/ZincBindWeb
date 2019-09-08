@@ -1,5 +1,10 @@
 import React from "react";
 import {BrowserRouter } from "react-router-dom";
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloLink } from 'apollo-link';
+import { createHttpLink } from "apollo-link-http";
+import { ApolloProvider } from "react-apollo";
 import { Route, Switch } from "react-router";
 import Nav from "./Nav";
 import Home from "./Home";
@@ -11,20 +16,27 @@ import Help from "./Help";
 import Footer from "./Footer";
 
 class App extends React.Component {
+
+	httpLink = createHttpLink({ uri: "https://api.zincbind.net/" });
+    link = ApolloLink.from([this.httpLink]);
+	client = new ApolloClient({cache: new InMemoryCache(), link: this.link});
+	
 	render() {
 		return (
-			<BrowserRouter>
-				<Nav />
-				<Switch>
-					<Route path="/" exact component={Home} />
-					<Route path="/search" exact component={Search} />
-					<Route path="/predict" exact component={Predict} />
-					<Route path="/data" exact component={Data} />
-					<Route path="/about" exact component={About} />
-					<Route path="/help" exact component={Help} />
-				</Switch>
-				<Footer />
-			</BrowserRouter>
+			<ApolloProvider client={this.client}>
+				<BrowserRouter>
+					<Nav />
+					<Switch>
+						<Route path="/" exact component={Home} />
+						<Route path="/search" exact component={Search} />
+						<Route path="/predict" exact component={Predict} />
+						<Route path="/data" exact render={() => <Data client={this.client}/>} />
+						<Route path="/about" exact component={About} />
+						<Route path="/help" exact component={Help} />
+					</Switch>
+					<Footer />
+				</BrowserRouter>
+			</ApolloProvider>
 		);
 	}
 }
