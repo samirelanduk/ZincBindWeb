@@ -11,14 +11,19 @@
     }
 
     .charts {
-        display: grid;
-        grid-gap: $gap-3;
         width: 100%;
         max-width: 1000px;
         margin: 0px auto;
 
         .box {
             margin: 0px;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: $gap-3;
+        }
+
+        .box:nth-child(6) {
+            margin-bottom: 0;
         }
     }
 }
@@ -26,7 +31,22 @@
 @media (min-width: 800px) {
     .data {
         .charts {
-            grid-template-columns: 1fr 1fr;
+
+            .box {
+                width: calc(50% - #{$gap-3 / 2});
+            }
+
+            .box:nth-child(odd) {
+                margin-right: $gap-3 / 2;
+            }
+
+            .box:nth-child(even) {
+                margin-left: $gap-3 / 2;
+            }
+
+            .box:nth-child(5) {
+                margin-bottom: 0;
+            }
         }
     }
 }

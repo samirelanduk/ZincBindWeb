@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Box from "./Box";
+import Chart from "./Chart"
 
 class Data extends Component {
     constructor(props) {
@@ -22,27 +23,27 @@ class Data extends Component {
 
                 <div className="charts">
                     <Box>
-                        chart1
+                        <Chart title="Residues" color="#079992" data={[[], []]} />
                     </Box>
 
                     <Box>
-                        chart2
+                        <Chart title="Techniques" color="#0a3d62" data={[[], []]} />
                     </Box>
 
                     <Box>
-                        chart3
+                        <Chart title="Species" color="#0c2461" data={[[], []]} />
                     </Box>
 
                     <Box>
-                        chart4
+                        <Chart title="Classifications" color="#b71540" data={[[], []]} />
                     </Box>
 
                     <Box>
-                        chart5
+                        <Chart title="Families" color="#e58e26" data={[[], []]} />
                     </Box>
 
                     <Box>
-                        chart6
+                        <Chart title="Resolution" color="#6a89cc" data={[[], []]} />
                     </Box>
                 </div>
             </main>
