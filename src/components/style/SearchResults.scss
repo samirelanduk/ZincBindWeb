@@ -1,0 +1,95 @@
+.search-results {
+
+    .box {
+        width: 100%;
+        max-width: 1200px;
+        margin: $gap-3 auto;
+
+        .row-1, .row-3 {
+            border-bottom: 1px solid $purple-3;
+        }
+
+        .row-1 {
+            display: flex;
+
+            div {
+                padding: $gap-2;
+                display: flex;
+                align-items: center;
+            }
+
+            .id {
+                font-size: $font-size-5;
+            }
+
+            .id, .date {
+                border-right: 1px solid $purple-3;
+            }
+
+            .species {
+                font-style: italic;
+            }
+        }
+
+        .row-2 {
+            padding: $gap-3 $gap-2;
+            font-size: $font-size-1;
+        }
+
+        .row-3 {
+            display: flex;
+            font-size: $font-size-2;
+            padding-bottom: $gap-1;
+
+            div {
+                padding: 0px $gap-1;
+            }
+
+            .classification {
+                padding-left: $gap-2;
+                border-right: 1px solid $purple-3;
+            }
+
+            .technique {
+                padding-right: 0;
+            }
+        }
+
+        .zincsite {
+            margin-left: $gap-5;
+            border-left: 1px solid $purple-3;
+            border-bottom: 1px solid $purple-3;
+            padding: $gap-2;
+
+            .site-id {
+                font-size: $font-size-4;
+            }
+
+            .residues {
+                color: $gray-6;
+
+                span {
+                    margin-left: $gap-1;
+                }
+            }
+        }
+
+        .zincsite:last-child {
+            border-bottom-width: 0;
+        }
+    }
+}
+
+@media (min-width: 600px) {
+    .search-results {
+        .box {
+            .row-2 {
+                font-size: $font-size-2;
+            }
+
+            .row-3 {
+                font-size: $font-size-3;
+            }
+        }
+    }
+}

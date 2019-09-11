@@ -11,6 +11,7 @@ import Home from "./Home";
 import Search from "./Search";
 import Predict from "./Predict";
 import Data from "./Data";
+import AllData from "./AllData";
 import About from "./About";
 import Help from "./Help";
 import Footer from "./Footer";
@@ -31,6 +32,7 @@ class App extends React.Component {
 						<Route path="/search" exact component={Search} />
 						<Route path="/predict" exact component={Predict} />
 						<Route path="/data" exact render={() => <Data client={this.client}/>} />
+						<Route path="/data/all" exact component={AllData} />
 						<Route path="/about" exact component={About} />
 						<Route path="/help" exact component={Help} />
 					</Switch>
