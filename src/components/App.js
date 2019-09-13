@@ -22,6 +22,10 @@ class App extends React.Component {
     link = ApolloLink.from([this.httpLink]);
 	client = new ApolloClient({cache: new InMemoryCache(), link: this.link});
 	
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
 	render() {
 		return (
 			<ApolloProvider client={this.client}>
@@ -32,7 +36,7 @@ class App extends React.Component {
 						<Route path="/search" exact component={Search} />
 						<Route path="/predict" exact component={Predict} />
 						<Route path="/data" exact render={() => <Data client={this.client}/>} />
-						<Route path="/data/all" exact component={AllData} />
+						<Route path="/data/all" exact render={({history}) => <AllData history={history} /> } />
 						<Route path="/about" exact component={About} />
 						<Route path="/help" exact component={Help} />
 					</Switch>
@@ -40,6 +44,8 @@ class App extends React.Component {
 				</BrowserRouter>
 			</ApolloProvider>
 		);
+
+		
 	}
 }
 

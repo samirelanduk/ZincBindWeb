@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import Box from "./Box";
 
 class SearchResult extends Component {
@@ -41,4 +42,4 @@ class SearchResult extends Component {
     }
 }
  
-export default SearchResult;
+export default withRouter(SearchResult);
