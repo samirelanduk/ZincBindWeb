@@ -5,10 +5,7 @@ import Box from "./Box";
 import Chart from "./Chart"
 
 class Data extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
+    
     render() { 
         const RESIDUES_QUERY = gql`{ stats { residueCounts(cutoff: 5) {
             label count

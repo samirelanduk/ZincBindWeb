@@ -21,13 +21,13 @@ a {
     color: hsl(208, 100%, 43%);
 }
 
-input, select {
+input, select, button, textarea {
     display: block;
     background-color: white;
     padding: $gap-2;
     font-size: $font-size-3;
     border: 1px solid $purple-3;
-    border-radius: $border-radius-2;
+    border-radius: $border-radius-1;
     width: 100%;
     box-shadow: $internal-shadow;
 }
@@ -47,6 +47,18 @@ select {
 	padding-right: $select-box-width + 0.5rem;
 	cursor: pointer;
 }
+
+input[type=submit], button {
+    width: auto;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $purple-5;
+    color: #fff;
+    border: none;
+    
+}
+
 
 @media (min-width: 600px) {
     html {

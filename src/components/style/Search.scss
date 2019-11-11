@@ -1,0 +1,101 @@
+.search {
+
+    .box {
+        width: 100%;
+        max-width: 900px;
+        margin: $gap-3 auto;
+
+        .search-input {
+            display: grid;
+
+            select {
+                font-size: $font-size-2;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            input {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-top-width: 0;
+            }
+        }
+
+        .search-buttons {
+            display: flex;
+            margin: $gap-4 0 0 0;
+            justify-content: center;
+
+            button {
+                margin: 0 $gap-1;
+                font-size: $font-size-2;
+            }
+        }
+
+        textarea {
+            font-family: 'Courier New', Courier, monospace;
+            height: 300px;
+            margin: $gap-3 0;
+        }
+
+        select.expect {
+            margin: $gap-2 auto;
+            max-width: 300px;
+            
+        }
+
+        button {
+            margin: $gap-5 auto $gap-3 auto;
+        }
+    }
+
+}
+
+@media (min-width: 500px) {
+    .search {
+
+        .box {
+
+            .search-input {
+                grid-template-columns: 1fr 1fr;
+
+                select {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius: $border-radius-1;
+                    font-size: inherit;
+                }
+
+                input {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    border-top-right-radius: $border-radius-1;
+                    border-left-width: 0;
+                    border-top-width: 1px;
+                }
+            }
+
+            .search-buttons {
+                display: flex;
+                margin: $gap-4 0;
+                justify-content: center;
+    
+                button {
+                    margin: 0 $gap-3;
+                }
+            }
+
+            textarea {
+                margin: $gap-4 0 $gap-6 0;
+            }
+    
+            select.expect {
+                margin: $gap-3 auto;
+            }
+    
+            button {
+                margin: $gap-6 auto $gap-4 auto;
+            }
+        }
+    }
+}
