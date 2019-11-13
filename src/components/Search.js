@@ -6,7 +6,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            terms: [{deletable: false, selected: "title"}]
+            terms: [{deletable: false, selected: "title", value: ""}]
         }
     }
 
@@ -15,7 +15,7 @@ class Search extends Component {
         for (let term of terms) {
             term.deletable = true;
         }
-        terms.push({deletable: true, selected: "title"});
+        terms.push({deletable: true, selected: "title", value: ""});
         this.setState({terms: terms});
     }
 
@@ -23,6 +23,13 @@ class Search extends Component {
         const index = parseInt(e.target.parentNode.getAttribute("data-index"));
         let terms = this.state.terms;
         terms[index].selected = e.target.value;
+        this.setState({terms: terms});
+    }
+
+    handleInputChange = (e) => {
+        const index = parseInt(e.target.parentNode.getAttribute("data-index"));
+        let terms = this.state.terms;
+        terms[index].value = e.target.value;
         this.setState({terms: terms});
     }
 
@@ -36,7 +43,20 @@ class Search extends Component {
             }
         }
         this.setState({terms: terms})
+    }
 
+    search = () => {
+        let query = [];
+        for (let term of this.state.terms) {
+            if (term.value) {
+                query.push(`${term.selected}=${term.value}`);
+            }
+        }
+        query = query.join("&");
+        if (query) {
+            this.props.history.push(`/search?${query}`);
+        }
+        
     }
     
     render() { 
@@ -67,14 +87,14 @@ class Search extends Component {
                                     <option data-placeholder="e.g. H3, C2" value="code">Family contains</option>
                                     <option data-placeholder="e.g. GLU, BON" value="residue_names">Residue names contain</option>
                                 </select>
-                                <input type="text"></input>{term.deletable && <button className="remove-term" onClick={this.removeTerm}>×</button>}
+                                <input type="text" onChange={this.handleInputChange}></input>{term.deletable && <button className="remove-term" onClick={this.removeTerm}>×</button>}
                             </div>
                         })}
                         
 
                     <div className="search-buttons">
                         <button onClick={this.addTerm}>New Term</button>
-                        <button>Search</button>
+                        <button onClick={this.search}>Search</button>
                     </div>
                     
                 </Box>

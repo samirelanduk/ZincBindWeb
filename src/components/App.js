@@ -33,7 +33,7 @@ class App extends React.Component {
 					<Nav />
 					<Switch>
 						<Route path="/" exact component={Home} />
-						<Route path="/search" exact component={Search} />
+						<Route path="/search" exact render={({history}) => <Search history={history} /> } />
 						<Route path="/predict" exact component={Predict} />
 						<Route path="/data" exact render={() => <Data client={this.client}/>} />
 						<Route path="/data/all" exact render={({history}) => <AllData history={history} /> } />
