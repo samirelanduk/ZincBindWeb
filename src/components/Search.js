@@ -6,7 +6,9 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            terms: [{deletable: false, selected: "title", value: ""}]
+            terms: [{deletable: false, selected: "title", value: ""}],
+            blastString: "",
+            expectString: "10"
         }
     }
 
@@ -56,6 +58,22 @@ class Search extends Component {
         if (query) {
             this.props.history.push(`/search?${query}`);
         }
+    }
+
+    blastStringUpdate = (e) => {
+        const value = e.target.value;
+        this.setState({blastString: value});
+    }
+
+    expectUpdate = (e) => {
+        this.setState({expectString: e.target.value});
+    }
+
+    blastSearch = () => {
+        if (this.state.blastString) {
+            let query = `sequence=${this.state.blastString}&expect=${this.state.expectString}`;
+            this.props.history.push(`/search?${query}`);
+        }
         
     }
     
@@ -102,11 +120,11 @@ class Search extends Component {
                 <Box>
                     <h2>BLAST Search</h2>
 
-                    <textarea placeholder="Raw or FASTA formatted peptide sequence"></textarea>
+                    <textarea onChange={this.blastStringUpdate} placeholder="Raw or FASTA formatted peptide sequence"></textarea>
 
                     <label>Expect Threshold</label>
 
-                    <select className="expect" name="threshold" defaultValue="10">
+                    <select className="expect" name="threshold" defaultValue="10" onChange={this.expectUpdate}>
                         <option value="0.0001">0.0001</option>
                         <option value="0.001">0.001</option>
                         <option value="0.01">0.01</option>
@@ -117,7 +135,7 @@ class Search extends Component {
                         <option value="1000">1000</option>
                     </select>
 
-                    <button>BLAST Search</button>
+                    <button onClick={this.blastSearch}>BLAST Search</button>
                 </Box>
             </main>
         )
