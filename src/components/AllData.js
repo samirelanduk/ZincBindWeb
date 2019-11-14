@@ -9,7 +9,7 @@ class AllData extends Component {
     
     render() {
 
-        const QUERY = gql`query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip) { edges { node {
+        const QUERY = this.props.query || gql`query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip) { edges { node {
             id depositionDate organism title classification technique resolution zincsites {
                 edges { node { id residues { edges { node { id atomiumId }}} } }
             }
