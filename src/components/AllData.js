@@ -6,27 +6,62 @@ import SearchNav from "./SearchNav";
 import SearchResult from "./SearchResult";
 
 class AllData extends Component {
+
+    paramsObject = (string) => {
+        let params = {};
+        if (string) {
+            let queries = string.slice(1).split("&");
+            for (const query of queries) {
+                let [k, v] = query.split("=");
+                params[k] = v;
+            }
+        }
+        return params
+    }
     
     render() {
 
-        const QUERY = this.props.query || gql`query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip) { edges { node {
+        // Get keywords as dict
+        let params = this.paramsObject(this.props.history.location.search);
+
+        // How should the results be sorted?
+        const sort = "sort" in params ? params.sort : "-deposition_date";
+
+        // How many pages should be skipped?
+        const skip = "page" in params ? (parseInt(params.page) - 1) * 25 : 0;
+
+        // What filters should be applied
+        const lookup = {
+            title: "title__contains", classification: "classification__contains",
+            keywords: "keywords__contains", organism: "organism__contains",
+            expression: "expressionSystem__contains", technique: "technique__contains",
+            resolution_lt: "resolution__lt", resolution_gt: "resolution__gt",
+            rfactor_lt: "rfactor__lt", rfactor_gt: "rfactor__gt",
+            deposited_lt: "depositionDate__lt", deposited_gt: "depositionDate__gt"
+        }
+        let query = [];
+        for (let key in lookup) {
+            if (key in params) {
+                const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
+                query.push(`${lookup[key]}: ${value}`)
+            }
+        }
+        query = query.join(", ");
+        if (query) {
+            query = ", " + query;
+        }
+        console.log(query);
+
+        // Make query
+        const query_string = `query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip${query}) { edges { node {
             id depositionDate organism title classification technique resolution zincsites {
                 edges { node { id residues { edges { node { id atomiumId }}} } }
             }
-        } } } count: stats { pdbCount }}`;
+        } } } count: stats { pdbCount }}`
 
-        let params = this.props.history.location.search;
-        let keywords = params.slice(1).split("&");
-        let sort = "-deposition_date";
-        let skip = 0;
-        for (let keyword of keywords) {
-            if (keyword.split("=")[0] === "sort") {
-                sort = keyword.split("=")[1];
-            }
-            if (keyword.split("=")[0] === "page") {
-                skip = (parseInt(keyword.split("=")[1]) - 1) * 25;
-            }
-        }
+        const QUERY = gql(query_string);
+
+        
         
 
         return (

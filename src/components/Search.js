@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import gql from "graphql-tag";
 import Box from "./Box";
 import AllData from "./AllData";
 
@@ -8,7 +7,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            terms: [{deletable: false, selected: "title__contains", value: ""}],
+            terms: [{deletable: false, selected: "title", value: ""}],
             blastString: "",
             expectString: "10"
         }
@@ -19,7 +18,7 @@ class Search extends Component {
         for (let term of terms) {
             term.deletable = true;
         }
-        terms.push({deletable: true, selected: "title__contains", value: ""});
+        terms.push({deletable: true, selected: "title", value: ""});
         this.setState({terms: terms});
     }
 
@@ -81,25 +80,7 @@ class Search extends Component {
     
     render() {
         if (this.props.history.location.search) {
-            const terms = this.props.history.location.search.slice(1).split("&");
-            let query = [];
-            for (const term of terms) {
-                let words = term.split("=");
-                if (!["page", "sort"].includes(words[0])) {
-                    words[1] = isNaN(words[1]) ? `"${words[1]}"` : words[1]
-                    query.push(`${words[0]}: ${words[1]}`)
-                }
-            }
-            query = query.join(", ");
-            
-            const query_string = `query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip, ${query}) { edges { node {
-                id depositionDate organism title classification technique resolution zincsites {
-                    edges { node { id residues { edges { node { id atomiumId }}} } }
-                }
-            } } } count: stats { pdbCount }}`
-            const QUERY = gql(query_string);
-
-            return <AllData history={this.props.history} query={QUERY} />
+            return <AllData history={this.props.history} />
         }
         return (
             <main className="search">
@@ -112,21 +93,21 @@ class Search extends Component {
                         {this.state.terms.map((term, i) => {
                             return <div className="search-input" key={i} data-index={i}>
                                 <select value={term.selected} onChange={this.updateSelect}>
-                                    <option data-placeholder="e.g. antibody, carbonic anhydrase" value="title__contains">Title contains</option>
-                                    <option data-placeholder="e.g. oxidoreductase, membrane" value="classification__contains">Classification contains</option>
-                                    <option data-placeholder="e.g. ion channel, zinc finger" value="keywords__contains">Keywords contain</option>
-                                    <option data-placeholder="e.g. homo sapiens" value="organism__contains">Organism contains</option>
-                                    <option data-placeholder="e.g. saccharomyces" value="expression__contains">Expression System contains</option>
-                                    <option data-placeholder="e.g. NMR" value="technique__contains">Technique contains</option>
-                                    <option data-placeholder="e.g. 2.5" value="resolution__lt">Resolution better than</option>
-                                    <option data-placeholder="e.g. 10" value="resolution__gt">Resolution worse than</option>
-                                    <option data-placeholder="e.g. 0.2" value="rfactor__lt">Rfactor better than</option>
-                                    <option data-placeholder="e.g. 0.3" value="rfactor__gt">Rfactor worse than</option>
+                                    <option data-placeholder="e.g. antibody, carbonic anhydrase" value="title">Title contains</option>
+                                    <option data-placeholder="e.g. oxidoreductase, membrane" value="classification">Classification contains</option>
+                                    <option data-placeholder="e.g. ion channel, zinc finger" value="keywords">Keywords contain</option>
+                                    <option data-placeholder="e.g. homo sapiens" value="organism">Organism contains</option>
+                                    <option data-placeholder="e.g. saccharomyces" value="expression">Expression System contains</option>
+                                    <option data-placeholder="e.g. NMR" value="technique">Technique contains</option>
+                                    <option data-placeholder="e.g. 2.5" value="resolution_lt">Resolution better than</option>
+                                    <option data-placeholder="e.g. 10" value="resolution_gt">Resolution worse than</option>
+                                    <option data-placeholder="e.g. 0.2" value="rfactor_lt">Rfactor better than</option>
+                                    <option data-placeholder="e.g. 0.3" value="rfactor_gt">Rfactor worse than</option>
                                     <option data-placeholder="e.g. 2017-01-01" value="deposited_gt">Deposited since</option>
-                                    <option data-placeholder="e.g. 2000-01-01" value="deposited__lt">Deposited before</option>
-                                    <option data-placeholder="e.g. H3, C2H2" value="family__contains">Family is</option>
-                                    <option data-placeholder="e.g. H3, C2" value="code__contains">Family contains</option>
-                                    <option data-placeholder="e.g. GLU, BON" value="residue_names__contains">Residue names contain</option>
+                                    <option data-placeholder="e.g. 2000-01-01" value="deposited_lt">Deposited before</option>
+                                    <option data-placeholder="e.g. H3, C2H2" value="family">Family is</option>
+                                    <option data-placeholder="e.g. H3, C2" value="code">Family contains</option>
+                                    <option data-placeholder="e.g. GLU, BON" value="residue_names">Residue names contain</option>
                                 </select>
                                 <input type="text" onChange={this.handleInputChange}></input>{term.deletable && <button className="remove-term" onClick={this.removeTerm}>×</button>}
                             </div>
