@@ -50,14 +50,13 @@ class AllData extends Component {
         if (query) {
             query = ", " + query;
         }
-        console.log(query);
 
         // Make query
         const query_string = `query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip${query}) { edges { node {
             id depositionDate organism title classification technique resolution zincsites {
                 edges { node { id residues { edges { node { id atomiumId }}} } }
             }
-        } } } count: stats { pdbCount }}`
+        } } } count: pdbs(sort: $sort${query}) { count }}`
 
         const QUERY = gql(query_string);
 
@@ -67,7 +66,7 @@ class AllData extends Component {
         return (
             <main className="all-data search-results">
                 <Box>
-                    <h1>All Data</h1>
+                    <h1>{query ? "Search Results" : "All Data"}</h1>
                 </Box>
 
                 
@@ -80,13 +79,13 @@ class AllData extends Component {
                             }
                             return (
                                 <Fragment>
-                                <SearchNav history={this.props.history} sort={sort} count={data.count.pdbCount} />
+                                <SearchNav history={this.props.history} sort={sort} count={data.count.count} />
                                 <div className="results">{
                                     data.pdbs.edges.map((edge) => {
                                         return <SearchResult pdb={edge.node} key={edge.node.id} />
                                     })
                                 }</div>
-                                <SearchNav history={this.props.history} sort={sort} count={data.count.pdbCount} />
+                                <SearchNav history={this.props.history} sort={sort} count={data.count.count} />
                                 </Fragment>
                             );
                             
