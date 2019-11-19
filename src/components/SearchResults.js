@@ -41,47 +41,37 @@ class SearchResults extends Component {
         }
 
         // What filters should be applied
-        const pdbLookup = {
-            title: "title__contains", classification: "classification__contains",
-            keywords: "keywords__contains", organism: "organism__contains",
-            expression: "expressionSystem__contains", technique: "technique__contains",
-            resolution_lt: "resolution__lt", resolution_gt: "resolution__gt",
-            rfactor_lt: "rfactor__lt", rfactor_gt: "rfactor__gt",
-            deposited_lt: "depositionDate__lt", deposited_gt: "depositionDate__gt"
-        }
-        let pdbQquery = [];
-        for (let key in pdbLookup) {
-            if (key in params) {
-                const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
-                pdbQquery.push(`${pdbLookup[key]}: ${value}`)
+        let pdbQuery = []; 
+        if ("q" in params) {
+            pdbQuery = [`term: "${params.q}"`]
+        } else {
+            const pdbLookup = {
+                title: "title__contains", classification: "classification__contains",
+                keywords: "keywords__contains", organism: "organism__contains",
+                expression: "expressionSystem__contains", technique: "technique__contains",
+                resolution_lt: "resolution__lt", resolution_gt: "resolution__gt",
+                rfactor_lt: "rfactor__lt", rfactor_gt: "rfactor__gt",
+                deposited_lt: "depositionDate__lt", deposited_gt: "depositionDate__gt"
+            }
+            
+            for (let key in pdbLookup) {
+                if (key in params) {
+                    const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
+                    pdbQuery.push(`${pdbLookup[key]}: ${value}`)
+                }
             }
         }
-        pdbQquery = pdbQquery.join(", ");
-        if (pdbQquery) {
-            pdbQquery = ", " + pdbQquery;
-        }
-        const siteLookup = {
-            family: "family", code: "family__contains",
-            residue_name: "residueNames__contains"
-        }
-        let siteQuery = [];
-        for (let key in siteLookup) {
-            if (key in params) {
-                const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
-                siteQuery.push(`${siteLookup[key]}: ${value}`)
-            }
-        }
-        siteQuery = siteQuery.join(", ");
-        if (siteQuery) {
-            siteQuery = `(${siteQuery})`;
+        pdbQuery = pdbQuery.join(", ");
+        if (pdbQuery) {
+            pdbQuery = ", " + pdbQuery;
         }
 
         // Make query
-        const query_string = `query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip${pdbQquery}) { edges { node {
-            id depositionDate organism title classification technique resolution zincsites${siteQuery} {
+        const query_string = `query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip${pdbQuery}) { edges { node {
+            id depositionDate organism title classification technique resolution zincsites {
                 edges { node { id family residues(primary: true) { edges { node { id atomiumId name }}} } }
             }
-        } } } count: pdbs(sort: $sort${pdbQquery}) { count }}`
+        } } } count: pdbs(sort: $sort${pdbQuery}) { count }}`
 
         const QUERY = gql(query_string);
 
@@ -91,7 +81,7 @@ class SearchResults extends Component {
         return (
             <main className="all-data search-results">
                 <Box>
-                    <h1>{pdbQquery ? "Search Results" : "All Data"}</h1>
+                    <h1>{pdbQuery ? "Search Results" : "All Data"}</h1>
                 </Box>
 
                 
