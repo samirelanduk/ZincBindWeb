@@ -125,7 +125,7 @@ class AllData extends Component {
     renderBlast(params, skip) {
         const QUERY = gql`{ blast(sequence: "${params.sequence}", evalue: ${params.expect}, first: 25, skip: ${skip}) {
             count edges { node { id qseq hseq midline evalue score bitScore chain {
-                id atomiumId pdb { id title }
+                id atomiumId pdb { id title } chainInteractions { edges { node { site { id family residues(primary: true) { edges { node { atomiumId name id }}}} }}}
             } } }
         } count: blast(sequence: "${params.sequence}", evalue: ${params.expect}) { count }}`
         return (

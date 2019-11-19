@@ -1,0 +1,25 @@
+.zinc-sites {
+    font-size: $font-size-2;
+    text-align: left;
+    border-top: 1px solid $purple-3;
+    line-height: 1.8;
+
+    .site {
+        padding: $gap-2;
+        margin-left: $gap-6;
+        border-top: 1px solid $purple-3;
+        border-left: 1px solid $purple-3;
+
+        h3 {
+            font-weight: 700;
+        }
+
+        span {
+            padding-right: $gap-1;
+        }
+    }
+
+    .site:nth-child(1) {
+        border-top-width: 0px;
+    }
+}
