@@ -79,7 +79,7 @@ class AllData extends Component {
         // Make query
         const query_string = `query pdbs($sort: String, $skip: Int) { pdbs(sort: $sort, first: 25, skip: $skip${pdbQquery}) { edges { node {
             id depositionDate organism title classification technique resolution zincsites${siteQuery} {
-                edges { node { id family residues { edges { node { id atomiumId name }}} } }
+                edges { node { id family residues(primary: true) { edges { node { id atomiumId name }}} } }
             }
         } } } count: pdbs(sort: $sort${pdbQquery}) { count }}`
 

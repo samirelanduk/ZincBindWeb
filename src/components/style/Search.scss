@@ -5,6 +5,10 @@
         max-width: 900px;
         margin: $gap-3 auto;
 
+        h2 {
+            margin-bottom: $gap-3;
+        }
+
         .search-input {
             display: grid;
             position: relative;
@@ -49,7 +53,7 @@
         textarea {
             font-family: 'Courier New', Courier, monospace;
             height: 300px;
-            margin: $gap-3 0;
+            margin-bottom: $gap-3;
         }
 
         select.expect {
@@ -69,6 +73,10 @@
     .search {
 
         .box {
+
+            h2 {
+                margin-bottom: $gap-4;
+            }
 
             .search-input {
                 grid-template-columns: 1fr 1fr;
@@ -101,7 +109,7 @@
             }
 
             textarea {
-                margin: $gap-4 0 $gap-6 0;
+                margin-bottom: $gap-6;
             }
     
             select.expect {

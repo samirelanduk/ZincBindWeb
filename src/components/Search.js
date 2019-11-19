@@ -89,7 +89,7 @@ class Search extends Component {
                 </Box>
                 
                 <Box>
-                    
+                    <h2>PDB Search</h2>
                         {this.state.terms.map((term, i) => {
                             return <div className="search-input" key={i} data-index={i}>
                                 <select value={term.selected} onChange={this.updateSelect}>
