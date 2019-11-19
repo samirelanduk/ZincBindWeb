@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Box from "./Box";
-import AllData from "./AllData";
+import SearchResults from "./SearchResults";
 
 class Search extends Component {
 
@@ -80,7 +80,7 @@ class Search extends Component {
     
     render() {
         if (this.props.history.location.search) {
-            return <AllData history={this.props.history} />
+            return <SearchResults history={this.props.history} />
         }
         return (
             <main className="search">

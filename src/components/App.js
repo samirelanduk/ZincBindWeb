@@ -11,7 +11,7 @@ import Home from "./Home";
 import Search from "./Search";
 import Predict from "./Predict";
 import Data from "./Data";
-import AllData from "./AllData";
+import SearchResults from "./SearchResults";
 import About from "./About";
 import Help from "./Help";
 import Footer from "./Footer";
@@ -36,7 +36,7 @@ class App extends React.Component {
 						<Route path="/search" exact render={({history}) => <Search history={history} /> } />
 						<Route path="/predict" exact component={Predict} />
 						<Route path="/data" exact render={() => <Data client={this.client}/>} />
-						<Route path="/data/all" exact render={({history}) => <AllData history={history} /> } />
+						<Route path="/data/all" exact render={({history}) => <SearchResults history={history} /> } />
 						<Route path="/about" exact component={About} />
 						<Route path="/help" exact component={Help} />
 					</Switch>

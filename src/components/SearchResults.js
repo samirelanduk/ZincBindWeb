@@ -6,7 +6,7 @@ import SearchNav from "./SearchNav";
 import SearchResult from "./SearchResult";
 import SequenceResult from "./SequenceResult";
 
-class AllData extends Component {
+class SearchResults extends Component {
 
     paramsObject = (string) => {
         let params = {};
@@ -158,4 +158,4 @@ class AllData extends Component {
     }
 }
 
-export default AllData;
+export default SearchResults;
