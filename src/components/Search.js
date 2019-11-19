@@ -105,9 +105,9 @@ class Search extends Component {
                                     <option data-placeholder="e.g. 0.3" value="rfactor_gt">Rfactor worse than</option>
                                     <option data-placeholder="e.g. 2017-01-01" value="deposited_gt">Deposited since</option>
                                     <option data-placeholder="e.g. 2000-01-01" value="deposited_lt">Deposited before</option>
-                                    <option data-placeholder="e.g. H3, C2H2" value="family">Family is</option>
+                                    {/* <option data-placeholder="e.g. H3, C2H2" value="family">Family is</option>
                                     <option data-placeholder="e.g. H3, C2" value="code">Family contains</option>
-                                    <option data-placeholder="e.g. GLU, BON" value="residue_names">Residue names contain</option>
+                                    <option data-placeholder="e.g. GLU, BON" value="residue_names">Residue names contain</option> */}
                                 </select>
                                 <input type="text" onChange={this.handleInputChange}></input>{term.deletable && <button className="remove-term" onClick={this.removeTerm}>×</button>}
                             </div>

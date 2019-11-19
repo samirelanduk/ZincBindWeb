@@ -5,12 +5,9 @@
         max-width: 1200px;
         margin: $gap-3 auto;
 
-        .row-1, .row-3 {
-            border-bottom: 1px solid $purple-3;
-        }
-
         .row-1 {
             display: flex;
+            border-bottom: 1px solid $purple-3;
 
             div {
                 padding: $gap-2;
@@ -55,28 +52,7 @@
             }
         }
 
-        .zincsite {
-            margin-left: $gap-5;
-            border-left: 1px solid $purple-3;
-            border-bottom: 1px solid $purple-3;
-            padding: $gap-2;
-
-            .site-id {
-                font-size: $font-size-4;
-            }
-
-            .residues {
-                color: $gray-6;
-
-                span {
-                    margin-left: $gap-1;
-                }
-            }
-        }
-
-        .zincsite:last-child {
-            border-bottom-width: 0;
-        }
+       
     }
 }
 

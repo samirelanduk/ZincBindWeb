@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Box from "./Box";
+import ZincSites from "./ZincSites";
 
 class SearchResult extends Component {
 
@@ -29,14 +30,8 @@ class SearchResult extends Component {
                     <div className="technique">{ this.props.pdb.technique }</div>
                     <div className="resolution">{ (this.props.pdb.resolution ? this.props.pdb.resolution + " Å" : "")}</div>
                 </div>
-                {this.props.pdb.zincsites.edges.map((edge) => {
-                    return <div key={edge.node.id} className="zincsite">
-                        <div className="site-id">{ edge.node.id }</div>
-                        <div className="residues">{ edge.node.residues.edges.length} residues:{edge.node.residues.edges.map((edge) => {
-                            return <span key={edge.node.id}>{edge.node.atomiumId}</span>
-                        })}</div>
-                    </div>
-                })}
+                <ZincSites sites={this.props.pdb.zincsites.edges} />
+               
             </Box></div>
         );
     }
