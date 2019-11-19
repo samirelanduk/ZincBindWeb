@@ -1,0 +1,45 @@
+.sequence-result {
+    .box {
+        padding: 0;
+
+        .info {
+            display: flex;
+            border-bottom: 1px solid $purple-3;
+            align-items: center;
+            
+
+            h2 {
+                font-size: $font-size-4;
+                white-space: nowrap;
+            }
+
+            h2, .metric, .title {
+                padding: $gap-1;
+                height: 100%;
+            }
+
+            .metric {
+                border-left: 1px solid $purple-3;
+                font-size: $font-size-2;
+                white-space: nowrap;
+            }
+
+            .title {
+                border-left: 1px solid $purple-3;
+            }
+
+        }
+
+        .sequence {
+            padding: $gap-2;
+            font-size: $font-size-2;
+
+            .query, .midline, .hit {
+                font-family: monospace;
+                white-space: pre;
+            }
+        }
+
+        
+    }
+}
