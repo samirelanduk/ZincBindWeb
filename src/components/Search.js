@@ -35,7 +35,15 @@ class Search extends Component {
 
     addTerm = () => {
         let terms = this.state.pdbTerms;
-        terms.push([0, ""]);
+        let done = terms.map(term => term[0]);
+        let next = 0;
+        for (let x = 0; x < this.state.pdbSelect.length; x++) {
+            if (!(done.includes(x))) {
+                next = x;
+                break;
+            }
+        }
+        terms.push([next, ""]);
         this.setState({pdbTerms: terms});
     }
 
