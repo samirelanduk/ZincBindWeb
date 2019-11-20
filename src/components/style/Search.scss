@@ -34,7 +34,7 @@
                 line-height: 1;
                 border-radius: 100%;
                 padding: 3px 6px;
-                background-color: $red;
+                background-color: transparentize($red, 0.3);
                 bottom: 27.5px;
             }
         }
