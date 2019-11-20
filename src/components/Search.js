@@ -22,57 +22,65 @@ class Search extends Component {
                 ["deposted_gt", "Deposited before", "e.g. 2000-01-01"]
             ],
             pdbTerms: [[0, ""]],
-            siteTerms: [],
+            siteTerms: [[0, ""]],
             blastString: "",
             expectString: "10"
         }
         let siteSelect = [];
         for (const row of this.state.pdbSelect) {
-            siteSelect.push([row[0], row[1], row[2]]);
+            siteSelect.push(["structure-" + row[0], "Structure " + row[1], row[2]]);
         }
+        siteSelect.push(["family", "Family is", "e.g. C2H2"]);
+        siteSelect.push(["code", "Family contains", "e.g. C2"]);
+        siteSelect.push(["residues", "Residue Names contain", "e.g. GLU, BON"]);
         this.state.siteSelect = siteSelect;
     }
 
-    addTerm = () => {
-        let terms = this.state.pdbTerms;
+    addTerm = (e) => {
+        const dataType = e.target.getAttribute("data-type");
+        let terms = this.state[`${dataType}Terms`];
         let done = terms.map(term => term[0]);
         let next = 0;
-        for (let x = 0; x < this.state.pdbSelect.length; x++) {
+        for (let x = 0; x < this.state[`${dataType}Select`].length; x++) {
             if (!(done.includes(x))) {
                 next = x;
                 break;
             }
         }
         terms.push([next, ""]);
-        this.setState({pdbTerms: terms});
+        this.setState({[`${dataType}Terms`]: terms});
     }
 
     removeTerm = (e) => {
+        const dataType = e.target.parentNode.getAttribute("data-type");
         const index = parseInt(e.target.parentNode.getAttribute("data-index"));
-        let terms = this.state.pdbTerms;
+        let terms = this.state[`${dataType}Terms`];
         terms.splice(index, 1);
-        this.setState({terms: terms});
+        this.setState({[`${dataType}Terms`]: terms});
     }
 
     updateSelect = (e) => {
+        const dataType = e.target.parentNode.getAttribute("data-type");
         const index = parseInt(e.target.parentNode.getAttribute("data-index"));
-        let terms = this.state.pdbTerms;
+        let terms = this.state[`${dataType}Terms`];
         terms[index] = [e.target.selectedIndex, ""];
-        this.setState({pdbTerms: terms});
+        this.setState({[`${dataType}Terms`]: terms});
     }
 
     updateInput = (e) => {
+        const dataType = e.target.parentNode.getAttribute("data-type");
         const index = parseInt(e.target.parentNode.getAttribute("data-index"));
-        let terms = this.state.pdbTerms;
+        let terms = this.state[`${dataType}Terms`];
         terms[index][1] = e.target.value;
-        this.setState({pdbTerms: terms});
+        this.setState({[`${dataType}Terms`]: terms});
     }
 
-    search = () => {
+    search = (e) => {
+        const dataType = e.target.getAttribute("data-type");
         let query = [];
-        for (let term of this.state.pdbTerms) {
+        for (let term of this.state[`${dataType}Terms`]) {
             if (term[1]) {
-                query.push(`${this.state.pdbSelect[term[0]][0]}=${term[1]}`);
+                query.push(`${this.state[`${dataType}Select`][term[0]][0]}=${term[1]}`);
             }
         }
         query = query.join("&");
@@ -110,7 +118,7 @@ class Search extends Component {
                     <h2>PDB Search</h2>
                     {this.state.pdbTerms.map((term, i) => {
                         return (
-                            <div className="search-input" key={i} data-index={i}>
+                            <div className="search-input" key={i} data-index={i} data-type="pdb">
                                 <select value={this.state.pdbSelect[term[0]][0]} onChange={this.updateSelect}>
                                     {this.state.pdbSelect.map((option, o) => {
                                         return <option key={o} value={option[0]}>{option[1]}</option>
@@ -124,41 +132,34 @@ class Search extends Component {
                     })}
                     
                     <div className="search-buttons">
-                        <button onClick={this.addTerm}>New Term</button>
-                        <button onClick={this.search}>Search</button>
+                        <button onClick={this.addTerm} data-type="pdb">New Term</button>
+                        <button onClick={this.search} data-type="pdb">Search</button>
                     </div> 
                 </Box>
 
-
                 <Box>
                     <h2>Site Search</h2>
-
-                    <div className="search-input" data-index={1}>
-                        <select value="title" onChange={this.updateSelect}>
-                            <option data-placeholder="e.g. antibody, carbonic anhydrase" value="title">Structure Title contains</option>
-                            <option data-placeholder="e.g. oxidoreductase, membrane" value="classification">CStructure lassification contains</option>
-                            <option data-placeholder="e.g. ion channel, zinc finger" value="keywords">Structure Keywords contain</option>
-                            <option data-placeholder="e.g. homo sapiens" value="organism">Structure Organism contains</option>
-                            <option data-placeholder="e.g. saccharomyces" value="expression">Structure Expression System contains</option>
-                            <option data-placeholder="e.g. NMR" value="technique">Structure Technique contains</option>
-                            <option data-placeholder="e.g. 2.5" value="resolution_lt">Structure Resolution better than</option>
-                            <option data-placeholder="e.g. 10" value="resolution_gt">Structure Resolution worse than</option>
-                            <option data-placeholder="e.g. 0.2" value="rfactor_lt">Structure Rfactor better than</option>
-                            <option data-placeholder="e.g. 0.3" value="rfactor_gt">Structure Rfactor worse than</option>
-                            <option data-placeholder="e.g. 2017-01-01" value="deposited_gt">Structure Deposited since</option>
-                            <option data-placeholder="e.g. 2000-01-01" value="deposited_lt">vDeposited before</option>
-                            <option data-placeholder="e.g. H3, C2H2" value="family">Family is</option>
-                            <option data-placeholder="e.g. H3, C2" value="code">Family contains</option>
-                            <option data-placeholder="e.g. GLU, BON" value="residue_names">Residue names contain</option>
-                        </select>
-                        <input type="text" onChange={this.handleInputChange}></input>
-                    </div>
-
+                    {this.state.siteTerms.map((term, i) => {
+                        return (
+                            <div className="search-input" key={i} data-index={i} data-type="site">
+                                <select value={this.state.siteSelect[term[0]][0]} onChange={this.updateSelect}>
+                                    {this.state.siteSelect.map((option, o) => {
+                                        return <option key={o} value={option[0]}>{option[1]}</option>
+                                    })}
+                                </select>
+                                <input type="text" placeholder={this.state.siteSelect[term[0]][2]} onChange={this.updateInput} value={term[1]}></input>{
+                                    this.state.siteTerms.length > 1 && <button className="remove-term" onClick={this.removeTerm}>×</button>
+                                }
+                            </div>
+                        )
+                    })}
+                    
                     <div className="search-buttons">
-                        <button onClick={this.addTerm}>New Term</button>
-                        <button onClick={this.search}>Search</button>
-                    </div>
+                        <button onClick={this.addTerm} data-type="site">New Term</button>
+                        <button onClick={this.search} data-type="site">Search</button>
+                    </div> 
                 </Box>
+
 
                 <Box>
                     <h2>BLAST Search</h2>
