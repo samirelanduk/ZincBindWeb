@@ -122,6 +122,36 @@ class Search extends Component {
                 </Box>
 
                 <Box>
+                    <h2>Site Search</h2>
+
+                    <div className="search-input" data-index={1}>
+                        <select value="title" onChange={this.updateSelect}>
+                            <option data-placeholder="e.g. antibody, carbonic anhydrase" value="title">Structure Title contains</option>
+                            <option data-placeholder="e.g. oxidoreductase, membrane" value="classification">CStructure lassification contains</option>
+                            <option data-placeholder="e.g. ion channel, zinc finger" value="keywords">Structure Keywords contain</option>
+                            <option data-placeholder="e.g. homo sapiens" value="organism">Structure Organism contains</option>
+                            <option data-placeholder="e.g. saccharomyces" value="expression">Structure Expression System contains</option>
+                            <option data-placeholder="e.g. NMR" value="technique">Structure Technique contains</option>
+                            <option data-placeholder="e.g. 2.5" value="resolution_lt">Structure Resolution better than</option>
+                            <option data-placeholder="e.g. 10" value="resolution_gt">Structure Resolution worse than</option>
+                            <option data-placeholder="e.g. 0.2" value="rfactor_lt">Structure Rfactor better than</option>
+                            <option data-placeholder="e.g. 0.3" value="rfactor_gt">Structure Rfactor worse than</option>
+                            <option data-placeholder="e.g. 2017-01-01" value="deposited_gt">Structure Deposited since</option>
+                            <option data-placeholder="e.g. 2000-01-01" value="deposited_lt">vDeposited before</option>
+                            <option data-placeholder="e.g. H3, C2H2" value="family">Family is</option>
+                            <option data-placeholder="e.g. H3, C2" value="code">Family contains</option>
+                            <option data-placeholder="e.g. GLU, BON" value="residue_names">Residue names contain</option>
+                        </select>
+                        <input type="text" onChange={this.handleInputChange}></input>
+                    </div>
+
+                    <div className="search-buttons">
+                        <button onClick={this.addTerm}>New Term</button>
+                        <button onClick={this.search}>Search</button>
+                    </div>
+                </Box>
+
+                <Box>
                     <h2>BLAST Search</h2>
 
                     <textarea onChange={this.blastStringUpdate} placeholder="Raw or FASTA formatted peptide sequence"></textarea>
