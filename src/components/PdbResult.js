@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import Box from "./Box";
 import ZincSites from "./ZincSites";
 
-class SearchResult extends Component {
+class PdbResult extends Component {
 
     formatDate = (datestring) => {
         const date = new Date(datestring)
@@ -37,4 +37,4 @@ class SearchResult extends Component {
     }
 }
  
-export default withRouter(SearchResult);
+export default withRouter(PdbResult);

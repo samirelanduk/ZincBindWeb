@@ -3,8 +3,9 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Box from "./Box";
 import SearchNav from "./SearchNav";
-import SearchResult from "./SearchResult";
+import PdbResult from "./PdbResult";
 import SequenceResult from "./SequenceResult";
+import SiteResult from "./SiteResult";
 
 class SearchResults extends Component {
 
@@ -36,8 +37,13 @@ class SearchResults extends Component {
         const skip = "page" in params ? (parseInt(params.page) - 1) * 25 : 0;
 
         // What kind of search is this?
+        const isSite = Object.keys(params).some((key) => {
+            return key.startsWith("structure") || ["family", "code", "residues"].includes(key);
+        });
         if ("sequence" in params) {
             return this.renderBlast(params, skip);
+        } else if (isSite) {
+            return this.renderSiteSearch(params, skip);
         }
 
         // What filters should be applied
@@ -97,7 +103,7 @@ class SearchResults extends Component {
                                 <SearchNav history={this.props.history} sort={sort} count={data.count.count} />
                                 <div className="results">{
                                     data.pdbs.edges.map((edge) => {
-                                        return <SearchResult pdb={edge.node} key={edge.node.id} />
+                                        return <PdbResult pdb={edge.node} key={edge.node.id} />
                                     })
                                 }</div>
                                 <SearchNav history={this.props.history} sort={sort} count={data.count.count} />
@@ -134,6 +140,58 @@ class SearchResults extends Component {
                             <div className="results">{
                                 data.blast.edges.map((edge) => {
                                     return <SequenceResult sequence={edge.node} key={edge.node.id} />
+                                })
+                            }</div>
+                            <SearchNav history={this.props.history} count={data.count.count} />
+                            </Fragment>
+                        );
+                        
+                    }
+                }
+                </Query>
+            </main>
+        )
+    }
+
+    renderSiteSearch(params, skip) {
+        const siteLookup = {
+            family: "family", code: "family__contains",
+            residues: "residueNames__contains"
+        }
+        let siteQuery = []; 
+        for (let key in siteLookup) {
+            if (key in params) {
+                const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
+                siteQuery.push(`${siteLookup[key]}: ${value}`)
+            }
+        }
+    
+        siteQuery = siteQuery.join(", ");
+        if (siteQuery) {
+            siteQuery = ", " + siteQuery;
+        }
+
+        const query_string = `query zincsites($skip: Int) { zincsites(first: 25, skip: $skip${siteQuery}) { edges { node {
+            id 
+        } } } count: zincsites(${siteQuery}) { count }}`
+
+        const QUERY = gql(query_string);
+        return (
+            <main className="all-data search-results">
+                <Box><h1>Search Results</h1></Box>
+                
+                <Query query={QUERY} variables={{skip: skip}} >
+                {
+                    ({loading, data}) => {
+                        if (loading) {
+                            return <div className="results"></div>
+                        }
+                        return (
+                            <Fragment>
+                            <SearchNav history={this.props.history} count={data.count.count} />
+                            <div className="results">{
+                                data.zincsites.edges.map((edge) => {
+                                    return <SiteResult site={edge.node} key={edge.node.id} />
                                 })
                             }</div>
                             <SearchNav history={this.props.history} count={data.count.count} />
