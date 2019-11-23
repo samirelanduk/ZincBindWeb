@@ -155,7 +155,19 @@ class SearchResults extends Component {
     renderSiteSearch(params, skip) {
         const siteQuery = this.gqlFilter(params, {
             family: "family", code: "family__contains",
-            residues: "residueNames__contains"
+            residues: "residueNames__contains",
+            "structure-title": "pdb__title__contains",
+            "structure-classification": "pdb__classification__contains",
+            "structure-keywords": "pdb__keywords__contains",
+            "structure-organism": "pdb__organism__contains",
+            "structure-expression": "pdb__expressionSystem__contains",
+            "structure-technique": "pdb__technique__contains",
+            "structure-resolution_lt": "pdb__resolution__lt",
+            "structure-resolution_gt": "pdb__resolution__gt",
+            "structure-rfactor_lt": "pdb__rfactor__lt",
+            "structure-rfactor_gt": "pdb__rfactor__gt",
+            "structure-deposited_lt": "pdb__depositionDate__lt",
+            "structure-deposited_gt": "pdb__depositionDate__gt"
         })
 
         const query_string = `query zincsites($skip: Int) {
