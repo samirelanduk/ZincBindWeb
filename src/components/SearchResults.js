@@ -18,7 +18,7 @@ class SearchResults extends Component {
                 params[k] = v;
             }
         }
-        if (!"sort" in params) {
+        if (!("sort" in params)) {
             params.sort = "-deposition_date";
         }
         return params
@@ -62,7 +62,7 @@ class SearchResults extends Component {
         
         let pdbQuery = ""; 
         if ("q" in params) {
-            pdbQuery = `term: "${params.q}"`;
+            pdbQuery = `, term: "${params.q}"`;
         } else {
             pdbQuery = this.gqlFilter(params, {
                 title: "title__contains", classification: "classification__contains",
@@ -99,13 +99,13 @@ class SearchResults extends Component {
                             }
                             return (
                                 <Fragment>
-                                <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} />
+                                <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} params={params} />
                                 <div className="results">{
                                     data.pdbs.edges.map((edge) => {
                                         return <PdbResult pdb={edge.node} key={edge.node.id} />
                                     })
                                 }</div>
-                                <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} />
+                                <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} params={params} />
                                 </Fragment>
                             );
                             
@@ -135,13 +135,13 @@ class SearchResults extends Component {
                         }
                         return (
                             <Fragment>
-                            <SearchNav history={this.props.history} count={data.count.count} />
+                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
                             <div className="results">{
                                 data.blast.edges.map((edge) => {
                                     return <SequenceResult sequence={edge.node} key={edge.node.id} />
                                 })
                             }</div>
-                            <SearchNav history={this.props.history} count={data.count.count} />
+                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
                             </Fragment>
                         );
                         
@@ -190,13 +190,13 @@ class SearchResults extends Component {
                         }
                         return (
                             <Fragment>
-                            <SearchNav history={this.props.history} count={data.count.count} />
+                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
                             <div className="results">{
                                 data.zincsites.edges.map((edge) => {
                                     return <SiteResult site={edge.node} key={edge.node.id} />
                                 })
                             }</div>
-                            <SearchNav history={this.props.history} count={data.count.count} />
+                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
                             </Fragment>
                         );
                         

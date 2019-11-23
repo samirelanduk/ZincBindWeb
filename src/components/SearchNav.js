@@ -5,7 +5,17 @@ import Box from "./Box";
 class SearchNav extends Component {
     
     sort = (event) => {
-        this.props.history.push(`${this.props.history.location.pathname}?sort=${event.target.value}`);
+        let query = this.props.history.location.search;
+        query = query ? query : "?";
+        if (query.includes("sort=")) {
+            query = query.replace(/sort=(.+?)(&|$)/, `sort=${event.target.value}&`)
+        } else {
+            query = query +  `&sort=${event.target.value}`
+        }
+        if (query.endsWith("&")) {
+            query = query.slice(0, -1)
+        }
+        this.props.history.push(query);
     }
 
     makeParamsString = (params, page) => {
