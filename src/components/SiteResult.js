@@ -8,7 +8,20 @@ class SiteResult extends Component {
         return (
             <div className="site-result"><Box>
                 
-                { this.props.site.id}
+                <div className="site-id">{ this.props.site.id }</div>
+                <div className="site-info">
+                    
+                    <div className="pdb">{ this.props.site.pdb.title }</div>
+                    <div className="residues">
+                        <div className="family">{ this.props.site.family }</div>
+                        {this.props.site.residues.edges.map((edge) => {
+                        return <div className="residue">
+                            <span class="residue-id">{ edge.node.atomiumId}</span>
+                            <span class="residue-name">{ edge.node.name}</span>
+                        </div>
+                    })}</div>
+                </div>
+                
                 
                 
             </Box></div>

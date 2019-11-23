@@ -18,20 +18,27 @@ class SearchResults extends Component {
                 params[k] = v;
             }
         }
+        if (!"sort" in params) {
+            params.sort = "-deposition_date";
+        }
         return params
+    }
+
+    gqlFilter(params, lookup) {
+        let query = [];
+        for (let key in lookup) {
+            if (key in params) {
+                const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
+                query.push(`${lookup[key]}: ${value}`)
+            }
+        }
+        query = query ? ", " + query.join(", ") : query.join(", ");
+        return query;
     }
     
     render() {
-
         // Get keywords as dict
         let params = this.paramsObject(this.props.history.location.search);
-
-        
-
-        
-
-        // How should the results be sorted?
-        const sort = "sort" in params ? params.sort : "-deposition_date";
 
         // How many pages should be skipped?
         const skip = "page" in params ? (parseInt(params.page) - 1) * 25 : 0;
@@ -44,32 +51,27 @@ class SearchResults extends Component {
             return this.renderBlast(params, skip);
         } else if (isSite) {
             return this.renderSiteSearch(params, skip);
+        } else {
+            return this.renderPdbSearch(params, skip);
         }
+    }
+
+    renderPdbSearch(params, skip) {
 
         // What filters should be applied
-        let pdbQuery = []; 
+        
+        let pdbQuery = ""; 
         if ("q" in params) {
-            pdbQuery = [`term: "${params.q}"`]
+            pdbQuery = `term: "${params.q}"`;
         } else {
-            const pdbLookup = {
+            pdbQuery = this.gqlFilter(params, {
                 title: "title__contains", classification: "classification__contains",
                 keywords: "keywords__contains", organism: "organism__contains",
                 expression: "expressionSystem__contains", technique: "technique__contains",
                 resolution_lt: "resolution__lt", resolution_gt: "resolution__gt",
                 rfactor_lt: "rfactor__lt", rfactor_gt: "rfactor__gt",
                 deposited_lt: "depositionDate__lt", deposited_gt: "depositionDate__gt"
-            }
-            
-            for (let key in pdbLookup) {
-                if (key in params) {
-                    const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
-                    pdbQuery.push(`${pdbLookup[key]}: ${value}`)
-                }
-            }
-        }
-        pdbQuery = pdbQuery.join(", ");
-        if (pdbQuery) {
-            pdbQuery = ", " + pdbQuery;
+            })
         }
 
         // Make query
@@ -81,9 +83,6 @@ class SearchResults extends Component {
 
         const QUERY = gql(query_string);
 
-        
-        
-
         return (
             <main className="all-data search-results">
                 <Box>
@@ -92,7 +91,7 @@ class SearchResults extends Component {
 
                 
 
-                <Query query={QUERY} variables={{sort: sort, skip: skip}} >
+                <Query query={QUERY} variables={{sort: params.sort, skip: skip}} >
                     {
                         ({loading, data}) => {
                             if (loading) {
@@ -100,13 +99,13 @@ class SearchResults extends Component {
                             }
                             return (
                                 <Fragment>
-                                <SearchNav history={this.props.history} sort={sort} count={data.count.count} />
+                                <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} />
                                 <div className="results">{
                                     data.pdbs.edges.map((edge) => {
                                         return <PdbResult pdb={edge.node} key={edge.node.id} />
                                     })
                                 }</div>
-                                <SearchNav history={this.props.history} sort={sort} count={data.count.count} />
+                                <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} />
                                 </Fragment>
                             );
                             
@@ -154,26 +153,17 @@ class SearchResults extends Component {
     }
 
     renderSiteSearch(params, skip) {
-        const siteLookup = {
+        const siteQuery = this.gqlFilter(params, {
             family: "family", code: "family__contains",
             residues: "residueNames__contains"
-        }
-        let siteQuery = []; 
-        for (let key in siteLookup) {
-            if (key in params) {
-                const value = isNaN(params[key]) ? `"${params[key]}"` : params[key];
-                siteQuery.push(`${siteLookup[key]}: ${value}`)
-            }
-        }
-    
-        siteQuery = siteQuery.join(", ");
-        if (siteQuery) {
-            siteQuery = ", " + siteQuery;
-        }
+        })
 
-        const query_string = `query zincsites($skip: Int) { zincsites(first: 25, skip: $skip${siteQuery}) { edges { node {
-            id 
-        } } } count: zincsites(${siteQuery}) { count }}`
+        const query_string = `query zincsites($skip: Int) {
+            zincsites(first: 25, skip: $skip${siteQuery}) { edges { node {
+                id family pdb { title } residues(primary: true) { edges { node { atomiumId name }}}
+            } } }
+            count: zincsites(${siteQuery}) { count }
+        }`
 
         const QUERY = gql(query_string);
         return (
