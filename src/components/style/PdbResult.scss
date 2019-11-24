@@ -1,7 +1,82 @@
-.search-result {
+.pdb-result {
+
     .box {
-        text-align: left;
-        padding: 0;
-    }
+        padding: 0px;
+        width: 100%;
+        max-width: 1200px;
+        margin: $gap-4 auto;
+        background-color: $gray-1;
+
+        .pdb {
+            border-left: 10px solid $purple-4;
+            background-color: white;
+            cursor: pointer;
+            font-size: $font-size-2;
+
+            .row-1 {
+                display: flex;
+                border-bottom: 1px solid $purple-3;
     
+                div {
+                    padding: $gap-2;
+                    display: flex;
+                    align-items: center;
+                }
+    
+                .id {
+                    font-size: $font-size-5;
+                }
+    
+                .id, .date {
+                    border-right: 1px solid $purple-3;
+                }
+    
+                .species {
+                    font-style: italic;
+                }
+            }
+    
+            .row-2 {
+                padding: $gap-3 $gap-2;
+                text-align: left;
+            }
+    
+            .row-3 {
+                display: flex;
+                padding-bottom: $gap-1;
+                font-weight: 100;
+    
+                div {
+                    padding: 0px $gap-1;
+                }
+    
+                .classification {
+                    padding-left: $gap-2;
+                    border-right: 1px solid $purple-3;
+                }
+    
+                .technique {
+                    padding-right: 0;
+                }
+            }
+        }
+
+        .pdb:hover {
+            background-color: $purple-2;
+            border-left-color: $purple-5;
+        }
+
+    }
+}
+
+@media (min-width: 600px) {
+    .pdb-result {
+        .box {
+
+            .pdb {
+                font-size: $font-size-3;
+            }
+            
+        }
+    }
 }

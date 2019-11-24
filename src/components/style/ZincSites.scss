@@ -5,10 +5,12 @@
     line-height: 1.8;
 
     .site {
+        background-color: white;
         padding: $gap-2;
         margin-left: $gap-6;
         border-top: 1px solid $purple-3;
-        border-left: 1px solid $purple-3;
+        border-left: 10px solid $purple-4;
+        cursor: pointer;
 
         h3 {
             font-weight: 700;
@@ -21,5 +23,10 @@
 
     .site:nth-child(1) {
         border-top-width: 0px;
+    }
+
+    .site:hover {
+        background-color: $purple-2;
+        border-left-color: $purple-5;
     }
 }
