@@ -172,7 +172,7 @@ class SearchResults extends Component {
 
         const query_string = `query zincsites($skip: Int, $sort: String) {
             zincsites(first: 25, skip: $skip, sort: $sort${siteQuery}) { edges { node {
-                id family pdb { title } residues(primary: true) { edges { node { id atomiumId name }}}
+                id family pdb { title organism depositionDate } residues(primary: true) { edges { node { id atomiumId name }}}
             } } }
             count: zincsites(${siteQuery}) { count }
         }`

@@ -11,14 +11,13 @@ class SiteResult extends Component {
                 <div className="site-id">{ this.props.site.id }</div>
                 <div className="site-info">
                     
-                    <div className="pdb">{ this.props.site.pdb.title }</div>
+                    <div className="pdb">{ this.props.site.pdb.title } (<span>{ this.props.site.pdb.organism }</span>, { this.props.site.pdb.depositionDate.split("-")[0] })</div>
                     <div className="residues">
                         <div className="family">{ this.props.site.family }</div>
                         {this.props.site.residues.edges.map((edge) => {
-                        return <div className="residue" key={edge.node.id}>
-                            <span className="residue-id">{ edge.node.atomiumId}</span>
-                            <span className="residue-name">{ edge.node.name}</span>
-                        </div>
+                        return <span className="residue" key={edge.node.id}>
+                            { edge.node.atomiumId} ({ edge.node.name})
+                        </span>
                     })}</div>
                 </div>
                 
