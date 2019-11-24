@@ -19,7 +19,7 @@ class Search extends Component {
                 ["rfactor_lt", "Rfactor better than", "e.g. 0.2"],
                 ["rfactor_gt", "Rfactor worse than", "e.g. 0.3"],
                 ["deposited_lt", "Deposited since", "e.g. 2017-01-01"],
-                ["deposted_gt", "Deposited before", "e.g. 2000-01-01"]
+                ["deposited_gt", "Deposited before", "e.g. 2000-01-01"]
             ],
             pdbTerms: [[0, ""]],
             siteTerms: [[0, ""]],
