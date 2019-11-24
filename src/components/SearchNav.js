@@ -53,7 +53,7 @@ class SearchNav extends Component {
         return (
             <div className="search-nav">
                 <Box>
-                    <select onChange={this.sort} value={this.props.sort}>
+                    <select onChange={this.sort} value={this.props.params.sort}>
                         <option value="-deposition_date">Newest to Oldest</option>
                         <option value="deposition_date">Oldest to Newest</option>
                         <option value="resolution">Resolution (Best to Worst)</option>

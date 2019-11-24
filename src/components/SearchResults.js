@@ -170,19 +170,21 @@ class SearchResults extends Component {
             "structure-deposited_gt": "pdb__depositionDate__gt"
         })
 
-        const query_string = `query zincsites($skip: Int) {
-            zincsites(first: 25, skip: $skip${siteQuery}) { edges { node {
-                id family pdb { title } residues(primary: true) { edges { node { atomiumId name }}}
+        const query_string = `query zincsites($skip: Int, $sort: String) {
+            zincsites(first: 25, skip: $skip, sort: $sort${siteQuery}) { edges { node {
+                id family pdb { title } residues(primary: true) { edges { node { id atomiumId name }}}
             } } }
             count: zincsites(${siteQuery}) { count }
         }`
 
         const QUERY = gql(query_string);
+        let sort = (params.sort[0] === "-" ? "-" : "") + "pdb__" + params.sort.replace("-", "")
+        
         return (
             <main className="all-data search-results">
                 <Box><h1>Search Results</h1></Box>
                 
-                <Query query={QUERY} variables={{skip: skip}} >
+                <Query query={QUERY} variables={{skip: skip, sort: sort}} >
                 {
                     ({loading, data}) => {
                         if (loading) {

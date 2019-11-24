@@ -15,9 +15,9 @@ class SiteResult extends Component {
                     <div className="residues">
                         <div className="family">{ this.props.site.family }</div>
                         {this.props.site.residues.edges.map((edge) => {
-                        return <div className="residue">
-                            <span class="residue-id">{ edge.node.atomiumId}</span>
-                            <span class="residue-name">{ edge.node.name}</span>
+                        return <div className="residue" key={edge.node.id}>
+                            <span className="residue-id">{ edge.node.atomiumId}</span>
+                            <span className="residue-name">{ edge.node.name}</span>
                         </div>
                     })}</div>
                 </div>
