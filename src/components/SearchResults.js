@@ -117,41 +117,6 @@ class SearchResults extends Component {
         )
     }
 
-    renderBlast(params, skip) {
-        const QUERY = gql`{ blast(sequence: "${params.sequence}", evalue: ${params.expect}, first: 25, skip: ${skip}) {
-            count edges { node { id qseq hseq midline evalue score bitScore chain {
-                id atomiumId pdb { id title } chainInteractions { edges { node { site { id family residues(primary: true) { edges { node { atomiumId name id }}}} }}}
-            } } }
-        } count: blast(sequence: "${params.sequence}", evalue: ${params.expect}) { count }}`
-        return (
-            <main className="all-data search-results">
-                <Box><h1>BLAST Results</h1></Box>
-                
-                <Query query={QUERY} >
-                {
-                    ({loading, data}) => {
-                        if (loading) {
-                            return <div className="results"></div>
-                        }
-                        return (
-                            <Fragment>
-                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
-                            <div className="results">{
-                                data.blast.edges.map((edge) => {
-                                    return <SequenceResult sequence={edge.node} key={edge.node.id} />
-                                })
-                            }</div>
-                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
-                            </Fragment>
-                        );
-                        
-                    }
-                }
-                </Query>
-            </main>
-        )
-    }
-
     renderSiteSearch(params, skip) {
         const siteQuery = this.gqlFilter(params, {
             family: "family", code: "family__contains",
@@ -196,6 +161,41 @@ class SearchResults extends Component {
                             <div className="results">{
                                 data.zincsites.edges.map((edge) => {
                                     return <SiteResult site={edge.node} key={edge.node.id} />
+                                })
+                            }</div>
+                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
+                            </Fragment>
+                        );
+                        
+                    }
+                }
+                </Query>
+            </main>
+        )
+    }
+
+    renderBlast(params, skip) {
+        const QUERY = gql`{ blast(sequence: "${params.sequence}", evalue: ${params.expect}, first: 25, skip: ${skip}) {
+            count edges { node { id qseq hseq midline evalue score bitScore hitFrom hitTo chain {
+                id atomiumId sequence pdb { id title depositionDate organism } chainInteractions { edges { node { site { id family residues(primary: true) { edges { node { atomiumId name id }}}} }}}
+            } } }
+        } count: blast(sequence: "${params.sequence}", evalue: ${params.expect}) { count }}`
+        return (
+            <main className="all-data search-results">
+                <Box><h1>BLAST Results</h1></Box>
+                
+                <Query query={QUERY} >
+                {
+                    ({loading, data}) => {
+                        if (loading) {
+                            return <div className="results"></div>
+                        }
+                        return (
+                            <Fragment>
+                            <SearchNav history={this.props.history} count={data.count.count} params={params} />
+                            <div className="results">{
+                                data.blast.edges.map((edge) => {
+                                    return <SequenceResult sequence={edge.node} key={edge.node.id} />
                                 })
                             }</div>
                             <SearchNav history={this.props.history} count={data.count.count} params={params} />

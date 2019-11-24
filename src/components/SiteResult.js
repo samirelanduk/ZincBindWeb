@@ -11,7 +11,7 @@ class SiteResult extends Component {
                 <div className="site-id">{ this.props.site.id }</div>
                 <div className="site-info">
                     
-                    <div className="pdb">{ this.props.site.pdb.title } (<span>{ this.props.site.pdb.organism }</span>, { this.props.site.pdb.depositionDate.split("-")[0] })</div>
+                    <div className="pdb">{ this.props.site.pdb.title } (<span>{ this.props.site.pdb.organism.toLowerCase() }</span>, { this.props.site.pdb.depositionDate.split("-")[0] })</div>
                     <div className="residues">
                         <div className="family">{ this.props.site.family }</div>
                         {this.props.site.residues.edges.map((edge) => {
