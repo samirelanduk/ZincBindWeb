@@ -45,11 +45,23 @@
     
 }
 
+
+
 @media (min-width: 600px) {
     .search-nav {
 
         .box {
             grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .search-nav.sequence {
+        .box {
+            grid-template-columns: 1fr;
+            select {
+                display: none;
+                
+            }
         }
     }
 }

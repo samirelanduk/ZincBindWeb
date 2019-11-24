@@ -50,8 +50,10 @@ class SearchNav extends Component {
         let lastLink = this.makeParamsString(params, pageCount);
 
 
+
+
         return (
-            <div className="search-nav">
+            <div className={"search-nav" + ("sequence" in this.props.params ? " sequence" : "")}>
                 <Box>
                     <select onChange={this.sort} value={this.props.params.sort}>
                         <option value="-deposition_date">Newest to Oldest</option>
