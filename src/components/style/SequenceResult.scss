@@ -46,15 +46,13 @@
             font-size: $font-size-2;
             overflow-x: scroll;
 
-            .query, .midline, .hit, .hit .out, .hit .in {
+            .query, .midline, .hit, .out, .in {
                 font-family: monospace;
                 white-space: pre;
             }
 
-            .hit {
-                .out {
-                    color: $gray-3;
-                }
+            .out {
+                color: $gray-3;
             }
         }
 

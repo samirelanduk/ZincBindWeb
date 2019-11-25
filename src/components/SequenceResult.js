@@ -14,9 +14,22 @@ class SequenceResult extends Component {
     }
 
     render() {
-        const preSequence = this.props.sequence.chain.sequence.slice(0, this.props.sequence.hitFrom - 1);
-        const postSequence = this.props.sequence.chain.sequence.slice(this.props.sequence.hitTo);
-        const pad = " ".repeat(preSequence.length);
+        const preQuery = this.props.query.slice(0, this.props.sequence.queryFrom - 1).toLowerCase();
+        const postQuery = this.props.query.slice(this.props.sequence.queryTo).toLowerCase();
+        const preSequence = this.props.sequence.chain.sequence.slice(0, this.props.sequence.hitFrom - 1).toLowerCase();
+        const postSequence = this.props.sequence.chain.sequence.slice(this.props.sequence.hitTo).toLowerCase();
+        
+        let queryPad = "";
+        let sequencePad = "";
+        if (this.props.query.length > this.props.sequence.chain.sequence.length) {
+            sequencePad = " ".repeat(preQuery.length);
+        }
+        if (this.props.query.length < this.props.sequence.chain.sequence.length) {
+            queryPad = " ".repeat(preSequence.length);
+        }
+        let pad = " ".repeat(Math.max(preQuery.length, preSequence.length));
+        
+        
         let organism = this.props.sequence.chain.pdb.organism;
         if (organism) {
             organism = organism[0].toUpperCase() + organism.slice(1).toLowerCase();
@@ -33,9 +46,9 @@ class SequenceResult extends Component {
                     <div className="title">{ this.props.sequence.chain.pdb.title } (<span>{ organism }</span>, { this.props.sequence.chain.pdb.depositionDate.split("-")[0] })</div>
                 </div>
                 <div className="sequence" ref="sequence">
-                    <div className="query">{pad}{ this.props.sequence.qseq }</div>
-                    <div className="midline">{pad}{ this.props.sequence.midline }</div>
-                    <div className="hit"><span className="out">{preSequence}</span><span className="in" ref="in">{ this.props.sequence.hseq }</span><span className="out">{postSequence}</span></div>
+                    <div className="query">{ queryPad }<span className="out">{preQuery}</span><span className="in">{ this.props.sequence.qseq }</span><span className="out">{postQuery}</span></div>
+                    <div className="midline">{ pad }{ this.props.sequence.midline }{ pad }</div>
+                    <div className="hit">{ sequencePad }<span className="out">{preSequence}</span><span className="in" ref="in">{ this.props.sequence.hseq }</span><span className="out">{postSequence}</span></div>
                 </div>
 
                 <ZincSites sites={this.props.sequence.chain.chainInteractions.edges }/>

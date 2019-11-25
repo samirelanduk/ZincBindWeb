@@ -188,7 +188,7 @@ class SearchResults extends Component {
 
     renderBlast(params, skip) {
         const QUERY = gql`{ blast(sequence: "${params.sequence}", evalue: ${params.expect}, first: 25, skip: ${skip}) {
-            count edges { node { id qseq hseq midline evalue score bitScore hitFrom hitTo chain {
+            count edges { node { id qseq hseq midline evalue score bitScore hitFrom hitTo queryFrom queryTo chain {
                 id atomiumId sequence pdb { id title depositionDate organism } chainInteractions { edges { node { site { id family residues(primary: true) { edges { node { atomiumId name id }}}} }}}
             } } }
         } count: blast(sequence: "${params.sequence}", evalue: ${params.expect}) { count }}`
@@ -210,7 +210,7 @@ class SearchResults extends Component {
                             <SearchNav history={this.props.history} count={data.count.count} params={params} />
                             <div className="results">{
                                 data.blast.edges.map((edge) => {
-                                    return <SequenceResult sequence={edge.node} key={edge.node.id} />
+                                    return <SequenceResult sequence={edge.node} key={edge.node.id} query={params.sequence} />
                                 })
                             }</div>
                             <SearchNav history={this.props.history} count={data.count.count} params={params} />
