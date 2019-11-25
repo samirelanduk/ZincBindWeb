@@ -76,7 +76,7 @@ class Search extends Component {
     }
 
     keyDown = (e) => {
-        if (e.which == 13 || e.keyCode == 13) {
+        if (e.which === 13 || e.keyCode === 13) {
             this.search(e);
         }
     }

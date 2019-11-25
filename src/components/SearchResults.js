@@ -86,7 +86,8 @@ class SearchResults extends Component {
         return (
             <main className="all-data search-results">
                 <Box>
-                    <h1>{pdbQuery ? "Search Results" : "All Data"}</h1>
+                    <h1>{pdbQuery.length > 2 ? "Search Results" : "All Data"}</h1>
+                    <div className="result-count"></div>
                 </Box>
 
                 
@@ -95,7 +96,12 @@ class SearchResults extends Component {
                     {
                         ({loading, data}) => {
                             if (loading) {
-                                return <div className="results"></div>
+                                return (
+                                    <Fragment>
+                                        <SearchNav />
+                                        <div className="results"></div>
+                                    </Fragment>
+                                )
                             }
                             return (
                                 <Fragment>

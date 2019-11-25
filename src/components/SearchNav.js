@@ -28,6 +28,31 @@ class SearchNav extends Component {
 
     render() {
 
+        if (!this.props.params) {
+            return (
+                <div className={"search-nav"}>
+                    <Box>
+                        <select>
+                            <option value="-deposition_date">Newest to Oldest</option>
+                            <option value="deposition_date">Oldest to Newest</option>
+                            <option value="resolution">Resolution (Best to Worst)</option>
+                            <option value="-resolution">Resolution (Worst to Best)</option>
+                            <option value="rvalue">R-value (Best to Worst)</option>
+                            <option value="-rvalue">R-value (Worst to Best)</option>
+                            <option value="title">PDB Title (A-Z)</option>
+                            <option value="-title">PDB Title (Z-A)</option>
+                            <option value="id">PDB Code (A-Z)</option>
+                            <option value="-id">PDB Code (Z-A)</option>
+                        </select>
+    
+                        <div className="search-links">
+                            <div className="search-link">...</div>
+                        </div>
+                    </Box>
+                </div>
+            ); 
+        }
+
         let path = this.props.history.location.pathname;
 
         let params = {};
