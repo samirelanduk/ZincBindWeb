@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Box from "./Box";
 import ZincSites from "./ZincSites";
 
@@ -17,7 +17,7 @@ class PdbResult extends Component {
     render() { 
         return (
             <div className="pdb-result"><Box>
-                <div className="pdb">
+                <Link className="pdb" to={`/pdbs/${this.props.pdb.id}/`}>
                     <div className="row-1">
                         <div className="id">{ this.props.pdb.id }</div>
                         <div className="date">{ this.formatDate(this.props.pdb.depositionDate) }</div>
@@ -31,7 +31,7 @@ class PdbResult extends Component {
                         <div className="technique">{ this.props.pdb.technique }</div>
                         <div className="resolution">{ (this.props.pdb.resolution ? this.props.pdb.resolution + " Å" : "")}</div>
                     </div>
-                </div>
+                </Link>
 
                 <div className="zincsites">
                     <ZincSites sites={this.props.pdb.zincsites.edges} />

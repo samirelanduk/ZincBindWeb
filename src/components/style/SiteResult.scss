@@ -2,6 +2,8 @@
     font-size: $font-size-2;
     cursor: pointer;
     margin: $gap-4 auto;
+    display: block;
+    color: inherit;
 
     .box {
         padding: 0;

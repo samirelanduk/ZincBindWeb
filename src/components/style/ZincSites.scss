@@ -5,11 +5,13 @@
     line-height: 1.8;
 
     .site {
+        display: block;
         background-color: white;
         padding: $gap-2;
         margin-left: $gap-6;
         border-top: 1px solid $purple-3;
         border-left: 10px solid $purple-4;
+        color: inherit;
         cursor: pointer;
 
         h3 {

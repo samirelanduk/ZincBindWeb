@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class ZincSites extends Component {
     
@@ -11,7 +12,7 @@ class ZincSites extends Component {
         return <div className="zinc-sites">
             {
                 this.props.sites.map((edge) => {
-                    return <div className="site" key={edge.node.id}>
+                    return <Link className="site" key={edge.node.id} to={`/${edge.node.id}/`}>
                         <h3 className="site-info">{ edge.node.id } ({ edge.node.family })</h3>
                         
                         <div className="residues">
@@ -22,7 +23,7 @@ class ZincSites extends Component {
                         }
                         </div>
 
-                    </div>
+                    </Link>
                 })
             }
         </div>

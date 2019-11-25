@@ -12,6 +12,8 @@
             background-color: white;
             cursor: pointer;
             font-size: $font-size-2;
+            display: block;
+            color: inherit;
 
             .row-1 {
                 display: flex;
