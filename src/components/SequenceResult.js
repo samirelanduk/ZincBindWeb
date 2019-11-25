@@ -21,10 +21,10 @@ class SequenceResult extends Component {
         
         let queryPad = "";
         let sequencePad = "";
-        if (this.props.query.length > this.props.sequence.chain.sequence.length) {
+        if (preQuery > preSequence) {
             sequencePad = " ".repeat(preQuery.length);
         }
-        if (this.props.query.length < this.props.sequence.chain.sequence.length) {
+        if (preQuery < preSequence) {
             queryPad = " ".repeat(preSequence.length);
         }
         let pad = " ".repeat(Math.max(preQuery.length, preSequence.length));

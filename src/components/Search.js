@@ -108,7 +108,7 @@ class Search extends Component {
     }
 
     expectUpdate = (e) => {
-        this.setState({expectString: e.target.lines});
+        this.setState({expectString: e.target.value});
     }
 
     blastSearch = () => {
