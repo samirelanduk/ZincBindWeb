@@ -40,7 +40,7 @@ class SearchResults extends Component {
     render() {
         // Get keywords as dict
         let params = this.paramsObject(this.props.history.location.search);
-        console.log(params)
+        
         // How many pages should be skipped?
         const skip = "page" in params ? (parseInt(params.page) - 1) * 25 : 0;
 

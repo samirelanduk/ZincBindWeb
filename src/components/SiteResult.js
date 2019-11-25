@@ -4,14 +4,21 @@ import Box from "./Box";
 
 class SiteResult extends Component {
 
-    render() { 
+    render() {
+        let organism = this.props.site.pdb.organism;
+        if (organism) {
+            organism = organism[0].toUpperCase() + organism.slice(1).toLowerCase();
+        } else {
+            organism = "No organism given";
+        }
+
         return (
             <Link className="site-result" to={`/${ this.props.site.id }/`}><Box>
                 
                 <div className="site-id">{ this.props.site.id }</div>
                 <div className="site-info">
                     
-                    <div className="pdb">{ this.props.site.pdb.title } (<span>{ this.props.site.pdb.organism.toLowerCase() }</span>, { this.props.site.pdb.depositionDate.split("-")[0] })</div>
+                    <div className="pdb">{ this.props.site.pdb.title } (<span>{ organism }</span>, { this.props.site.pdb.depositionDate.split("-")[0] })</div>
                     <div className="residues">
                         <div className="family">{ this.props.site.family }</div>
                         {this.props.site.residues.edges.map((edge) => {

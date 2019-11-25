@@ -99,12 +99,16 @@ class Search extends Component {
     }
 
     blastStringUpdate = (e) => {
-        const value = e.target.value;
-        this.setState({blastString: value});
+        let value = e.target.value;
+        let lines = value.split(/[\r\n]+/);
+        if (lines[0][0] === ">") {
+            lines.shift();
+        }
+        this.setState({blastString: lines.join("")});
     }
 
     expectUpdate = (e) => {
-        this.setState({expectString: e.target.value});
+        this.setState({expectString: e.target.lines});
     }
 
     blastSearch = () => {
