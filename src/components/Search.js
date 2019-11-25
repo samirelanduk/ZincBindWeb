@@ -75,8 +75,17 @@ class Search extends Component {
         this.setState({[`${dataType}Terms`]: terms});
     }
 
+    keyDown = (e) => {
+        if (e.which == 13 || e.keyCode == 13) {
+            this.search(e);
+        }
+    }
+
     search = (e) => {
-        const dataType = e.target.getAttribute("data-type");
+        let dataType = e.target.getAttribute("data-type");
+        if (!dataType) {
+            dataType = e.target.parentNode.getAttribute("data-type");
+        }
         let query = [];
         for (let term of this.state[`${dataType}Terms`]) {
             if (term[1]) {
@@ -124,7 +133,7 @@ class Search extends Component {
                                         return <option key={o} value={option[0]}>{option[1]}</option>
                                     })}
                                 </select>
-                                <input type="text" placeholder={this.state.pdbSelect[term[0]][2]} onChange={this.updateInput} value={term[1]}></input>{
+                                <input type="text" placeholder={this.state.pdbSelect[term[0]][2]} onChange={this.updateInput} onKeyDown={this.keyDown} value={term[1]}></input>{
                                     this.state.pdbTerms.length > 1 && <button className="remove-term" onClick={this.removeTerm}>×</button>
                                 }
                             </div>
@@ -147,7 +156,7 @@ class Search extends Component {
                                         return <option key={o} value={option[0]}>{option[1]}</option>
                                     })}
                                 </select>
-                                <input type="text" placeholder={this.state.siteSelect[term[0]][2]} onChange={this.updateInput} value={term[1]}></input>{
+                                <input type="text" placeholder={this.state.siteSelect[term[0]][2]} onChange={this.updateInput} onKeyDown={this.keyDown} value={term[1]}></input>{
                                     this.state.siteTerms.length > 1 && <button className="remove-term" onClick={this.removeTerm}>×</button>
                                 }
                             </div>
