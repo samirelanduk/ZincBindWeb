@@ -6,6 +6,7 @@ import SearchNav from "./SearchNav";
 import PdbResult from "./PdbResult";
 import SequenceResult from "./SequenceResult";
 import SiteResult from "./SiteResult";
+import NoResults from "./NoResults";
 
 class SearchResults extends Component {
 
@@ -87,7 +88,6 @@ class SearchResults extends Component {
             <main className="all-data search-results">
                 <Box>
                     <h1>{pdbQuery.length > 2 ? "Search Results" : "All Data"}</h1>
-                    <div className="result-count"></div>
                 </Box>
 
                 
@@ -102,6 +102,9 @@ class SearchResults extends Component {
                                         <div className="results"></div>
                                     </Fragment>
                                 )
+                            }
+                            if (data.count.count === 0) {
+                                return <NoResults q={ "q" in params }/>
                             }
                             return (
                                 <Fragment>
@@ -161,6 +164,9 @@ class SearchResults extends Component {
                         if (loading) {
                             return <div className="results"></div>
                         }
+                        if (data.count.count === 0) {
+                            return <NoResults q={false}/>
+                        }
                         return (
                             <Fragment>
                             <SearchNav history={this.props.history} count={data.count.count} params={params} />
@@ -195,6 +201,9 @@ class SearchResults extends Component {
                     ({loading, data}) => {
                         if (loading) {
                             return <div className="results"></div>
+                        }
+                        if (data.count.count === 0) {
+                            return <NoResults sequence={true}/>
                         }
                         return (
                             <Fragment>

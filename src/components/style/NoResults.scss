@@ -1,0 +1,15 @@
+.no-results {
+    p:nth-child(1) {
+        font-size: $font-size-6;
+        margin-bottom: $gap-3;
+    }
+}
+
+@media (min-width: 600px) {
+    .no-results {
+        p:nth-child(1) {
+            font-size: $font-size-7;
+            margin-bottom: $gap-4;
+        }
+    }
+}
