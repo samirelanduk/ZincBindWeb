@@ -16,7 +16,7 @@ class SearchResults extends Component {
             let queries = string.slice(1).split("&");
             for (const query of queries) {
                 let [k, v] = query.split("=");
-                params[k] = v;
+                params[k] = decodeURI(v);
             }
         }
         if (!("sort" in params)) {
@@ -40,7 +40,7 @@ class SearchResults extends Component {
     render() {
         // Get keywords as dict
         let params = this.paramsObject(this.props.history.location.search);
-
+        console.log(params)
         // How many pages should be skipped?
         const skip = "page" in params ? (parseInt(params.page) - 1) * 25 : 0;
 
