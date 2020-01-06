@@ -1,13 +1,81 @@
 .pdb {
-    h1 {
-        font-size: $font-size-6;
+    display: grid;
+    grid-gap: $gap-3;
+
+    .box {
+        width: 100%;
+        max-width: 1000px;
+        margin: auto;
     }
+
+
+    .heading {
+        padding: $gap-3;
+
+        h1 {
+            font-size: $font-size-6;
+        }
+    }
+    
+
+
+    .properties {
+        text-align: left;
+        padding: $gap-3;
+        display: grid;
+        grid-gap: $gap-1;
+        grid-template-columns: 1fr 1fr;
+
+        .pdb-row {
+            font-weight: 300;
+    
+            .property {
+                font-weight: 600;
+                margin-right: 3px;
+            }
+
+            .species {
+                font-style: italic;
+            }
+
+            a {
+                font-weight: 400;
+            }
+        }
+
+        .full {
+            grid-column: 1 / 3;
+        }
+    }
+
+    
 }
 
 @media (min-width: 600px) {
     .pdb {
-        h1 {
-            font-size: $font-size-7;
+        .heading {
+            padding: $gap-4;
+
+            h1 {
+                font-size: $font-size-7;
+            }
+        }
+
+        .properties {
+            padding: $gap-4;
+            grid-gap: $gap-2;
+        }
+        
+    }
+}
+
+@media (min-width: 800px) {
+    .pdb {
+        
+        .properties {
+            .full {
+                grid-column: inherit;
+            }
         }
     }
 }
