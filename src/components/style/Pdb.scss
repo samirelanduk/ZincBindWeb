@@ -6,6 +6,12 @@
         width: 100%;
         max-width: 1000px;
         margin: auto;
+
+        h2 {
+            font-weight: 600;
+            font-size: $font-size-5;
+            margin-bottom: $gap-2;
+        }
     }
 
 
@@ -17,8 +23,6 @@
         }
     }
     
-
-
     .properties {
         text-align: left;
         padding: $gap-3;
@@ -48,11 +52,95 @@
         }
     }
 
-    
+    .chains {
+        padding: $gap-4;
+        text-align: left;
+        width: 100%;
+        overflow: hidden;
+
+        .pdb-chain {
+            width: 100%;
+
+            .site-count {
+                font-size: $font-size-1;
+            }
+
+            .sequence {
+                overflow-x: scroll;
+                font-size: $font-size-1;
+                color: $gray-4;
+                padding-bottom: $gap-3;
+
+                span {
+                    font-family: monospace;
+                    white-space: pre;
+                }
+
+                .binding {
+                    color: $gray-10;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .atoms {
+        display: grid;
+        padding: $gap-2;
+        grid-template-columns: 1fr;
+        gap: $gap-5;
+
+        .identified {
+            .all-zincs {
+                width: 75%;
+                margin: auto;
+
+                .atom {
+                    display: inline-block;
+                    margin-right: $gap-1;
+                    line-height: 2;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: $gap-2;
+            margin-top: -$gap-2;
+
+            tr {
+
+                td:nth-child(1) {
+                    font-weight: 500;
+                }
+
+                td:nth-child(2) {
+                    font-weight: 300;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 400px) {
+    .pdb {
+        .atoms {
+            grid-template-columns: 1fr 1fr;
+            gap: $gap-2;
+        }
+    }
 }
 
 @media (min-width: 600px) {
     .pdb {
+        .box {
+            h2 {
+                font-size: $font-size-6;
+            }
+        }
+
         .heading {
             padding: $gap-4;
 
@@ -64,6 +152,19 @@
         .properties {
             padding: $gap-4;
             grid-gap: $gap-2;
+        }
+
+        .chains {
+
+            .pdb-chain {
+                .site-count {
+                    font-size: $font-size-2;
+                }
+
+                .sequence {
+                    font-size: $font-size-2;
+                }
+            }
         }
         
     }
