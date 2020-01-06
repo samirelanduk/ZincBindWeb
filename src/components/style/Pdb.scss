@@ -1,0 +1,13 @@
+.pdb {
+    h1 {
+        font-size: $font-size-6;
+    }
+}
+
+@media (min-width: 600px) {
+    .pdb {
+        h1 {
+            font-size: $font-size-7;
+        }
+    }
+}
