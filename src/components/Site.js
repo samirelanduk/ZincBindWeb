@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Box from "./Box";
+import ZincSites from "./ZincSites";
 
 class Site extends Component {
     
@@ -16,6 +17,9 @@ class Site extends Component {
             residues(primary: true) { count edges { node {
                 id chainIdentifier residueNumber insertionCode name
             } } }
+            group { zincsites { count edges { node { id family residues(primary: true) {
+                edges { node { id atomiumId name } }
+            } } } } }
         }}`
         const QUERY = gql(query_string);
 
@@ -27,29 +31,38 @@ class Site extends Component {
                         if (loading) {
                             return <Box />
                         }
+                        let data_ = JSON.parse(JSON.stringify(data));
+                        let index = null;
+                        for (let i = 0; i < data_.zincsite.group.zincsites.edges.length; i++) {
+                            if (data_.zincsite.group.zincsites.edges[i].node.id === id) {
+                                index = i; break;
+                            }
+                        }
+                        data_.zincsite.group.zincsites.edges.shift(index);
+                        data_.zincsite.group.zincsites.count -= 1;
                         return (
                             <Fragment>
-                                <Box className="heading"><h1>{ data.zincsite.id }</h1></Box>
+                                <Box className="heading"><h1>{ data_.zincsite.id }</h1></Box>
 
                                 <div className="two-box">
                                     <Box>
-                                        <h3>PDB</h3>
+                                        <h3 className="box-heading">PDB</h3>
                                         <div className="site-pdb">
-                                            <Link to={ "/pdbs/" + data.zincsite.pdb.id }>{ data.zincsite.pdb.id }</Link>: { data.zincsite.pdb.title }
+                                            <Link to={ "/pdbs/" + data_.zincsite.pdb.id }>{ data_.zincsite.pdb.id }</Link>: { data_.zincsite.pdb.title }
                                         </div>
 
-                                        <h3>Metals: { data.zincsite.metals.count }</h3>
-                                        <div className="metals">
-                                            { data.zincsite.metals.edges.map(edge => {
+                                        <h3 className="box-heading">Metals: { data_.zincsite.metals.count }</h3>
+                                        <div className="site-metals">
+                                            { data_.zincsite.metals.edges.map(edge => {
                                                 return <div className="metal" key={edge.node.id}>
                                                     {edge.node.chainId}:{edge.node.residueNumber}{edge.node.insertionCode} ({edge.node.element}, {edge.node.coordinateBonds.count}-coordination)
                                                 </div>
                                             }) }
                                         </div>
 
-                                        <h3>Liganding Residues: { data.zincsite.residues.count }</h3>
-                                        <div className="residues">
-                                            { data.zincsite.residues.edges.map(edge => {
+                                        <h3 className="box-heading">Liganding Residues: { data_.zincsite.residues.count }</h3>
+                                        <div className="site-residues">
+                                            { data_.zincsite.residues.edges.map(edge => {
                                                 return <div className="residue" key={edge.node.id}>
                                                     {edge.node.chainIdentifier}:{edge.node.residueNumber}{edge.node.insertionCode} ({edge.node.name})
                                                 </div>
@@ -57,7 +70,11 @@ class Site extends Component {
                                         </div>
                                     </Box>
                                     <Box>
-                                        
+                                        <h2>Equivalent Sites: { data_.zincsite.group.zincsites.count }</h2>
+                                        {
+                                        data_.zincsite.group.zincsites.count === 0 ? 
+                                        <p>No equivalent sites - this binding site is unique in the database.</p> :
+                                        <ZincSites sites={ data_.zincsite.group.zincsites.edges } />}
                                     </Box>
                                 </div>
                             </Fragment>
