@@ -1,11 +1,14 @@
 .site-page {
     display: grid;
     grid-gap: $gap-3;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+
+    padding: $gap-3;
 
     .box {
-        width: 100%;
-        max-width: 1000px;
-        margin: auto;
+        
 
         h2 {
             font-weight: 600;
@@ -20,6 +23,46 @@
 
         h1 {
             font-size: $font-size-8;
+        }
+    }
+
+    .two-box {
+        
+        display: grid;
+        gap: $gap-3;
+
+        .box {
+            text-align: left;
+            padding: $gap-3;
+
+            h3 {
+                font-weight: 600;
+                font-size: $font-size-5;
+                margin-bottom: $gap-3;
+            }
+
+            .site-pdb, .metals, .residues {
+                margin-bottom: $gap-3;
+
+                .metal, .residue {
+                    display: inline-block;
+                    margin-right: $gap-2;
+                    margin-bottom: $gap-2;
+                    border: 1px solid $purple-3;
+                    padding: $gap-2 $gap-3;
+                    box-shadow: $box-shadow-2;
+                    font-weight: 300;
+                    cursor: pointer;
+                }
+            }
+
+            .site-pdb {
+                font-weight: 300;
+
+                a {
+                    font-weight: normal;
+                }
+            }
         }
     }
     
@@ -41,5 +84,13 @@
             }
         }
         
+    }
+}
+
+@media (min-width: 800px) {
+    .site-page {
+        .two-box {
+            grid-template-columns: 1fr 1fr;
+        }
     }
 }
