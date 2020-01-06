@@ -2,6 +2,7 @@ import React, { Fragment, Component } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Box from "./Box";
+import ZincSites from "./ZincSites";
 
 class Pdb extends Component {
     
@@ -15,11 +16,14 @@ class Pdb extends Component {
             ignored: metals(omissionReason__contains: "") { count edges { node {
                  id chainId residueNumber omissionReason
             } } }
+            zincsites { count edges { node { id family residues(primary: true) {
+                edges { node { id atomiumId name } }
+            } } } }
         }}`
         const QUERY = gql(query_string);
 
         return (
-        <main className="pdb">
+        <main className="pdb-page">
             <Query query={QUERY} >
                 {
                     ({loading, data}) => {
@@ -50,7 +54,7 @@ class Pdb extends Component {
                                     {data.pdb.chains.edges.map((edge) => {
                                         return (<div className="pdb-chain" key={edge.node.id}>
                                             <h3 className="chain-id">Chain {edge.node.atomiumId}</h3>
-                                            <div className="site-count">{ edge.node.chainInteractions.count } binding site{edge.node.chainInteractions.count === 1 ? '' : 's'}</div>
+                                            <div className="site-count">{ edge.node.chainInteractions.count } binding site{edge.node.chainInteractions.count === 1 ? "" : "s"}</div>
                                             <div className="sequence">{ edge.node.sequence.split("").map((char, i) => {
                                                 return (char === char.toUpperCase() ? (<span key={i} className="binding">{ char }</span>) : <span key={i}>{ char }</span>)
                                             }) }</div>
@@ -79,8 +83,11 @@ class Pdb extends Component {
                                             </tbody>
                                         </table>
                                     </div>
-                                    
-                                    
+                                </Box>
+
+                                <Box className="sites">
+                                    <h2>{ data.pdb.zincsites.count } Zinc Binding Site{ data.pdb.zincsites.count === 1 ? "" : "s"}</h2>
+                                    <ZincSites sites={data.pdb.zincsites.edges } />
                                 </Box>
                             </Fragment>
                         )

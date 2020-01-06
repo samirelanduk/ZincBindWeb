@@ -1,4 +1,4 @@
-.pdb {
+.pdb-page {
     display: grid;
     grid-gap: $gap-3;
 
@@ -122,10 +122,28 @@
             }
         }
     }
+
+    .sites {
+        text-align: left;
+        padding: $gap-4;
+
+        h2 {
+            margin-bottom: $gap-4;
+        }
+
+        .zinc-sites {
+            border: 1px solid $purple-3;
+            border-left: 0;
+
+            .site {
+                margin-left: 0;
+            }
+        }
+    }
 }
 
 @media (min-width: 400px) {
-    .pdb {
+    .pdb-page {
         .atoms {
             grid-template-columns: 1fr 1fr;
             gap: $gap-2;
@@ -134,7 +152,7 @@
 }
 
 @media (min-width: 600px) {
-    .pdb {
+    .pdb-page {
         .box {
             h2 {
                 font-size: $font-size-6;
@@ -171,7 +189,7 @@
 }
 
 @media (min-width: 800px) {
-    .pdb {
+    .pdb-page {
         
         .properties {
             .full {
