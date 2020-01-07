@@ -20,6 +20,7 @@ class Site extends Component {
             group { zincsites { count edges { node { id family residues(primary: true) {
                 edges { node { id atomiumId name } }
             } } } } }
+            chainInteractions { count edges { node { sequence chain { id atomiumId }}}}
         }}`
         const QUERY = gql(query_string);
 
@@ -60,7 +61,7 @@ class Site extends Component {
                                             }) }
                                         </div>
 
-                                        <h3 className="box-heading">Liganding Residues: { data_.zincsite.residues.count }</h3>
+                    <h3 className="box-heading">Liganding Residues: { data_.zincsite.residues.count } ({ data_.zincsite.family })</h3>
                                         <div className="site-residues">
                                             { data_.zincsite.residues.edges.map(edge => {
                                                 return <div className="residue" key={edge.node.id}>
@@ -77,6 +78,19 @@ class Site extends Component {
                                         <ZincSites sites={ data_.zincsite.group.zincsites.edges } />}
                                     </Box>
                                 </div>
+
+                                <Box className="chains">
+                                    <h2>Chains Involved: {data_.zincsite.chainInteractions.count}</h2>
+                                    {data_.zincsite.chainInteractions.edges.map((edge) => {
+                                        return (<div className="pdb-chain" key={edge.node.id}>
+                                            <h3 className="chain-id">Chain {edge.node.chain.atomiumId}</h3>
+                                            
+                                            <div className="sequence">{ edge.node.sequence.split("").map((char, i) => {
+                                                return (char === char.toUpperCase() ? (<span key={i} className="binding">{ char }</span>) : <span key={i}>{ char }</span>)
+                                            }) }</div>
+                                        </div>)
+                                    })}
+                                </Box>
                             </Fragment>
                         )
                     }
