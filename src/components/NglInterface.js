@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Box from "./Box"
 import { TwitterPicker } from "react-color";
+import { Stage } from "ngl";
 
 class NglInterface extends Component {
 
@@ -11,11 +12,20 @@ class NglInterface extends Component {
             this.refs.spinToggle.classList.add("active");
         }
     }
+
+    componentDidMount() {
+        let stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
+        const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
+        stage.loadFile("rcsb://" + this.props.code + ".mmtf").then(function(component) {
+            stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
+            component.autoView();
+        });
+    }
     
-    render() { 
+    render() {
         return (
             <Box className="ngl-interface">
-                <div className="window">
+                <div className="window" id="ngl-container">
 
                 </div>
                 <div className="controls">

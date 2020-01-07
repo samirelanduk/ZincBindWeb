@@ -78,7 +78,7 @@ class Pdb extends Component {
                                     <ZincSites sites={data.pdb.zincsites.edges } />
                                 </Box>
 
-                                <NglInterface />
+                                <NglInterface code={code} assembly={data.pdb.assembly}/>
                             </Fragment>
                         )
                     }
