@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import Box from "./Box";
 import ZincSites from "./ZincSites";
 import PdbInfo from "./PdbInfo";
+import NglInterface from "./NglInterface";
 
 class Pdb extends Component {
     
@@ -76,6 +77,8 @@ class Pdb extends Component {
                                     <h2>{ data.pdb.zincsites.count } Zinc Binding Site{ data.pdb.zincsites.count === 1 ? "" : "s"}</h2>
                                     <ZincSites sites={data.pdb.zincsites.edges } />
                                 </Box>
+
+                                <NglInterface />
                             </Fragment>
                         )
                     }
