@@ -1,13 +1,14 @@
 import React from "react";
 import Box from "./Box";
+import externalLink from "../images/external-link.svg";
 
 class PdbInfo extends React.Component {
 
 	render() {
 		return (
 			<Box className="properties">
-                {this.props.title && <h2 className="pdb-row full">Pdb Information</h2>}
-                <div className="pdb-row"><span className="property">Code: </span> <a href={"https://www.rcsb.org/structure/" + this.props.code} target="_blank" rel="noopener noreferrer">{this.props.code}</a></div>
+                {this.props.title && <h2 className="pdb-row full">PDB Information</h2>}
+                <div className="pdb-row"><span className="property">Code: </span> <a href={"https://www.rcsb.org/structure/" + this.props.code} target="_blank" rel="noopener noreferrer">{this.props.code} <img src={externalLink} alt="external" /></a></div>
                 <div className="pdb-row"><span className="property">Deposited: </span> {this.props.pdb.depositionDate}</div>
 
                 <div className="pdb-row"><span className="property">Resolution: </span> {this.props.pdb.resolution}</div>
