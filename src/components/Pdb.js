@@ -14,9 +14,14 @@ class Pdb extends Component {
             title classification keywords depositionDate technique organism
             expressionSystem assembly resolution rvalue chains {
                 count edges { node { id sequence atomiumId chainInteractions { count }} }
-            } metals(element: "ZN") { count edges { node { id chainId residueNumber } } }
+            } metals(element: "ZN") { count edges { node {
+                id chainId residueNumber
+            } } }
             ignored: metals(omissionReason__contains: "") { count edges { node {
                  id chainId residueNumber omissionReason
+            } } }
+            allMetals: metals { edges { node {
+                id chainId residueNumber residueName insertionCode
             } } }
             zincsites { count edges { node { id family residues(primary: true) {
                 edges { node { id atomiumId name } }
@@ -78,7 +83,7 @@ class Pdb extends Component {
                                     <ZincSites sites={data.pdb.zincsites.edges } />
                                 </Box>
 
-                                <NglInterface code={code} assembly={data.pdb.assembly}/>
+                                <NglInterface code={code} assembly={data.pdb.assembly} metals={data.pdb.allMetals.edges}/>
                             </Fragment>
                         )
                     }

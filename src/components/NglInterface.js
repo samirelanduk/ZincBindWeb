@@ -14,6 +14,11 @@ class NglInterface extends Component {
     }
 
     componentDidMount() {
+        let metals = [];
+        for (const edge of this.props.metals) {
+            metals.push(`${edge.node.residueNumber}^${edge.node.insertionCode}:${edge.node.chainId}/0 and .${edge.node.residueName} and (%A or %)`)
+        }
+        metals = metals.join(" or ");
         let stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
         const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
 
@@ -21,9 +26,14 @@ class NglInterface extends Component {
         stage.viewer.container.addEventListener("dblclick", function () {
             stage.toggleFullscreen();
         });
-        
+
         stage.loadFile("rcsb://" + this.props.code + ".mmtf").then(function(component) {
+            // Make the whole thing a cartoon
             stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
+
+            // Make metals appear as spheres
+            component.addRepresentation("ball+stick", {sele: metals, aspectRatio: 8, assembly: assembly});
+
             component.autoView();
         });
     }
