@@ -16,6 +16,12 @@ class NglInterface extends Component {
     componentDidMount() {
         let stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
         const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
+
+        // If the user double clicks, make it full screen
+        stage.viewer.container.addEventListener("dblclick", function () {
+            stage.toggleFullscreen();
+        });
+        
         stage.loadFile("rcsb://" + this.props.code + ".mmtf").then(function(component) {
             stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
             component.autoView();

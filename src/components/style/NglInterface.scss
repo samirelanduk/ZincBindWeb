@@ -1,9 +1,10 @@
 .ngl-interface {
     padding: 0;
     text-align: left;
+    overflow: hidden;
 
     .window {
-        min-height: 400px;
+        height: 400px;
     }
 
     .controls {
