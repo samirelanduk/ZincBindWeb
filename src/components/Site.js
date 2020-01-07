@@ -4,13 +4,17 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Box from "./Box";
 import ZincSites from "./ZincSites";
+import PdbInfo from "./PdbInfo";
 
 class Site extends Component {
     
     render() {
         const id = this.props.match.params.id;
         const query_string = `{ zincsite(id: "${id}") {
-            id family pdb { id title }
+            id family pdb { 
+                id title classification keywords depositionDate technique organism
+                expressionSystem assembly resolution rvalue
+            }
             metals { count edges { node {
                 id chainId residueNumber insertionCode element coordinateBonds { count }
             } } }
@@ -91,6 +95,8 @@ class Site extends Component {
                                         </div>)
                                     })}
                                 </Box>
+
+                                <PdbInfo pdb={ data.zincsite.pdb } code={ data.zincsite.pdb.id} title={true} />
                             </Fragment>
                         )
                     }
