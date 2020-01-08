@@ -3,21 +3,26 @@ import { Link } from "react-router-dom";
 
 class Nav extends React.Component {
 
-	toggleMenu = (e) => {
-		let navLinks = document.getElementsByClassName("nav-links")[0];
+	toggleMenu = () => {
+		let navLinks = this.refs.navLinks;
 		
 		if (navLinks.style.height) {
-			navLinks.style.removeProperty("height");
-			navLinks.removeAttribute("style");
+			navLinks.style.height = null;
+			setTimeout(function () {
+				navLinks.style.transitionDuration = null
+			}, 250);
 		} else {
 			let height = 0;
 			let links = navLinks.getElementsByTagName("a");
 			for (var i = 0; i < links.length; i++) {
 				height += links.item(i).clientHeight;
 			}
-			navLinks.style = "height: " + height + "px";
+			navLinks.style.transitionDuration = "0.2s";
+			navLinks.style.height = height + "px";
+			
 		}
 	}
+
 	render() {
 		return (
 			<nav>
@@ -25,7 +30,7 @@ class Nav extends React.Component {
 				<div className="mobile-menu" onClick={this.toggleMenu}>
 					<div><div></div><div></div><div></div></div>
 				</div>
-				<div className="nav-links">
+				<div className="nav-links" ref="navLinks">
 					<Link to="/search/">Search</Link>
 					<Link to="/predict/">Predict</Link>
 					<Link to="/data/">Data</Link>

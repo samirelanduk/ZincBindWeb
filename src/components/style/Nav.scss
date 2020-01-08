@@ -42,7 +42,6 @@ nav {
 		overflow: hidden;
 		margin-left: -$gap-4;
 		transition-property: height;
-		transition-duration: 0.2s;
 		transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 
 		a {
