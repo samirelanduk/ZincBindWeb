@@ -19,6 +19,14 @@ class NglInterface extends Component {
         }
     }
 
+    toggleHighlight = () => {
+        if (this.refs.highlightToggle.classList.contains("active")) {
+            this.refs.highlightToggle.classList.remove("active");
+        } else {
+            this.refs.highlightToggle.classList.add("active");
+        }
+    }
+
     componentDidMount() {
         // Get selector for metals
         let metals = [];
@@ -68,6 +76,13 @@ class NglInterface extends Component {
         stage.viewer.container.addEventListener("dblclick", function () {
             stage.toggleFullscreen();
         });
+
+        // If the screen changes size, deal with it
+        function handleResize () {
+            stage.handleResize();
+        }
+        window.addEventListener("orientationchange", handleResize, false);
+        window.addEventListener("resize", handleResize, false);
 
         stage.loadFile("rcsb://" + this.props.code + ".mmtf").then(function(component) {
             // Make the whole thing a cartoon
@@ -133,6 +148,13 @@ class NglInterface extends Component {
                     <div className="control">
                         <label>Spin</label>
                         <span ref="spinToggle" className="toggle-switch" onClick={this.toggleSpin}>
+                            <span className="toggle-knob"></span>
+                        </span>
+                    </div>
+
+                    <div className="control">
+                        <label>Highlight</label>
+                        <span ref="highlightToggle" className="toggle-switch" onClick={this.toggleHighlight}>
                             <span className="toggle-knob"></span>
                         </span>
                     </div>
