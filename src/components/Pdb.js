@@ -21,7 +21,8 @@ class Pdb extends Component {
                  id chainId residueNumber omissionReason
             } } }
             allMetals: metals { edges { node {
-                id chainId residueNumber residueName insertionCode
+                id chainId residueNumber residueName insertionCode x y z
+                coordinateBonds { edges { node { atom { x y z } } } }
             } } }
             zincsites { count edges { node { id family residues(primary: true) {
                 edges { node { id atomiumId name insertionCode residueNumber chainIdentifier } }

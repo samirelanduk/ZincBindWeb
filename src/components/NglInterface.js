@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Box from "./Box"
 import { TwitterPicker } from "react-color";
-import { Stage } from "ngl";
+import { Stage, Shape } from "ngl";
 
 class NglInterface extends Component {
 
@@ -35,6 +35,39 @@ class NglInterface extends Component {
         }
         residues = residues.join(" or ");
 
+        // What are the vectors for distance lines?
+        let bonds = [];
+        for (const edge of this.props.metals) {
+            let location = [edge.node.x, edge.node.y, edge.node.z];
+            for (const edge2 of edge.node.coordinateBonds.edges) {
+                bonds.push([location, [edge2.node.atom.x, edge2.node.atom.y, edge2.node.atom.z]])
+            }
+        }
+
+        /* for (var b = 0; b < bonds.length; b++) {
+            var metalPos = bonds[b][0];
+            var atomPos = bonds[b][1];
+            var vector = [
+                metalPos[0] - atomPos[0], metalPos[1] - atomPos[1], metalPos[2] - atomPos[2]
+            ]
+            DIV = 16;
+            miniVector = [vector[0] / DIV, vector[1] / DIV, vector[2] / DIV]
+            lines = []
+            for (x = 0; x <= DIV; x++) {
+                lines.push([
+                    atomPos[0] + miniVector[0] * x, atomPos[1] + miniVector[1] * x, atomPos[2] + miniVector[2] * x
+                ])
+            }
+            for (x = 0; x < DIV; x++) {
+                if (x % 3 != 0) {
+                    var shape = new NGL.Shape("shape", { disableImpostor: true });
+                    shape.addCylinder(lines[x], lines[x + 1], [0.56, 0.37, 0.6], 0.1);
+                    var shapeComp = stage.addComponentFromObject(shape);
+                    shapeComp.addRepresentation("distance");
+                }
+            }
+        } */
+
         let stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
         const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
 
@@ -53,6 +86,31 @@ class NglInterface extends Component {
             // Make residue side chains appear as sticks
             if (residues.length > 0) {
                 component.addRepresentation("licorice", {sele: residues, assembly: assembly});
+            }
+
+            // Make distance lines appear
+            for (let b = 0; b < bonds.length; b++) {
+                let metalPos = bonds[b][0];
+                let atomPos = bonds[b][1];
+                let vector = [
+                    metalPos[0] - atomPos[0], metalPos[1] - atomPos[1], metalPos[2] - atomPos[2]
+                ]
+                const DIV = 16;
+                let miniVector = [vector[0] / DIV, vector[1] / DIV, vector[2] / DIV]
+                let lines = []
+                for (let x = 0; x <= DIV; x++) {
+                    lines.push([
+                        atomPos[0] + miniVector[0] * x, atomPos[1] + miniVector[1] * x, atomPos[2] + miniVector[2] * x
+                    ])
+                }
+                for (let x = 0; x < DIV; x++) {
+                    if (x % 3 != 0) {
+                        let shape = new Shape("shape", { disableImpostor: true });
+                        shape.addCylinder(lines[x], lines[x + 1], [0.56, 0.37, 0.6], 0.1);
+                        let shapeComp = stage.addComponentFromObject(shape);
+                        shapeComp.addRepresentation("distance");
+                    }
+                }
             }
 
             component.autoView();
