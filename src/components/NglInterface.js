@@ -13,11 +13,25 @@ class NglInterface extends Component {
 
     stage = null;
 
+    repChange = () => {
+        if (this.stage) {
+            this.stage.rep.setVisibility(false);
+            this.stage.rep = this.stage.compList[0].addRepresentation(
+                this.refs.rep.value, {sele: "/0 and (not water)",
+                assembly: this.stage.assembly}
+            );
+        }
+    }
+
     toggleSpin = () => {
-        if (this.refs.spinToggle.classList.contains("active")) {
-            this.refs.spinToggle.classList.remove("active");
-        } else {
-            this.refs.spinToggle.classList.add("active");
+        if (this.stage) {
+            if (this.refs.spinToggle.classList.contains("active")) {
+                this.refs.spinToggle.classList.remove("active");
+                this.stage.setSpin(false);
+            } else {
+                this.refs.spinToggle.classList.add("active");
+                this.stage.setSpin(true);
+            }
         }
     }
 
@@ -26,16 +40,6 @@ class NglInterface extends Component {
             this.refs.highlightToggle.classList.remove("active");
         } else {
             this.refs.highlightToggle.classList.add("active");
-        }
-    }
-
-    repChange = () => {
-        if (this.stage) {
-            this.stage.rep.setVisibility(false);
-            this.stage.rep = this.stage.compList[0].addRepresentation(
-                this.refs.rep.value, {sele: "/0 and (not water)",
-                assembly: this.stage.assembly}
-            );
         }
     }
 
