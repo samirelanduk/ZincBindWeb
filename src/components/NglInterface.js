@@ -5,6 +5,12 @@ import { Stage, Shape } from "ngl";
 
 class NglInterface extends Component {
 
+    chainResidues = [
+        "VAL", "ILE", "LEU", "GLU", "GLN", "ASP", "ASN", "HIS", "TRP", "PHE",
+        "TYR", "ARG", "LYS", "SER", "THR", "MET", "ALA", "GLY", "PRO", "CYS",
+        "HIP", "HIE", "DA", "DG", "DC", "DT", "A", "G", "C", "U"
+    ]
+
     toggleSpin = () => {
         if (this.refs.spinToggle.classList.contains("active")) {
             this.refs.spinToggle.classList.remove("active");
@@ -16,8 +22,12 @@ class NglInterface extends Component {
     componentDidMount() {
         // Get selector for metals
         let metals = [];
+        let coordinatingAtoms = [];
         for (const edge of this.props.metals) {
-            metals.push(`${edge.node.residueNumber}^${edge.node.insertionCode}:${edge.node.chainId}/0 and .${edge.node.residueName} and (%A or %)`)
+            metals.push(`${edge.node.residueNumber}^${edge.node.insertionCode}:${edge.node.chainId}/0 and .${edge.node.residueName} and (%A or %)`);
+            for (let edge2 of edge.node.coordinateBonds.edges) {
+                coordinatingAtoms.push(edge2.node.atom.id)
+            }
         }
         metals = metals.join(" or ");
 
@@ -25,10 +35,17 @@ class NglInterface extends Component {
         let residues = [];
         for (const residue of this.props.residues) {
             let s = `${residue.residueNumber}^${residue.insertionCode}:${residue.chainIdentifier}/0 and (%A or %)`
-            if (["HIS"].includes(residue.name)) {
+            if (this.chainResidues.includes(residue.name)) {
                 let includes = ["sidechain", ".CA"];
+                for (let edge of residue.atoms.edges) {
+                    if (coordinatingAtoms.includes(edge.node.id)) {
+                        includes.push(`.${edge.node.name}`)
+                    }
+                }
+                if (includes.includes(".O")) {
+                    includes.push(".C");
+                }
                 includes = includes.join(" or ");
-                //TODO: liganding atoms on main chain
                 s = `(${includes}) and ${s}`;
             }
             residues.push(s)
@@ -43,30 +60,6 @@ class NglInterface extends Component {
                 bonds.push([location, [edge2.node.atom.x, edge2.node.atom.y, edge2.node.atom.z]])
             }
         }
-
-        /* for (var b = 0; b < bonds.length; b++) {
-            var metalPos = bonds[b][0];
-            var atomPos = bonds[b][1];
-            var vector = [
-                metalPos[0] - atomPos[0], metalPos[1] - atomPos[1], metalPos[2] - atomPos[2]
-            ]
-            DIV = 16;
-            miniVector = [vector[0] / DIV, vector[1] / DIV, vector[2] / DIV]
-            lines = []
-            for (x = 0; x <= DIV; x++) {
-                lines.push([
-                    atomPos[0] + miniVector[0] * x, atomPos[1] + miniVector[1] * x, atomPos[2] + miniVector[2] * x
-                ])
-            }
-            for (x = 0; x < DIV; x++) {
-                if (x % 3 != 0) {
-                    var shape = new NGL.Shape("shape", { disableImpostor: true });
-                    shape.addCylinder(lines[x], lines[x + 1], [0.56, 0.37, 0.6], 0.1);
-                    var shapeComp = stage.addComponentFromObject(shape);
-                    shapeComp.addRepresentation("distance");
-                }
-            }
-        } */
 
         let stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
         const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
