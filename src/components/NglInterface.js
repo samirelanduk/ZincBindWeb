@@ -11,6 +11,8 @@ class NglInterface extends Component {
         "HIP", "HIE", "DA", "DG", "DC", "DT", "A", "G", "C", "U"
     ]
 
+    stage = null;
+
     toggleSpin = () => {
         if (this.refs.spinToggle.classList.contains("active")) {
             this.refs.spinToggle.classList.remove("active");
@@ -24,6 +26,16 @@ class NglInterface extends Component {
             this.refs.highlightToggle.classList.remove("active");
         } else {
             this.refs.highlightToggle.classList.add("active");
+        }
+    }
+
+    repChange = () => {
+        if (this.stage) {
+            this.stage.rep.setVisibility(false);
+            this.stage.rep = this.stage.compList[0].addRepresentation(
+                this.refs.rep.value, {sele: "/0 and (not water)",
+                assembly: this.stage.assembly}
+            );
         }
     }
 
@@ -69,24 +81,25 @@ class NglInterface extends Component {
             }
         }
 
-        let stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
+        this.stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
         const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
+        this.stage.assembly = assembly;
 
         // If the user double clicks, make it full screen
-        stage.viewer.container.addEventListener("dblclick", function () {
-            stage.toggleFullscreen();
+        this.stage.viewer.container.addEventListener("dblclick", function () {
+            this.stage.toggleFullscreen();
         });
 
         // If the screen changes size, deal with it
         function handleResize () {
-            stage.handleResize();
+            this.stage.handleResize();
         }
         window.addEventListener("orientationchange", handleResize, false);
         window.addEventListener("resize", handleResize, false);
 
-        stage.loadFile("rcsb://" + this.props.code + ".mmtf").then(function(component) {
+        this.stage.loadFile("rcsb://" + this.props.code + ".mmtf").then((component) => {
             // Make the whole thing a cartoon
-            stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
+            this.stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
 
             // Make metals appear as spheres
             component.addRepresentation("ball+stick", {sele: metals, aspectRatio: 8, assembly: assembly});
@@ -112,10 +125,10 @@ class NglInterface extends Component {
                     ])
                 }
                 for (let x = 0; x < DIV; x++) {
-                    if (x % 3 != 0) {
+                    if (x % 3 !== 0) {
                         let shape = new Shape("shape", { disableImpostor: true });
                         shape.addCylinder(lines[x], lines[x + 1], [0.56, 0.37, 0.6], 0.1);
-                        let shapeComp = stage.addComponentFromObject(shape);
+                        let shapeComp = this.stage.addComponentFromObject(shape);
                         shapeComp.addRepresentation("distance");
                     }
                 }
@@ -134,14 +147,14 @@ class NglInterface extends Component {
                 <div className="controls">
                     <div className="control">
                         <label>Protein View</label>
-                        <select>
-                            <option>Cartoon</option>
-                            <option>Ball and Stick</option>
-                            <option>Lines</option>
-                            <option>Backbone</option>
-                            <option>Ribbon</option>
-                            <option>Rope</option>
-                            <option>Tube</option>
+                        <select onChange={this.repChange} ref="rep" >
+                            <option value="cartoon">Cartoon</option>
+                            <option value="ball+stick">Ball and Stick</option>
+                            <option value="line">Lines</option>
+                            <option value="backbone">Backbone</option>
+                            <option value="ribbon">Ribbon</option>
+                            <option value="rope">Rope</option>
+                            <option value="tube">Tube</option>
                         </select>
                     </div>
 
