@@ -88,5 +88,14 @@ nav {
 			}
 		}
 	}
+}
 
+@media (min-width: 1400px) {
+	nav {
+		padding-left: calc(50% - 676px);
+
+		.nav-links {
+			margin-right: calc(50% - 676px);
+		}
+	}
 }
