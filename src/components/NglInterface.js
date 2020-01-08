@@ -55,6 +55,11 @@ class NglInterface extends Component {
         }
     }
 
+    colorChange = (e) => {
+        let canvas = document.getElementsByTagName("canvas").item(0);
+        canvas.style.backgroundColor = e.hex;
+    }
+
     componentDidMount() {
         // Get selector for metals
         let metals = [];
@@ -190,7 +195,10 @@ class NglInterface extends Component {
 
                     <div className="control">
                         <label>Background</label>
-                        <TwitterPicker triangle="hide" />
+                        <TwitterPicker triangle="hide" onChange={this.colorChange} colors={[
+                            "#000000", "#FFFFFF", "#7BDCB5", "#fab1a0", "#8ED1FC",
+                            "#ff7675", "#ABB8C3", "#482c54", "#f5f6fa", "#303952"
+                        ]} />
                     </div>
 
                     
