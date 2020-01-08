@@ -95,7 +95,7 @@ class NglInterface extends Component {
         });
 
         // If the screen changes size, deal with it
-        function handleResize () {
+        let handleResize = () => {
             this.stage.handleResize();
         }
         window.addEventListener("orientationchange", handleResize, false);
