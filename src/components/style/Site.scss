@@ -78,6 +78,13 @@
             p {
                 font-style: italic;
                 font-weight: 300;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 80%;
+                padding: $gap-4 $gap-5;
+                text-align: center;
+                line-height: 2;
             }
         }
     }
