@@ -81,6 +81,11 @@ nav {
 			right: 0;
 			background-color: #ffffff00;
 			margin-right: $gap-4;
+
+			a {
+				padding-left: $gap-3;
+				padding-right: $gap-3;
+			}
 		}
 	}
 
