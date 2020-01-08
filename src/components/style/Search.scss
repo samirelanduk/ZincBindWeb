@@ -12,6 +12,7 @@
         .search-input {
             display: grid;
             position: relative;
+            z-index: 0;
 
             select {
                 font-size: $font-size-2;

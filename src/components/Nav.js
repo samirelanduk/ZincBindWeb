@@ -30,11 +30,11 @@ class Nav extends React.Component {
 			let height = 0;
 			let links = navLinks.getElementsByTagName("a");
 			for (var i = 0; i < links.length; i++) {
-				height += links.item(i).clientHeight;
+				height += links.item(i).clientHeight + 2;
 			}
+			height -= 2;
 			navLinks.style.transitionDuration = "0.2s";
 			navLinks.style.height = height + "px";
-			
 		}
 	}
 

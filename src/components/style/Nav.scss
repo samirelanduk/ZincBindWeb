@@ -41,6 +41,7 @@ nav {
 		height: 0px;
 		overflow: hidden;
 		margin-left: -$gap-4;
+		z-index: 100;
 		transition-property: height;
 		transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 
@@ -52,6 +53,12 @@ nav {
 			padding-left: $gap-4;
 			font-size: $font-size-5;
 			color: white;
+			font-weight: 400;
+			border-bottom: 2px solid transparentize($purple-5, 0.5);
+		}
+
+		a:last-child {
+			border-bottom-width: 2;
 		}
 	}
 }
