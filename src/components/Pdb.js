@@ -24,7 +24,7 @@ class Pdb extends Component {
                 id chainId residueNumber residueName insertionCode
             } } }
             zincsites { count edges { node { id family residues(primary: true) {
-                edges { node { id atomiumId name } }
+                edges { node { id atomiumId name insertionCode residueNumber chainIdentifier } }
             } } } }
         }}`
         const QUERY = gql(query_string);
@@ -36,6 +36,12 @@ class Pdb extends Component {
                     ({loading, data}) => {
                         if (loading) {
                             return <Box />
+                        }
+                        let residues = [];
+                        for (const edge of data.pdb.zincsites.edges) {
+                            for (const edge2 of edge.node.residues.edges) {
+                                residues.push(edge2.node)
+                            }   
                         }
                         return (
                             <Fragment>
@@ -83,7 +89,12 @@ class Pdb extends Component {
                                     <ZincSites sites={data.pdb.zincsites.edges } />
                                 </Box>
 
-                                <NglInterface code={code} assembly={data.pdb.assembly} metals={data.pdb.allMetals.edges}/>
+                                <
+                                    NglInterface
+                                    code={code} assembly={data.pdb.assembly}
+                                    metals={data.pdb.allMetals.edges}
+                                    residues={residues}
+                                />
                             </Fragment>
                         )
                     }

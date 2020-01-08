@@ -14,11 +14,27 @@ class NglInterface extends Component {
     }
 
     componentDidMount() {
+        // Get selector for metals
         let metals = [];
         for (const edge of this.props.metals) {
             metals.push(`${edge.node.residueNumber}^${edge.node.insertionCode}:${edge.node.chainId}/0 and .${edge.node.residueName} and (%A or %)`)
         }
         metals = metals.join(" or ");
+
+        // Get selector for residues
+        let residues = [];
+        for (const residue of this.props.residues) {
+            let s = `${residue.residueNumber}^${residue.insertionCode}:${residue.chainIdentifier}/0 and (%A or %)`
+            if (["HIS"].includes(residue.name)) {
+                let includes = ["sidechain", ".CA"];
+                includes = includes.join(" or ");
+                //TODO: liganding atoms on main chain
+                s = `(${includes}) and ${s}`;
+            }
+            residues.push(s)
+        }
+        residues = residues.join(" or ");
+
         let stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
         const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
 
@@ -33,6 +49,11 @@ class NglInterface extends Component {
 
             // Make metals appear as spheres
             component.addRepresentation("ball+stick", {sele: metals, aspectRatio: 8, assembly: assembly});
+
+            // Make residue side chains appear as sticks
+            if (residues.length > 0) {
+                component.addRepresentation("licorice", {sele: residues, assembly: assembly});
+            }
 
             component.autoView();
         });
