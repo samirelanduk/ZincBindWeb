@@ -114,7 +114,7 @@ class SearchResults extends Component {
                                         return <PdbResult pdb={edge.node} key={edge.node.id} />
                                     })
                                 }</div>
-                                <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} params={params} />
+                                {(data.count.count > 2) && <SearchNav history={this.props.history} sort={params.sort} count={data.count.count} params={params} />}
                                 </Fragment>
                             );
                             
