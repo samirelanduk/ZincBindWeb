@@ -18,7 +18,8 @@ class NglInterface extends Component {
             this.stage.rep.setVisibility(false);
             this.stage.rep = this.stage.compList[0].addRepresentation(
                 this.refs.rep.value, {sele: "/0 and (not water)",
-                assembly: this.stage.assembly}
+                assembly: this.stage.assembly,
+                opacity: this.refs.highlightToggle.classList.contains("active") ? 0.2 : 1}
             );
         }
     }
@@ -36,10 +37,21 @@ class NglInterface extends Component {
     }
 
     toggleHighlight = () => {
-        if (this.refs.highlightToggle.classList.contains("active")) {
-            this.refs.highlightToggle.classList.remove("active");
-        } else {
-            this.refs.highlightToggle.classList.add("active");
+        if (this.stage) {
+            this.stage.rep.setVisibility(false);
+            if (this.refs.highlightToggle.classList.contains("active")) {
+                this.refs.highlightToggle.classList.remove("active");
+                this.stage.rep = this.stage.compList[0].addRepresentation(
+                    this.refs.rep.value, {sele: "/0 and (not water)",
+                    assembly: this.stage.assembly, opacity: 1}
+                );
+            } else {
+                this.refs.highlightToggle.classList.add("active");
+                this.stage.rep = this.stage.compList[0].addRepresentation(
+                    this.refs.rep.value, {sele: "/0 and (not water)",
+                    assembly: this.stage.assembly, opacity: 0.2}
+                );
+            }
         }
     }
 
