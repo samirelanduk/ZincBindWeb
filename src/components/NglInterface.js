@@ -107,7 +107,7 @@ class NglInterface extends Component {
         this.stage.assembly = assembly;
 
         // If the user double clicks, make it full screen
-        this.stage.viewer.container.addEventListener("dblclick", function () {
+        this.stage.viewer.container.addEventListener("dblclick", () => {
             this.stage.toggleFullscreen();
         });
 

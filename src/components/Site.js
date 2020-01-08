@@ -17,7 +17,7 @@ class Site extends Component {
                 expressionSystem assembly resolution rvalue
             }
             metals { count edges { node {
-                id chainId residueNumber residueName insertionCode x y z
+                id chainId residueNumber residueName element insertionCode x y z
                 coordinateBonds { count edges { node { atom { id x y z } } } }
             } } }
             residues(primary: true) { count edges { node {

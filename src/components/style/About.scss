@@ -18,6 +18,7 @@
             img {
                 display: block;
                 width: 70%;
+                max-width: 200px;
                 margin: 0px auto;
             }
         }
@@ -33,6 +34,7 @@
     .about {
         .box:nth-child(3) {
             grid-template-columns: 1fr 1fr;
+            padding: $gap-5 $gap-6;
 
             .logo {
                 display: flex;
@@ -40,7 +42,7 @@
                 align-items: center;
                 
                 img {
-                    width: 85%;
+                    width: 95%;
                 }
             }
         }
