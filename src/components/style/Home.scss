@@ -21,12 +21,14 @@
             h1 {
                 line-height: 1.5;
                 margin-top: $gap-3;
-                margin-bottom: $gap-6;
+                margin-bottom: $gap-3;
             }
 
             p {
-                margin-bottom: $gap-5;
+                display: flex;
+                align-items: center;
                 line-height: 2;
+                min-height: 150px;
             }
         }
 
@@ -42,7 +44,7 @@
             form {
                 display: grid;
                 grid-template-columns: 1fr 70px;
-                margin-bottom: $gap-5;
+                margin-bottom: $gap-7;
 
                 input {
                     display: inline;
@@ -105,6 +107,7 @@
         .home-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: $gap-6;
 
             .home-cell {
                 width: 100%;
@@ -115,14 +118,15 @@
                 h1, p, img {
                     margin-left: auto;
                     margin-right: 0;
-                    max-width: 600px;
+                    max-width: 500px;
                 }
             }
 
             .home-cell:nth-child(2) {
                 .small-links, form, p {
                     margin-right: auto;
-                    max-width: 600px;
+                    max-width: 500px;
+                    margin-bottom: 0;
                 }
             }
         }
