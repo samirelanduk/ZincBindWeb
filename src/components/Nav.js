@@ -3,12 +3,27 @@ import { Link } from "react-router-dom";
 
 class Nav extends React.Component {
 
+	componentDidMount() {
+		console.log(this.refs.navLinks.style.height)
+		document.body.onresize = () => {
+			if (this.refs.navLinks.style.height.length) {
+				this.vanquishNav()
+			}
+			//positionFooter();
+		}
+	}
+
+	vanquishNav = () => {
+		this.refs.navLinks.style.transitionDuration = null;
+		this.refs.navLinks.style.height = null;
+	}
+
 	toggleMenu = () => {
 		let navLinks = this.refs.navLinks;
 		
 		if (navLinks.style.height) {
 			navLinks.style.height = null;
-			setTimeout(function () {
+			setTimeout(() => {
 				navLinks.style.transitionDuration = null
 			}, 250);
 		} else {
@@ -30,7 +45,7 @@ class Nav extends React.Component {
 				<div className="mobile-menu" onClick={this.toggleMenu}>
 					<div><div></div><div></div><div></div></div>
 				</div>
-				<div className="nav-links" ref="navLinks">
+				<div className="nav-links" ref="navLinks" onClick={this.vanquishNav}>
 					<Link to="/search/">Search</Link>
 					<Link to="/predict/">Predict</Link>
 					<Link to="/data/">Data</Link>
