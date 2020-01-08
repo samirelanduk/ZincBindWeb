@@ -98,6 +98,7 @@ class Pdb extends Component {
                                     code={code} assembly={data.pdb.assembly}
                                     metals={data.pdb.allMetals.edges}
                                     residues={residues}
+                                    zoom={false}
                                 />
                             </Fragment>
                         )

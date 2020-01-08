@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import Box from "./Box";
 import ZincSites from "./ZincSites";
 import PdbInfo from "./PdbInfo";
+import NglInterface from "./NglInterface";
 
 class Site extends Component {
     
@@ -16,10 +17,12 @@ class Site extends Component {
                 expressionSystem assembly resolution rvalue
             }
             metals { count edges { node {
-                id chainId residueNumber insertionCode element coordinateBonds { count }
+                id chainId residueNumber residueName insertionCode x y z
+                coordinateBonds { count edges { node { atom { id x y z } } } }
             } } }
             residues(primary: true) { count edges { node {
                 id chainIdentifier residueNumber insertionCode name
+                atoms { edges { node { id name } } }
             } } }
             group { zincsites { count edges { node { id family residues(primary: true) {
                 edges { node { id atomiumId name } }
@@ -27,6 +30,7 @@ class Site extends Component {
             chainInteractions { count edges { node { sequence chain { id atomiumId }}}}
         }}`
         const QUERY = gql(query_string);
+        
 
         return (
         <main className="site-page">
@@ -43,8 +47,13 @@ class Site extends Component {
                                 index = i; break;
                             }
                         }
+                        let residues = [];
+                        for (const edge of data.zincsite.residues.edges) {
+                            residues.push(edge.node); 
+                        }
                         data_.zincsite.group.zincsites.edges.shift(index);
                         data_.zincsite.group.zincsites.count -= 1;
+                        
                         return (
                             <Fragment>
                                 <Box className="heading"><h1>{ data_.zincsite.id }</h1></Box>
@@ -65,7 +74,7 @@ class Site extends Component {
                                             }) }
                                         </div>
 
-                    <h3 className="box-heading">Liganding Residues: { data_.zincsite.residues.count } ({ data_.zincsite.family })</h3>
+                                        <h3 className="box-heading">Liganding Residues: { data_.zincsite.residues.count } ({ data_.zincsite.family })</h3>
                                         <div className="site-residues">
                                             { data_.zincsite.residues.edges.map(edge => {
                                                 return <div className="residue" key={edge.node.id}>
@@ -82,6 +91,14 @@ class Site extends Component {
                                         <ZincSites sites={ data_.zincsite.group.zincsites.edges } />}
                                     </Box>
                                 </div>
+
+                                <
+                                    NglInterface
+                                    code={data_.zincsite.pdb.id} assembly={data_.zincsite.pdb.assembly}
+                                    metals={data_.zincsite.metals.edges}
+                                    residues={residues}
+                                    zoom={true}
+                                />
 
                                 <Box className="chains">
                                     <h2>Chains Involved: {data_.zincsite.chainInteractions.count}</h2>

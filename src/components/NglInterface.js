@@ -155,7 +155,12 @@ class NglInterface extends Component {
                 }
             }
 
-            component.autoView();
+            if (this.props.zoom) {
+                this.stage.viewerControls.center(bonds[0][0]);
+                this.stage.viewerControls.zoom(0.75);
+            } else {
+                component.autoView();
+            }
         });
     }
     
