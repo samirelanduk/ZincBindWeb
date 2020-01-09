@@ -4,7 +4,7 @@
 
     .box {
         width: 100%;
-        max-width: 1000px;
+        max-width: calc(100vw - #{2 * $gap-3});
         margin: auto;
 
         h2 {
@@ -161,6 +161,15 @@
             .full {
                 grid-column: inherit;
             }
+        }
+    }
+}
+
+@media (min-width: 1032px) {
+    .pdb-page {
+        
+        .box {
+            max-width: 1000px;
         }
     }
 }

@@ -8,7 +8,7 @@
     padding: $gap-3;
 
     .box {
-        
+        max-width: calc(100vw - #{2 * $gap-3});
 
         h2 {
             font-weight: 600;
@@ -167,6 +167,15 @@
     .site-page {
         .two-box {
             grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media (min-width: 1032px) {
+    .site-page {
+        
+        .box {
+            max-width: 1000px;
         }
     }
 }

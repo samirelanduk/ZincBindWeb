@@ -5,6 +5,7 @@
 
     .window {
         height: 450px;
+        width: 100%;
     }
 
     .controls {
@@ -108,6 +109,10 @@
     .ngl-interface {
         display: grid;
         grid-template-columns: 1fr 350px;
+
+        .window {
+            max-width: calc(100vw - 380px);
+        }
 
         .controls {
             flex-direction: column;
