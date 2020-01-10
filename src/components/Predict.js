@@ -6,7 +6,7 @@ class Predict extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <div>Predict</div> );
+        return ( <main>Predict</main> );
     }
 }
  
