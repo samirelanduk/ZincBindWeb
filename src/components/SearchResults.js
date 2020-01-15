@@ -16,6 +16,7 @@ class SearchResults extends Component {
             let queries = string.slice(1).split("&");
             for (const query of queries) {
                 let [k, v] = query.split("=");
+                v = v.replace("+", "%20");
                 params[k] = decodeURI(v);
             }
         }

@@ -36,22 +36,24 @@ class Help extends Component {
                 </Box>
                 
                 <Box>
-                    <h2>I have a peptide sequence and I want to know if it encodes a protein
+                    <h2>I have a protein and I want to know if it encodes a protein
                     which binds zinc.</h2>
-                    <p>Currently the way to get an idea of whether your sequence binds zinc
-                    is to run it through ZincBind's <Link to="/search/">BLAST search</Link> 
-                    utility, at the bottom of that page.</p>
-                    <p>This will tell you how similar your sequence is to sequences known to
-                    bind zinc, and results are returned 'best match first'. More
-                    sophisticated tools are planned for the future.</p>
-                    <p>You can pass in a raw peptide sequence, or a FASTA formatted peptide
-                    sequence.</p>
+                    <p>If you have the sequence, you might first want to try performing
+                    a BLAST search at the bottom of
+                    ZincBind's <Link to="/search/">search page</Link>. This will
+                    tell you how similar your sequence is to sequences known to
+                    bind zinc, and results are returned 'best match first'.</p>
+                    <p>You can also search your protein using ZincBind's predictive
+                    models <Link to="/predict/">here</Link>. You can pass a
+                    structure or a sequence, and the protein will be analysed
+                    using machine learning classifiers to identify possible
+                    zinc binding sites.</p>
                 </Box>
 
                 <Box>
                     <h2>I'm a developer and I want to access the data with a script or
                     other program.</h2>
-                    <p>The REST API can be found <Link to="/api/">here</Link>. You can also
+                    <p>The GraphQL API can be found <Link to="/api/">here</Link>. You can also
                     download the database from the <Link to="/data/">data page</Link>.</p>
                 </Box>
 
@@ -81,7 +83,7 @@ class Help extends Component {
                     way - and the relevant metal ions it contains. Here 'relevant' means
                     zinc, and any other metal that is in a zinc binding site. Within the
                     chain sequence, binding residues will be capitalised and in bold.</p>
-                    <p>Any zinc atoms in the PDb which have not been assigned a binding site
+                    <p>Any zinc atoms in the PDB which have not been assigned a binding site
                     will also be listed, along with the reason for their exclusion.</p>
                     <p>Then there is a list of all the zinc binding sites in that PDB. Each
                     one is a clickable link to that site's page, and has a summary of the
