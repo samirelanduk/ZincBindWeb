@@ -16,6 +16,11 @@
         flex-direction: column;
         background-color: $gray-1;
 
+        .toggles {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
         .control {
             text-align: center;
             margin-bottom: $gap-5;
@@ -87,7 +92,7 @@
     }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .ngl-interface {
         .controls {
             flex-direction: row;
@@ -101,6 +106,12 @@
                     font-size: $font-size-3;
                 }
             }
+
+            .toggles {
+                flex-grow: 1;
+            }
+
+            
         }
     }
 }
@@ -127,6 +138,10 @@
                     margin-bottom: $gap-2;
                     font-size: $font-size-2;
                 }
+            }
+
+            .toggles {
+                flex-grow: inherit;
             }
         }
     }

@@ -174,19 +174,23 @@ class NglInterface extends Component {
                         </select>
                     </div>
 
-                    <div className="control">
-                        <label>Spin</label>
-                        <span ref="spinToggle" className="toggle-switch" onClick={this.toggleSpin}>
-                            <span className="toggle-knob"></span>
-                        </span>
+                    <div className="toggles">
+                        <div className="control">
+                            <label>Spin</label>
+                            <span ref="spinToggle" className="toggle-switch" onClick={this.toggleSpin}>
+                                <span className="toggle-knob"></span>
+                            </span>
+                        </div>
+
+                        <div className="control">
+                            <label>Highlight</label>
+                            <span ref="highlightToggle" className="toggle-switch" onClick={this.toggleHighlight}>
+                                <span className="toggle-knob"></span>
+                            </span>
+                        </div>
                     </div>
 
-                    <div className="control">
-                        <label>Highlight</label>
-                        <span ref="highlightToggle" className="toggle-switch" onClick={this.toggleHighlight}>
-                            <span className="toggle-knob"></span>
-                        </span>
-                    </div>
+                    
 
                     <div className="control">
                         <label>Background</label>
