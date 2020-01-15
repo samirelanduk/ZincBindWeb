@@ -6,7 +6,9 @@ import Chart from "./Chart"
 
 class Data extends Component {
     
-    render() { 
+    render() {
+        document.title = "Data - ZincBind";
+        
         const RESIDUES_QUERY = gql`{ stats { residueCounts(cutoff: 5) {
             label count
         } } }`;

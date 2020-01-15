@@ -4,7 +4,9 @@ import Box from "./Box";
 
 class Help extends Component {
     
-    render() { 
+    render() {
+        document.title = "Help - ZincBind";
+        
         return (
             <main className="help">
                 <Box>

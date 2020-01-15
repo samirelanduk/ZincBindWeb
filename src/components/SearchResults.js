@@ -39,6 +39,8 @@ class SearchResults extends Component {
     }
     
     render() {
+        document.title = "Results - ZincBind";
+
         // Get keywords as dict
         let params = this.paramsObject(this.props.history.location.search);
         

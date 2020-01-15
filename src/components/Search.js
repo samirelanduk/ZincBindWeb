@@ -120,6 +120,8 @@ class Search extends Component {
     }
     
     render() {
+        document.title = "Search - ZincBind";
+        
         if (this.props.history.location.search) {
             return <SearchResults history={this.props.history} />
         }

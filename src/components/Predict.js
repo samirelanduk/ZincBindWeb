@@ -5,7 +5,8 @@ class Predict extends Component {
         super(props);
         this.state = {  }
     }
-    render() { 
+    render() {
+        document.title = "Predict - ZincBind";
         return ( <main>Predict</main> );
     }
 }

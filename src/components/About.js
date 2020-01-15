@@ -13,7 +13,9 @@ import blast from '../images/blast.jpg';
 
 class About extends Component {
     
-    render() { 
+    render() {
+        document.title = "About - ZincBind";
+        
         return (
             <main className="about">
                 <Box>

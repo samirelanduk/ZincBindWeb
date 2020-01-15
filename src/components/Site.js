@@ -49,7 +49,7 @@ class Site extends Component {
             chainInteractions { count edges { node { sequence chain { id atomiumId }}}}
         }}`
         const QUERY = gql(query_string);
-        
+        document.title = id + " - ZincBind";
 
         return (
         <main className="site-page">

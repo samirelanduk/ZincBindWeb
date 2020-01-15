@@ -41,6 +41,7 @@ class Pdb extends Component {
                         if (loading) {
                             return <Box />
                         }
+                        document.title = code + " - ZincBind";
                         let residues = [];
                         for (const edge of data.pdb.zincsites.edges) {
                             for (const edge2 of edge.node.residues.edges) {
