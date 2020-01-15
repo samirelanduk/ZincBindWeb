@@ -7,14 +7,6 @@
         .home-cell {
             max-width: 600px;
             margin: 0px auto;
-        }
-    }
-
-    .home-1 {
-        background: $purple-2;
-        
-
-        .site-description {
             padding: $gap-4;
             text-align: center;
 
@@ -24,18 +16,21 @@
                 margin-bottom: $gap-3;
             }
 
+            img {
+                width: 80%;
+                max-width: 350px;
+                margin-top: $gap-4;
+            }
+
             p {
                 display: flex;
                 align-items: center;
                 line-height: 2;
                 min-height: 150px;
             }
-        }
-
-        .site-search {
-            padding: $gap-4;
 
             .small-links {
+                text-align: left;
                 font-size: $font-size-2;
                 padding-left: $gap-2;
                 margin-bottom: $gap-1;
@@ -69,40 +64,25 @@
         }
     }
 
-    .home-2 {
-        background-color: white;
-        
-        .home-picture {
-            padding: $gap-4;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            img {
-                width: 100%;
-                margin: 0px auto;
-                height: auto;
-                max-width: 600px;
-            }
-        }
-
-        .site-info {
-            text-align: center;
-            padding: $gap-4;
-            padding-bottom: $gap-7;
-    
-            h2 {
-                margin-bottom: $gap-3;
-            }
-
-            p {
-                line-height: 2;
-            }
-        }
+    .home-1 {
+        background: $purple-2;
     }
 
-    
+    .home-2 {
+        background-color: white;
+    }
+
+    .home-3 {
+        background-color: $purple-1;
+
+        .home-cell {
+            img {
+                max-width: 250px;
+                width: 50%;
+            }
+        }
+        
+    }
 }
 
 @media (min-width: 900px) {
@@ -110,38 +90,38 @@
         .home-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: $gap-6;
+            gap: $gap-5;
 
             .home-cell {
+                padding-top: $gap-6;
+                padding-bottom: $gap-6;
                 width: 100%;
-                max-width: none;
-            }
-    
-            .home-cell:nth-child(1) {
-                h1, p, img {
-                    margin-left: auto;
-                    margin-right: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                * {
                     max-width: 500px;
                 }
             }
 
-            .home-cell:nth-child(2) {
-                .small-links, form, p {
-                    margin-right: auto;
-                    max-width: 500px;
-                    margin-bottom: 0;
-                }
+            .home-cell:first-child {
+                margin-right: 0px;
+            }
+
+            .home-cell:last-child {
+                margin-left: 0px;
             }
         }
 
         .home-1 {
-            padding-top: $gap-6;
-            padding-bottom: $gap-6;
-            
+    
             .site-search {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                width: 100%;
 
                 .small-links, form {
                     width: 90%;
@@ -149,16 +129,19 @@
             }
         }
 
-        .home-2 {
-            .site-info {
-                display: flex;
-                padding-bottom: inherit;
-                flex-direction: column;
-                justify-content: center;
+        .home-3 {
+            .home-cell:first-child {
+                grid-column: 2;
+                grid-row: 1;
+                margin-left: 0px;
+                margin-right: auto;
+            }
 
-                h2 {
-                    max-width: 600px;
-                }
+            .home-cell:last-child {
+                grid-column: 1;
+                grid-row: 1;
+                margin-left: auto;
+                margin-right: 0px;
             }
         }
     }

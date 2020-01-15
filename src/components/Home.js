@@ -3,6 +3,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import zincsite from '../images/zincsite.png';
+import deepLearning from '../images/deep-learning.svg';
 
 class Home extends Component {
     
@@ -42,8 +43,18 @@ class Home extends Component {
                     </div>
                     <div className="home-cell site-info">
                         <h2>Classified and Clustered</h2>
-                        <p>ZincBind identifies all zinc atoms in the PDB, determines their bind site where appropriate, and clusters them on sequence identity. Each site is annotated and linked to equivalent sites.</p>
+                        <p>ZincBind identifies all zinc atoms in the PDB, determines their bind site where appropriate, and clusters them on sequence identity. Each site is then organised into groups and families.</p>
                     </div>
+                </div>
+                <div className="home-row home-3">
+                    <div className="home-cell home-picture">
+                        <img src={deepLearning} alt="Machine Learning" />
+                    </div>
+                    <div className="home-cell site-info">
+                        <h2>Predict Zinc Binding</h2>
+                        <p>Use classifiers trained on the database to predict zinc binding in structure or sequence. ZincBind hihglights probable zinc binding sites and assigns probabilities.</p>
+                    </div>
+                    
                 </div>
             </main>
         );
