@@ -26,6 +26,22 @@
         }
     }
 
+    .keywords {
+
+        a {
+            font-weight: 300;
+        }
+
+        a:after {
+            content: ", ";
+            color: $gray-8;
+        }
+
+        a:last-child:after {
+            content: "";
+        }
+    }
+
     .full {
         grid-column: 1 / 3;
     }

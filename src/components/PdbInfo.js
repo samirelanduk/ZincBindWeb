@@ -20,7 +20,9 @@ class PdbInfo extends React.Component {
                 <div className="pdb-row full"><span className="property">Source Organism: </span> <span className="species">{this.props.pdb.organism}</span></div>
                 <div className="pdb-row full"><span className="property">Expression Organism: </span> <span className="species">{this.props.pdb.expressionSystem}</span></div>
                 <div className="pdb-row full"><span className="property">Experimental Technique: </span> {this.props.pdb.technique}</div>
-                <div className="pdb-row full"><span className="property">Keywords: </span> {this.props.pdb.keywords}</div>
+                <div className="pdb-row full keywords"><span className="property">Keywords: </span> {this.props.pdb.keywords.split(", ").map((keyword, i) => {
+                    return <a key={i} href={`/search?keywords=${keyword}`}>{ keyword }</a>
+                })}</div>
             </Box>
 		);
 	}
