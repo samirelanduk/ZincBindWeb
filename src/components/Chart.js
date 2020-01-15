@@ -4,6 +4,10 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
 class Chart extends Component {
+
+    componentDidMount() {
+        console.log("Did mount")
+    }
     
     render() {
         let chartOptions = {
@@ -50,10 +54,8 @@ class Chart extends Component {
                     ({data, loading}) => {
                         if (loading) {
                             let options = {...chartOptions};
-                            return <HighchartsReact
-                                highcharts={Highcharts}
-                                options={options}
-                            />
+                            
+                            return <div style={{height: "400px"}} />
                         } else {
                             let points = data.stats[Object.keys(data.stats)[0]];
                             let labels = []; let counts = [];

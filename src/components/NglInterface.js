@@ -64,7 +64,6 @@ class NglInterface extends Component {
     componentDidMount() {
         // Get selector for metals
         let metals = [];
-        let coordinatingAtoms = [];
         for (const edge of this.props.metals) {
             metals.push(metalToNgl(edge.node));
         }
