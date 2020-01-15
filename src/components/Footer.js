@@ -10,8 +10,8 @@ class Footer extends Component {
                     <div className="useful">
                         <h3>Useful Links</h3>
                         <a href="http://www.bioinf.org.uk/" target="_blank" rel="noopener noreferrer">The ACRM Group</a>
-                        <a href="https://github.com/samirelanduk/zincbind" target="_blank" rel="noopener noreferrer">Source code</a>
-                        <Link to="/changelog/">Changelog</Link>
+                        <a href="https://github.com/samirelanduk/ZincBindWeb" target="_blank" rel="noopener noreferrer">Source code</a>
+                        <a href="https://www.rcsb.org/ligand/ZN" target="_blank" rel="noopener noreferrer">Zinc at RCSB PDB</a>
                     </div>
                     <div className="related">
                         <h3>Related Projects</h3>

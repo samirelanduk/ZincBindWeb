@@ -15,7 +15,7 @@ footer {
         text-align: center;
         padding: $gap-4;
         display: grid;
-        grid-gap: $gap-4;
+        grid-gap: $gap-5;
 
         h3 {
             margin-bottom: $gap-3;
@@ -43,6 +43,7 @@ footer {
         .links {
             grid-template-columns: 1fr 1fr;
             padding: $gap-6;
+            grid-gap: $gap-6;
 
             .useful {
                 margin-left: calc(100vw / 2 - 300px);
