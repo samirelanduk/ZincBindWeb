@@ -52,6 +52,7 @@ class Pdb extends Component {
                                 <Box className="heading"><h1>{ data.pdb.title }</h1></Box>
                                 <PdbInfo pdb={data.pdb} code={code} title={false} />
 
+                                { data.pdb.chains.count > 0 &&
                                 <Box className="chains">
                                     <h2>Zinc-Bearing Chains: {data.pdb.chains.count}</h2>
                                     {data.pdb.chains.edges.map((edge) => {
@@ -64,6 +65,7 @@ class Pdb extends Component {
                                         </div>)
                                     })}
                                 </Box>
+                                }
 
                                 <Box className="atoms">
                                     <div className="identified">
@@ -87,11 +89,13 @@ class Pdb extends Component {
                                         </table>
                                     </div>
                                 </Box>
-
+                                
+                                { data.pdb.zincsites.count > 0 &&
                                 <Box className="sites">
-                                    <h2>{ data.pdb.zincsites.count } Zinc Binding Site{ data.pdb.zincsites.count === 1 ? "" : "s"}</h2>
-                                    <ZincSites sites={data.pdb.zincsites.edges } />
-                                </Box>
+                                    <h2>Zinc Binding Sites: { data.pdb.zincsites.count }</h2>
+                                    
+                                    <ZincSites sites={data.pdb.zincsites.edges} />
+                                </Box> }
 
                                 <
                                     NglInterface

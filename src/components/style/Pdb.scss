@@ -1,6 +1,8 @@
 .pdb-page {
     display: grid;
     grid-gap: $gap-3;
+    margin-top: $gap-3;
+    margin-bottom: $gap-3;
 
     .box {
         width: 100%;
@@ -10,7 +12,7 @@
         h2 {
             font-weight: 600;
             font-size: $font-size-5;
-            margin-bottom: $gap-2;
+            margin-bottom: $gap-4;
         }
     }
 
@@ -97,10 +99,6 @@
     .sites {
         text-align: left;
         padding: $gap-4;
-
-        h2 {
-            margin-bottom: $gap-4;
-        }
 
         .zinc-sites {
             border: 1px solid $purple-3;
