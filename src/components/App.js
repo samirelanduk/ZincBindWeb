@@ -14,6 +14,7 @@ import Data from "./Data";
 import SearchResults from "./SearchResults";
 import About from "./About";
 import Help from "./Help";
+import Api from "./Api";
 import Pdb from "./Pdb";
 import Site from "./Site";
 import Footer from "./Footer";
@@ -42,6 +43,7 @@ class App extends React.Component {
 						<Route path="/data/all" exact render={({history}) => <SearchResults history={history} /> } />
 						<Route path="/about" exact component={About} />
 						<Route path="/help" exact component={Help} />
+						<Route path="/api" exact component={Api} />
 						<Route path="/pdbs/:code" component={Pdb} />
 						<Route path="/:id" component={Site} />
 						<Route path="" component={NotFound} />

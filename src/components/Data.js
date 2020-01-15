@@ -42,7 +42,7 @@ class Data extends Component {
                 <Box>
                     <p>The full list of Zinc Binding Sites can be browsed <Link to="/data/all/">here</Link>.
                     They can also be browsed by Family and Group <Link to="/families/">here</Link>.
-                    See the <a href="https://api.zincbind.net">GraphQL API</a> for programmatic access to the data.</p>
+                    See the <Link to="/api/">GraphQL API</Link> for programmatic access to the data.</p>
                 </Box>
 
                 <div className="charts">
