@@ -17,6 +17,7 @@ import Help from "./Help";
 import Pdb from "./Pdb";
 import Site from "./Site";
 import Footer from "./Footer";
+import NotFound from "./NotFound";
 
 class App extends React.Component {
 
@@ -43,6 +44,7 @@ class App extends React.Component {
 						<Route path="/help" exact component={Help} />
 						<Route path="/pdbs/:code" component={Pdb} />
 						<Route path="/:id" component={Site} />
+						<Route path="" component={NotFound} />
 					</Switch>
 					<Footer />
 				</BrowserRouter>

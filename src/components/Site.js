@@ -7,6 +7,7 @@ import ZincSites from "./ZincSites";
 import PdbInfo from "./PdbInfo";
 import NglInterface from "./NglInterface";
 import { metalToNgl, residueToNgl } from "../index";
+import NotFound from "./NotFound";
 
 class Site extends Component {
 
@@ -54,9 +55,12 @@ class Site extends Component {
         <main className="site-page">
             <Query query={QUERY} >
                 {
-                    ({loading, data}) => {
+                    ({loading, data, error}) => {
                         if (loading) {
                             return <Box />
+                        }
+                        if (error && error.message.substring("not found")) {
+                            return <NotFound />
                         }
                         let data_ = JSON.parse(JSON.stringify(data));
                         let index = null;
