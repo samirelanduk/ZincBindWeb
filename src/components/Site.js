@@ -6,8 +6,26 @@ import Box from "./Box";
 import ZincSites from "./ZincSites";
 import PdbInfo from "./PdbInfo";
 import NglInterface from "./NglInterface";
+import { metalToNgl, residueToNgl } from "../index";
 
 class Site extends Component {
+
+    elementClick(e) {
+        
+        const selector = e.target.dataset.ngl;
+        let stage = window.stage;
+        const rep = e.target.classList.contains("metal") ? "ball+stick" : "licorice";
+        if (e.target.classList.contains("active")) {
+            e.target.classList.remove("active");
+            stage.residueColors[selector].setVisibility(false);
+        } else {
+            e.target.classList.add("active");
+            var r = stage.compList[0].addRepresentation(rep, {
+                color: "#16a085", aspectRatio: 8, sele: selector, assembly: stage.assembly
+            });
+            stage.residueColors[selector] = r;
+        }
+    }
     
     render() {
         const id = this.props.match.params.id;
@@ -21,8 +39,8 @@ class Site extends Component {
                 coordinateBonds { count edges { node { atom { id x y z } } } }
             } } }
             residues(primary: true) { count edges { node {
-                id chainIdentifier residueNumber insertionCode name
-                atoms { edges { node { id name } } }
+                id chainIdentifier residueNumber insertionCode name chainSignature
+                atoms { edges { node { id name coordinateBonds { count } } } }
             } } }
             group { zincsites { count edges { node { id family residues(primary: true) {
                 edges { node { id atomiumId name } }
@@ -68,7 +86,7 @@ class Site extends Component {
                                         <h3 className="box-heading">Metals: { data_.zincsite.metals.count }</h3>
                                         <div className="site-metals">
                                             { data_.zincsite.metals.edges.map(edge => {
-                                                return <div className="metal" key={edge.node.id}>
+                                                return <div className="metal" key={edge.node.id} onClick={this.elementClick} data-ngl={metalToNgl(edge.node)}>
                                                     {edge.node.chainId}:{edge.node.residueNumber}{edge.node.insertionCode} ({edge.node.element}, {edge.node.coordinateBonds.count}-coordination)
                                                 </div>
                                             }) }
@@ -77,7 +95,7 @@ class Site extends Component {
                                         <h3 className="box-heading">Liganding Residues: { data_.zincsite.residues.count } ({ data_.zincsite.family })</h3>
                                         <div className="site-residues">
                                             { data_.zincsite.residues.edges.map(edge => {
-                                                return <div className="residue" key={edge.node.id}>
+                                                return <div className="residue" key={edge.node.id} onClick={this.elementClick} data-ngl={residueToNgl(edge.node)}>
                                                     {edge.node.chainIdentifier}:{edge.node.residueNumber}{edge.node.insertionCode} ({edge.node.name})
                                                 </div>
                                             }) }
@@ -102,8 +120,8 @@ class Site extends Component {
 
                                 <Box className="chains">
                                     <h2>Chains Involved: {data_.zincsite.chainInteractions.count}</h2>
-                                    {data_.zincsite.chainInteractions.edges.map((edge) => {
-                                        return (<div className="pdb-chain" key={edge.node.id}>
+                                    {data_.zincsite.chainInteractions.edges.map((edge, i) => {
+                                        return (<div className="pdb-chain" key={i}>
                                             <h3 className="chain-id">Chain {edge.node.chain.atomiumId}</h3>
                                             
                                             <div className="sequence">{ edge.node.sequence.split("").map((char, i) => {

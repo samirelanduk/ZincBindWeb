@@ -56,6 +56,10 @@
                     font-weight: 300;
                     cursor: pointer;
                 }
+
+                .metal.active, .residue.active {
+                    background-color: #16a08520;
+                }
             }
 
             .site-pdb {

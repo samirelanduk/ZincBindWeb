@@ -27,7 +27,7 @@ class Pdb extends Component {
             zincsites { count edges { node { id family residues(primary: true) {
                 edges { node {
                     id atomiumId name insertionCode residueNumber
-                    chainIdentifier atoms { edges { node { id name } } }
+                    chainIdentifier atoms { edges { node { id name coordinateBonds { count } } } }
                 } }
             } } } }
         }}`

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Box from "./Box"
 import { TwitterPicker } from "react-color";
 import { Stage, Shape } from "ngl";
+import { metalToNgl, residueToNgl } from "../index";
 
 class NglInterface extends Component {
 
@@ -65,31 +66,14 @@ class NglInterface extends Component {
         let metals = [];
         let coordinatingAtoms = [];
         for (const edge of this.props.metals) {
-            metals.push(`${edge.node.residueNumber}^${edge.node.insertionCode}:${edge.node.chainId}/0 and .${edge.node.residueName} and (%A or %)`);
-            for (let edge2 of edge.node.coordinateBonds.edges) {
-                coordinatingAtoms.push(edge2.node.atom.id)
-            }
+            metals.push(metalToNgl(edge.node));
         }
         metals = metals.join(" or ");
 
         // Get selector for residues
         let residues = [];
         for (const residue of this.props.residues) {
-            let s = `${residue.residueNumber}^${residue.insertionCode}:${residue.chainIdentifier}/0 and (%A or %)`
-            if (this.chainResidues.includes(residue.name)) {
-                let includes = ["sidechain", ".CA"];
-                for (let edge of residue.atoms.edges) {
-                    if (coordinatingAtoms.includes(edge.node.id)) {
-                        includes.push(`.${edge.node.name}`)
-                    }
-                }
-                if (includes.includes(".O")) {
-                    includes.push(".C");
-                }
-                includes = includes.join(" or ");
-                s = `(${includes}) and ${s}`;
-            }
-            residues.push(s)
+            residues.push(residueToNgl(residue));
         }
         residues = residues.join(" or ");
 
@@ -155,12 +139,17 @@ class NglInterface extends Component {
                 }
             }
 
+            // Store the representations
+            this.stage.residueColors = {};
+
             if (this.props.zoom) {
                 this.stage.viewerControls.center(bonds[0][0]);
                 this.stage.viewerControls.zoom(0.75);
             } else {
                 component.autoView();
             }
+
+            window.stage = this.stage;
         });
     }
     

@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 class Nav extends React.Component {
 
 	componentDidMount() {
-		console.log(this.refs.navLinks.style.height)
 		document.body.onresize = () => {
 			if (this.refs.navLinks.style.height.length) {
 				this.vanquishNav()
 			}
-			//positionFooter();
 		}
 	}
 
