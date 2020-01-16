@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Box from "./Box";
+import { BarLoader } from "react-spinners";
 
 class SearchNav extends Component {
     
@@ -30,25 +31,13 @@ class SearchNav extends Component {
 
         if (!this.props.params) {
             return (
-                <div className={"search-nav"}>
+                <div className={"search-nav sequence"}>
                     <Box>
-                        <select>
-                            <option value="-deposition_date">Newest to Oldest</option>
-                            <option value="deposition_date">Oldest to Newest</option>
-                            <option value="resolution">Resolution (Best to Worst)</option>
-                            <option value="-resolution">Resolution (Worst to Best)</option>
-                            <option value="rvalue">R-value (Best to Worst)</option>
-                            <option value="-rvalue">R-value (Worst to Best)</option>
-                            <option value="title">PDB Title (A-Z)</option>
-                            <option value="-title">PDB Title (Z-A)</option>
-                            <option value="id">PDB Code (A-Z)</option>
-                            <option value="-id">PDB Code (Z-A)</option>
-                        </select>
-    
-                        <div className="search-links">
-                            <div className="search-link">...</div>
-                        </div>
-                    </Box>
+                        <BarLoader
+                            color={"#482c54"}
+                            css={{margin: "auto"}}
+                        />
+                        </Box>
                 </div>
             ); 
         }

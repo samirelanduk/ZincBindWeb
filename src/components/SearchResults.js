@@ -102,7 +102,9 @@ class SearchResults extends Component {
                                 return (
                                     <Fragment>
                                         <SearchNav />
-                                        <div className="results"></div>
+                                        <div className="results">
+                                            
+                                        </div>
                                     </Fragment>
                                 )
                             }
