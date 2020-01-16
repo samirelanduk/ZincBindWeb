@@ -4,10 +4,6 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
 class Chart extends Component {
-
-    componentDidMount() {
-        console.log("Did mount")
-    }
     
     render() {
         let chartOptions = {
