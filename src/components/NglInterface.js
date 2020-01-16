@@ -161,7 +161,7 @@ class NglInterface extends Component {
     
     render() {
         return (
-            <Box className="ngl-interface">
+            <Box className="ngl-interface" key={this.props.code}>
                 <div className="window" id="ngl-container">
                 <ClipLoader
                     css={{margin: "auto", display: "block", marginTop: "140px"}}

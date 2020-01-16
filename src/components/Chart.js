@@ -53,8 +53,6 @@ class Chart extends Component {
                 {
                     ({data, loading}) => {
                         if (loading) {
-                            let options = {...chartOptions};
-                            
                             return <div style={{height: "400px"}} />
                         } else {
                             let points = data.stats[Object.keys(data.stats)[0]];

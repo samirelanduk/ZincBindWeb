@@ -57,7 +57,7 @@ class Site extends Component {
 
         return (
         <main className="site-page">
-            <Query query={QUERY} >
+            <Query query={QUERY} fetchPolicy='network-only' >
                 {
                     ({loading, data, error}) => {
                         if (loading) {

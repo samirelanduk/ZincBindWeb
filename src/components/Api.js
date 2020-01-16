@@ -35,14 +35,14 @@ class Api extends Component {
                     <h2>ZincBindDB</h2>
 
                     <p className="endpoint">Endpoint: <a href="https://api.zincbind.net">https://api.zincbind.net</a></p>
-                    <iframe src="https://api.zincbind.net"></iframe>
+                    <iframe src="https://api.zincbind.net" title="ZincBindDB"></iframe>
                 </Box>
 
                 <Box>
                     <h2>ZincBindPredict</h2>
 
                     <p className="endpoint">Endpoint: <a href="https://predict.zincbind.net">https://predict.zincbind.net</a></p>
-                    <iframe src="https://predict.zincbind.net"></iframe>
+                    <iframe src="https://predict.zincbind.net" title="ZincBindPredict"></iframe>
                 </Box>
             </main>
         );
