@@ -37,6 +37,8 @@ class Site extends Component {
                 id title classification keywords depositionDate technique organism
                 expressionSystem assembly resolution rvalue
             }
+            stabilisingBonds { count }
+            secondary: residues(primary: false) { count }
             metals { count edges { node {
                 id chainId residueNumber residueName element insertionCode x y z
                 coordinateBonds { count edges { node { atom { id x y z } } } }
@@ -111,6 +113,10 @@ class Site extends Component {
                                                 </div>
                                             }) }
                                         </div>
+
+                                        <p className="secondary">
+                                            {data_.zincsite.secondary.count} secondary residues, {data_.zincsite.stabilisingBonds.count} stabilising connections 
+                                        </p>
                                     </Box>
                                     <Box>
                                         <h2>Equivalent Sites: { data_.zincsite.group.zincsites.count }</h2>

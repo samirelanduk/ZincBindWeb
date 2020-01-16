@@ -68,6 +68,15 @@
                 a {
                     font-weight: normal;
                 }
+
+                
+            }
+
+            p.secondary {
+                display: block;
+                text-align: left;
+                padding: 0;
+                padding-bottom: $gap-2;
             }
 
             .zinc-sites {
