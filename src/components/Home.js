@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
-import zincsite from '../images/zincsite.png';
-import deepLearning from '../images/deep-learning.svg';
+import zincsite from "../images/zincsite.png";
+import deepLearning from "../images/deep-learning.svg";
+import ReactGA from "react-ga";
 
 class Home extends Component {
     
     render() {
         const QUERY = gql`{ stats { pdbCount allSiteCount uniqueSiteCount } }`;
-
+        ReactGA.initialize("UA-51790964-20");
+        ReactGA.pageview(window.location.pathname + window.location.search);
+        
         return (
             <main className="home">
                 <div className="home-row home-1">

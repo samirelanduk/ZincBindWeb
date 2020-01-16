@@ -6,6 +6,7 @@ import ZincSites from "./ZincSites";
 import PdbInfo from "./PdbInfo";
 import NglInterface from "./NglInterface";
 import { BarLoader } from "react-spinners";
+import ReactGA from "react-ga";
 
 class Pdb extends Component {
     
@@ -48,6 +49,8 @@ class Pdb extends Component {
             } } } }
         }}`
         const QUERY4 = gql(query4);
+        ReactGA.initialize("UA-51790964-20");
+        ReactGA.pageview(window.location.pathname + window.location.search);
 
         return (
         <main className="pdb-page">

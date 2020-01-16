@@ -3,11 +3,14 @@ import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import Box from "./Box";
 import Chart from "./Chart"
+import ReactGA from "react-ga";
 
 class Data extends Component {
     
     render() {
         document.title = "Data - ZincBind";
+        ReactGA.initialize("UA-51790964-20");
+        ReactGA.pageview(window.location.pathname + window.location.search);
         
         const RESIDUES_QUERY = gql`{ stats { residueCounts(cutoff: 5) {
             label count

@@ -10,11 +10,14 @@ import react from '../images/react.jpg';
 import highcharts from '../images/highcharts.png';
 import ngl from '../images/ngl.png';
 import blast from '../images/blast.jpg';
+import ReactGA from "react-ga";
 
 class About extends Component {
     
     render() {
         document.title = "About - ZincBind";
+        ReactGA.initialize("UA-51790964-20");
+        ReactGA.pageview(window.location.pathname + window.location.search);
         
         return (
             <main className="about">

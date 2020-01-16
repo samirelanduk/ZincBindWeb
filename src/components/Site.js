@@ -9,6 +9,7 @@ import NglInterface from "./NglInterface";
 import { metalToNgl, residueToNgl } from "../index";
 import NotFound from "./NotFound";
 import { BarLoader } from "react-spinners";
+import ReactGA from "react-ga";
 
 class Site extends Component {
 
@@ -51,6 +52,8 @@ class Site extends Component {
         }}`
         const QUERY = gql(query_string);
         document.title = id + " - ZincBind";
+        ReactGA.initialize("UA-51790964-20");
+        ReactGA.pageview(window.location.pathname + window.location.search);
 
         return (
         <main className="site-page">

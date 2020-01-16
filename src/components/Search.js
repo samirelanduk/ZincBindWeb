@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Box from "./Box";
 import SearchResults from "./SearchResults";
+import ReactGA from "react-ga";
 
 class Search extends Component {
 
@@ -121,6 +122,8 @@ class Search extends Component {
     
     render() {
         document.title = "Search - ZincBind";
+        ReactGA.initialize("UA-51790964-20");
+        ReactGA.pageview(window.location.pathname + window.location.search);
         
         if (this.props.history.location.search) {
             return <SearchResults history={this.props.history} />

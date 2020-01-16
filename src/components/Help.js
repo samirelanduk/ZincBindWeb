@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Box from "./Box";
+import ReactGA from "react-ga";
 
 class Help extends Component {
     
     render() {
         document.title = "Help - ZincBind";
+        ReactGA.initialize("UA-51790964-20");
+        ReactGA.pageview(window.location.pathname + window.location.search);
         
         return (
             <main className="help">
