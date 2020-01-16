@@ -5,14 +5,19 @@ import Box from "./Box";
 import ZincSites from "./ZincSites";
 import PdbInfo from "./PdbInfo";
 import NglInterface from "./NglInterface";
+import { BarLoader } from "react-spinners";
 
 class Pdb extends Component {
     
     render() {
         const code = this.props.match.params.code;
-        const query_string = `{ pdb(id: "${code}") {
+        const query1 = `{ pdb(id: "${code}") {
             title classification keywords depositionDate technique organism
-            expressionSystem assembly resolution rvalue chains {
+            expressionSystem assembly resolution rvalue
+        }}`;
+        const QUERY1 = gql(query1);
+        const query2 = `{ pdb(id: "${code}") {
+            chains {
                 count edges { node { id sequence atomiumId chainInteractions { count }} }
             } metals(element: "ZN") { count edges { node {
                 id chainId residueNumber
@@ -20,6 +25,17 @@ class Pdb extends Component {
             ignored: metals(omissionReason__contains: "") { count edges { node {
                  id chainId residueNumber omissionReason
             } } }
+        }}`;
+        const QUERY2 = gql(query2);
+        const query3 = `{ pdb(id: "${code}") {
+            zincsites { count edges { node { id family residues(primary: true) {
+                edges { node {
+                    id atomiumId name insertionCode residueNumber
+                } }
+            } } } }
+        }}`;
+        const QUERY3 = gql(query3);
+        const query4 = `{ pdb(id: "${code}") {assembly
             allMetals: metals { edges { node {
                 id chainId residueNumber residueName insertionCode x y z
                 coordinateBonds { edges { node { atom { id x y z } } } }
@@ -31,28 +47,38 @@ class Pdb extends Component {
                 } }
             } } } }
         }}`
-        const QUERY = gql(query_string);
+        const QUERY4 = gql(query4);
 
         return (
         <main className="pdb-page">
-            <Query query={QUERY} >
+            <Query query={QUERY1} >
+                {
+                    ({loading, data}) => {
+                        if (loading) {
+                            return <Box><BarLoader
+                                color={"#482c54"}
+                                css={{margin: "auto"}}
+                            /></Box>
+                        }
+                        document.title = code + " - ZincBind";
+                        return (
+                            <Fragment>
+                                <Box className="heading"><h1>{ data.pdb.title }</h1></Box>
+                                <PdbInfo pdb={data.pdb} code={code} title={false} />
+                            </Fragment>
+                        )
+                    }
+                }
+            </Query>
+            <Query query={QUERY2} >
                 {
                     ({loading, data}) => {
                         if (loading) {
                             return <Box />
                         }
                         document.title = code + " - ZincBind";
-                        let residues = [];
-                        for (const edge of data.pdb.zincsites.edges) {
-                            for (const edge2 of edge.node.residues.edges) {
-                                residues.push(edge2.node)
-                            }   
-                        }
                         return (
                             <Fragment>
-                                <Box className="heading"><h1>{ data.pdb.title }</h1></Box>
-                                <PdbInfo pdb={data.pdb} code={code} title={false} />
-
                                 { data.pdb.chains.count > 0 &&
                                 <Box className="chains">
                                     <h2>Zinc-Bearing Chains: {data.pdb.chains.count}</h2>
@@ -90,22 +116,49 @@ class Pdb extends Component {
                                         </table>
                                     </div>
                                 </Box>
-                                
-                                { data.pdb.zincsites.count > 0 &&
+                            </Fragment>
+                        )
+                    }
+                }
+            </Query>
+            <Query query={QUERY3} >
+                {
+                    ({loading, data}) => {
+                        if (loading) {
+                            return <Box />
+                        }
+                        document.title = code + " - ZincBind";
+                        return (
+                            data.pdb.zincsites.count > 0 &&
                                 <Box className="sites">
                                     <h2>Zinc Binding Sites: { data.pdb.zincsites.count }</h2>
                                     
                                     <ZincSites sites={data.pdb.zincsites.edges} />
-                                </Box> }
-
-                                <
-                                    NglInterface
-                                    code={code} assembly={data.pdb.assembly}
-                                    metals={data.pdb.allMetals.edges}
-                                    residues={residues}
-                                    zoom={false}
-                                />
-                            </Fragment>
+                                </Box>
+                        )
+                    }
+                }
+            </Query>
+            <Query query={QUERY4} >
+                {
+                    ({loading, data}) => {
+                        if (loading) {
+                            return <Box />
+                        }
+                        
+                        let residues = [];
+                        for (const edge of data.pdb.zincsites.edges) {
+                            for (const edge2 of edge.node.residues.edges) {
+                                residues.push(edge2.node)
+                            }   
+                        }
+                        return (
+                            <NglInterface
+                                code={code} assembly={data.pdb.assembly}
+                                metals={data.pdb.allMetals.edges}
+                                residues={residues}
+                                zoom={false}
+                            />
                         )
                     }
                 }

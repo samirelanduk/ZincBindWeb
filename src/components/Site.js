@@ -8,6 +8,7 @@ import PdbInfo from "./PdbInfo";
 import NglInterface from "./NglInterface";
 import { metalToNgl, residueToNgl } from "../index";
 import NotFound from "./NotFound";
+import { BarLoader } from "react-spinners";
 
 class Site extends Component {
 
@@ -57,7 +58,10 @@ class Site extends Component {
                 {
                     ({loading, data, error}) => {
                         if (loading) {
-                            return <Box />
+                            return <Box><BarLoader
+                                color={"#482c54"}
+                                css={{margin: "auto"}}
+                            /></Box>
                         }
                         if (error && error.message.substring("not found")) {
                             return <NotFound />

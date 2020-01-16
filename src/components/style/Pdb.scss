@@ -30,9 +30,12 @@
         text-align: left;
         width: 100%;
         overflow: hidden;
+        overflow-y: scroll;
+        max-height: 700px;
 
         .pdb-chain {
             width: 100%;
+            margin-bottom: $gap-2;
 
             .site-count {
                 font-size: $font-size-1;
@@ -62,6 +65,8 @@
         padding: $gap-2;
         grid-template-columns: 1fr;
         gap: $gap-5;
+        overflow-y: scroll;
+        max-height: 700px;
 
         .identified {
             .all-zincs {
@@ -81,6 +86,7 @@
             border-collapse: separate;
             border-spacing: $gap-2;
             margin-top: -$gap-2;
+            margin: auto;
 
             tr {
 
@@ -99,6 +105,8 @@
     .sites {
         text-align: left;
         padding: $gap-4;
+        overflow-y: scroll;
+        max-height: 700px;
 
         .zinc-sites {
             border: 1px solid $purple-3;
@@ -139,6 +147,8 @@
         .chains {
 
             .pdb-chain {
+                margin-bottom: $gap-3;
+
                 .site-count {
                     font-size: $font-size-2;
                 }

@@ -175,7 +175,6 @@ class NglInterface extends Component {
                         <label>Protein View</label>
                         <select onChange={this.repChange} ref="rep" >
                             <option value="cartoon">Cartoon</option>
-                            <option value="surface">Surface</option>
                             <option value="ball+stick">Ball and Stick</option>
                             <option value="line">Lines</option>
                             <option value="backbone">Backbone</option>
