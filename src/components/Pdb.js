@@ -97,7 +97,7 @@ class Pdb extends Component {
                                 </Box>
                                 }
 
-                                <Box className="atoms">
+                                <Box className={`atoms${data.pdb.ignored.count ? " split" : ""}`}>
                                     <div className="identified">
                                         <h2>Zinc Atoms: {data.pdb.metals.count}</h2>
                                         <div className="all-zincs">
@@ -106,6 +106,7 @@ class Pdb extends Component {
                                             })}
                                         </div>
                                     </div>
+                                    {data.pdb.ignored.count > 0 && 
                                     <div className="ignored">
                                         <h2>Not Used: {data.pdb.ignored.count}</h2>
                                         <table className="ingored-zincs">
@@ -117,7 +118,7 @@ class Pdb extends Component {
                                                 })}
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div>}
                                 </Box>
                             </Fragment>
                         )
