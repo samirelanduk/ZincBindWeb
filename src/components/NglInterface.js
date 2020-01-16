@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Box from "./Box"
 import { TwitterPicker } from "react-color";
 import { Stage, Shape } from "ngl";
+import { ClipLoader } from "react-spinners";
 import { metalToNgl, residueToNgl } from "../index";
 
 class NglInterface extends Component {
@@ -13,6 +14,11 @@ class NglInterface extends Component {
     ]
 
     stage = null;
+
+    constructor(props) {
+        super(props);
+        this.state = {nglLoading: true};
+    }
 
     repChange = () => {
         if (this.stage) {
@@ -102,6 +108,7 @@ class NglInterface extends Component {
         window.addEventListener("resize", handleResize, false);
 
         this.stage.loadFile("rcsb://" + this.props.code + ".mmtf").then((component) => {
+            this.setState({nglLoading: false})
             // Make the whole thing a cartoon
             this.stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
 
@@ -156,7 +163,12 @@ class NglInterface extends Component {
         return (
             <Box className="ngl-interface">
                 <div className="window" id="ngl-container">
-
+                <ClipLoader
+                    css={{margin: "auto", display: "block", marginTop: "140px"}}
+                    size={150}
+                    color={"#482c54"}
+                    loading={this.state.nglLoading}
+                />
                 </div>
                 <div className="controls">
                     <div className="control">
