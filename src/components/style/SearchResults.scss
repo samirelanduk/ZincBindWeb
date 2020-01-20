@@ -1,8 +1,13 @@
 .search-results {
+    display: block;
+
+    .results {
+        width: 100%;   
+    }
 
     .box {
         width: 100%;
         max-width: 1200px;
-        margin: $gap-3 auto;       
+        margin: $gap-3 auto;      
     }
 }

@@ -34,7 +34,7 @@ class Families extends Component {
                                         return <Box key={name} className="family">
                                             <Link to={"/families/" + name}>
                                                 <h2>{name}</h2>
-                                                <p>{count} {count == 1 ? "family" : "families"}</p>
+                                                <p>{count} {count == 1 ? "group" : "groups"}</p>
                                             </Link>
                                         </Box>
                                     })}

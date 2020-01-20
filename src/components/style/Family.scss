@@ -1,0 +1,31 @@
+.family {
+    max-width: 1000px;
+
+    .box {
+
+        padding: 0;
+
+        a {
+            color: inherit;
+            display: block;
+            padding: $gap-2 $gap-3;
+            
+            h2 {
+                font-weight: 600;
+                font-size: $font-size-6;
+                margin-bottom: $gap-3;
+            }
+        }
+
+        
+        
+    }
+
+    .heading {
+        padding: $gap-3;
+
+        h1 {
+            font-size: $font-size-8;
+        }
+    }
+}

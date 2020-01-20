@@ -7,15 +7,19 @@ class SearchNav extends Component {
     
     sort = (event) => {
         let query = this.props.history.location.search;
+        console.log(query)
         query = query ? query : "?";
+        console.log(query)
         if (query.includes("sort=")) {
             query = query.replace(/sort=(.+?)(&|$)/, `sort=${event.target.value}&`)
         } else {
-            query = query +  `&sort=${event.target.value}`
+            query = query +  `sort=${event.target.value}`
         }
+        console.log(query)
         if (query.endsWith("&")) {
             query = query.slice(0, -1)
         }
+        console.log(query)
         this.props.history.push(query);
     }
 

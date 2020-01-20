@@ -16,6 +16,7 @@ import About from "./About";
 import Help from "./Help";
 import Api from "./Api";
 import Families from "./Families";
+import Family from "./Family";
 import Pdb from "./Pdb";
 import Site from "./Site";
 import Footer from "./Footer";
@@ -48,6 +49,7 @@ class App extends React.Component {
 						<Route path="/api" exact component={Api} />
 						<Route path="/families" exact component={Families} />
 						<Route path="/pdbs/:code" component={Pdb} />
+						<Route path="/families/:family" component={Family} />
 						<Route path="/:id" component={Site} />
 						<Route path="" component={NotFound} />
 					</Switch>
