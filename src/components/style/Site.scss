@@ -99,6 +99,15 @@
                 text-align: center;
                 line-height: 2;
             }
+
+            .group-info {
+                font-weight: 300;
+                margin-bottom: $gap-5;
+            }
+        }
+
+        .box.group {
+            max-height: 350px;
         }
     }
 
