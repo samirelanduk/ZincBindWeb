@@ -3,6 +3,12 @@
 
     .results {
         width: 100%;   
+        display: grid;
+        grid-gap: $gap-3;
+    }
+
+    .box:first-child {
+        margin-top: 0;;
     }
 
     .box {
