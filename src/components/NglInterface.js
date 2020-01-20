@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import Box from "./Box"
 import { TwitterPicker } from "react-color";
 import { Stage, Shape } from "ngl";
@@ -17,7 +17,7 @@ class NglInterface extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {nglLoading: true};
+        this.state = {nglLoading: true, hasError: false};
     }
 
     repChange = () => {
@@ -68,6 +68,12 @@ class NglInterface extends Component {
     }
 
     componentDidMount() {
+        if (this.state.hasError) {
+            for (let div of document.getElementById("ngl-container").getElementsByTagName("div")) {
+                div.parentNode.removeChild(div);
+            }
+            return
+        }
         // Get selector for metals
         let metals = [];
         for (const edge of this.props.metals) {
@@ -107,10 +113,18 @@ class NglInterface extends Component {
         window.addEventListener("orientationchange", handleResize, false);
         window.addEventListener("resize", handleResize, false);
 
+
         this.stage.loadFile("rcsb://" + this.props.code + ".mmtf").then((component) => {
             this.setState({nglLoading: false})
             // Make the whole thing a cartoon
-            this.stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
+            try {
+                this.stage.rep = component.addRepresentation("cartoon", {sele: "/0", assembly: assembly});
+            } catch (e) {
+                this.setState({hasError: true});
+                this.componentDidMount();
+                return;
+            }
+            
 
             // Make metals appear as spheres
             component.addRepresentation("ball+stick", {sele: metals, aspectRatio: 8, assembly: assembly});
@@ -157,20 +171,26 @@ class NglInterface extends Component {
 
             window.stage = this.stage;
         });
+        
     }
     
     render() {
         return (
             <Box className="ngl-interface" key={this.props.code}>
                 <div className="window" id="ngl-container">
-                <ClipLoader
+                
+                {
+                    this.state.hasError ? <p>Structure could not be loaded.</p> : <ClipLoader
                     css={{margin: "auto", display: "block", marginTop: "140px"}}
                     size={150}
                     color={"#482c54"}
                     loading={this.state.nglLoading}
                 />
+                }
                 </div>
                 <div className="controls">
+                    { this.state.hasError ||
+                    <Fragment>
                     <div className="control">
                         <label>Protein View</label>
                         <select onChange={this.repChange} ref="rep" >
@@ -198,9 +218,8 @@ class NglInterface extends Component {
                                 <span className="toggle-knob"></span>
                             </span>
                         </div>
+                        
                     </div>
-
-                    
 
                     <div className="control">
                         <label>Background</label>
@@ -208,7 +227,7 @@ class NglInterface extends Component {
                             "#000000", "#FFFFFF", "#7BDCB5", "#fab1a0", "#8ED1FC",
                             "#ff7675", "#ABB8C3", "#482c54", "#f5f6fa", "#303952"
                         ]} />
-                    </div>
+                    </div></Fragment> }
 
                     
                 </div>
