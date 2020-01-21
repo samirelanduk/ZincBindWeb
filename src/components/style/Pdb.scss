@@ -1,12 +1,7 @@
 .pdb-page {
-    display: grid;
-    grid-gap: $gap-3;
-    margin-top: $gap-3;
-    margin-bottom: $gap-3;
 
     .box {
         width: 100%;
-        max-width: calc(100vw - #{2 * $gap-3});
         margin: auto;
 
         h2 {

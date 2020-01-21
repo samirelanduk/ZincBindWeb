@@ -1,6 +1,5 @@
 .search-results {
-    display: block;
-
+    
     .results {
         width: 100%;   
         display: grid;
@@ -9,11 +8,5 @@
 
     .box:first-child {
         margin-top: 0;;
-    }
-
-    .box {
-        width: 100%;
-        max-width: 1200px;
-        margin: $gap-3 auto;      
     }
 }

@@ -12,10 +12,14 @@ html {
 }
 
 main {
-    margin: $gap-3;
     flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
+    justify-content: center;
     grid-gap: $gap-3;
+    padding: $gap-3;
 }
 
 h1 {
