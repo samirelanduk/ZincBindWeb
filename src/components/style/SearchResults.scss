@@ -1,7 +1,9 @@
 .search-results {
+    max-width: 1000px;
     
     .results {
-        width: 100%;   
+        width: inherit;
+        max-width: inherit;
         display: grid;
         grid-gap: $gap-3;
     }
