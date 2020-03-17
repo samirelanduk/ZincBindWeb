@@ -100,12 +100,8 @@ class Search extends Component {
     }
 
     blastStringUpdate = (e) => {
-        let value = e.target.value;
-        let lines = value.split(/[\r\n]+/);
-        if (lines[0][0] === ">") {
-            lines.shift();
-        }
-        this.setState({blastString: lines.join("")});
+        this.setState({blastString: e.target.value.replace(/=/g, "%3D").replace(/\n/g, "\\n")});
+        console.log(this.state.blastString)
     }
 
     expectUpdate = (e) => {
@@ -115,6 +111,7 @@ class Search extends Component {
     blastSearch = () => {
         if (this.state.blastString) {
             let query = `sequence=${this.state.blastString}&expect=${this.state.expectString}`;
+            console.log(this.state.blastString)
             this.props.history.push(`/search?${query}`);
         }
         

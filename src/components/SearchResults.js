@@ -15,8 +15,10 @@ class SearchResults extends Component {
         if (string) {
             let queries = string.slice(1).split("&");
             for (const query of queries) {
+                console.log(query)
                 let [k, v] = query.split("=");
                 v = v.replace("+", "%20");
+                console.log(k, v)
                 params[k] = decodeURI(v);
             }
         }
@@ -43,6 +45,7 @@ class SearchResults extends Component {
 
         // Get keywords as dict
         let params = this.paramsObject(this.props.history.location.search);
+        console.log(params)
         
         // How many pages should be skipped?
         const skip = "page" in params ? (parseInt(params.page) - 1) * 25 : 0;
@@ -192,6 +195,7 @@ class SearchResults extends Component {
     }
 
     renderBlast(params, skip) {
+        console.log(params.sequence)
         const QUERY = gql`{ blast(sequence: "${params.sequence}", evalue: ${params.expect}, first: 25, skip: ${skip}) {
             count edges { node { id qseq hseq midline evalue score bitScore hitFrom hitTo queryFrom queryTo chain {
                 id atomiumId sequence pdb { id title depositionDate organism } chainInteractions { edges { node { site { id family residues(primary: true) { edges { node { atomiumId name id }}}} }}}
