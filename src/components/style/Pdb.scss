@@ -3,6 +3,7 @@
     .box {
         width: 100%;
         margin: auto;
+        max-width: calc(100vw - #{2 * $gap-3});
 
         h2 {
             font-weight: 600;

@@ -1,6 +1,8 @@
 .site-page {
 
     .box {
+        max-width: calc(100vw - #{2 * $gap-3});
+        margin: 0 auto;
 
         h2 {
             font-weight: 600;
@@ -19,7 +21,7 @@
     }
 
     .two-box {
-        
+        margin: 0 auto;
         display: grid;
         gap: $gap-3;
         max-width: 1000px;
