@@ -1,0 +1,44 @@
+.predict-page {
+
+    .box {
+        overflow: visible;
+    }
+
+    h2 {
+        margin-bottom: $gap-3;
+    }
+
+    textarea {
+        font-family: monospace;
+        height: 250px;
+        margin-bottom: $gap-3;
+    }
+
+    .options {
+        .families-select {
+            margin-bottom: $gap-2;
+        }
+    }
+
+    @media (min-width: 400px) {
+        h2 {
+            margin-bottom: $gap-4;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            gap: $gap-2;
+
+            .families-select {
+                margin-bottom: 0;
+            }
+
+            input {
+                height: 100%;
+                margin: 0;
+                padding: 0 $gap-2;
+            }
+        }
+    }
+}

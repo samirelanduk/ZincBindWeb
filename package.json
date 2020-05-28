@@ -19,10 +19,11 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-select": "^3.1.0",
     "react-spinners": "^0.8.0"
   },
   "scripts": {
-    "start": "PORT=3030 react-scripts start",
+    "start": "PORT=3003 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
