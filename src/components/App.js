@@ -20,8 +20,17 @@ import Family from "./Family";
 import Group from "./Group";
 import Pdb from "./Pdb";
 import Site from "./Site";
+import SequenceJob from "./SequenceJob";
 import Footer from "./Footer";
 import NotFound from "./NotFound";
+
+export const isDevelopment = () => {
+  /**
+   * Returns true if app is running locally.
+   */
+  return !process.env.NODE_ENV || process.env.NODE_ENV === "development";
+}
+
 
 class App extends React.Component {
 
@@ -52,6 +61,7 @@ class App extends React.Component {
 						<Route path="/pdbs/:code" component={Pdb} />
 						<Route path="/families/:family" component={Family} />
 						<Route path="/groups/:group" component={Group} />
+						<Route path="/sequence-jobs/:id/" component={SequenceJob} />
 						<Route path="/:id" component={Site} />
 						<Route path="" component={NotFound} />
 					</Switch>

@@ -1,0 +1,80 @@
+.sequence-job, .structure-job {
+
+    .box {
+        text-align: left;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .label {
+        font-weight: 300;
+
+        span {
+            font-weight: 600;
+        }
+    }
+
+    .status {
+        font-size: $font-size-6;
+        font-weight: 300;
+        margin-bottom: $gap-2;
+    }
+
+    .sequence {
+        font-family: monospace;
+        font-weight: light;
+        word-break: break-all;
+        font-size: $font-size-1;
+        margin-bottom: $gap-2;
+
+        .upper, .lower {
+            font-family: monospace;
+        }
+
+        .upper {
+            font-weight: bold;
+        }
+    }
+
+    .sequences {
+        .predicted-sequence {
+            margin: $gap-5 0;
+
+            .info {
+                display: flex;
+                align-items: flex-end;
+
+                .family {
+                    margin-right: $gap-3;
+                    line-height: 1;
+                }
+
+                .probability {
+                    font-size: $font-size-2;
+                }
+            }
+
+            .sequence {
+                color: $gray-4;
+
+                .upper {
+                    color: $gray-9;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 400px) {
+        .status {
+            font-size: $font-size-7;
+            margin-bottom: $gap-3;
+        }
+    
+        .sequence {
+            font-size: $font-size-2;
+            margin-bottom: $gap-3;
+        }
+    }
+}
