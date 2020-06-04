@@ -22,6 +22,7 @@ const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link})
 const Predict = props => {
     const [sequence, setSequence] = useState("");
     const [selectedFamilies, setSelectedFamilies] = useState([]);
+    const [error, setError] = useState("");
 
 
     document.title = "Predict - ZincBind";
@@ -36,6 +37,7 @@ const Predict = props => {
 
     const [searchSequence, searchSequenceMutation] = useMutation(SEARCH_SEQUENCE, {
         client: predictClient,
+        onError: () => setError("Sorry, an error occured."),
         onCompleted: response => {
             props.history.push(`/sequence-jobs/${response.searchSequence.jobId}/`);
         }
@@ -47,12 +49,13 @@ const Predict = props => {
 
     const sequenceSubmit = e => {
         e.preventDefault();
-        searchSequence({
-            variables: {
-                sequence: sequence, families: selectedFamilies
-            },
-            onCompleted: x => console.log(x)
-        })
+        if (sequence.length) {
+            searchSequence({
+                variables: {
+                    sequence: sequence, families: selectedFamilies
+                },
+            })
+        }
     }
 
     return ( <main className="predict-page">
@@ -60,10 +63,12 @@ const Predict = props => {
         <Box>
             <h2>Sequence Prediction</h2>
             <form onSubmit={sequenceSubmit}>
+                {error && <div className="error">{ error }</div>}
                 <textarea
+                    className={error ? "errored" : ""}
                     placeholder="Sequence"
                     value={sequence}
-                    onChange={e => setSequence(e.target.value)}
+                    onChange={e => {setSequence(e.target.value); setError("")}}
                 />
                 <div className="options">
                     <Select

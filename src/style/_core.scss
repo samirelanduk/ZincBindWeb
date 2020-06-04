@@ -71,6 +71,14 @@ input[type=submit], button {
     font-weight: 600;
 }
 
+.error {
+    color: $red;
+    font-size: $font-size-3;
+    text-align: left;
+    margin-left: $gap-1;
+    margin-bottom: $gap-1;
+}
+
 
 @media (min-width: 600px) {
     html {
