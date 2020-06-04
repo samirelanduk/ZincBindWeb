@@ -1,7 +1,12 @@
 .predict-page {
 
-    .box {
-        overflow: visible;
+    .predict-grid {
+        display: grid;
+        gap: $gap-3;
+
+        .box {
+            overflow: visible;
+        }
     }
 
     h2 {
@@ -17,6 +22,42 @@
     textarea.errored {
         background-color: transparentize($red, 0.8);
         color: transparentize($red, 0.2);
+    }
+
+    .file-upload {
+        border: 1px dashed $gray-3;
+        padding: $gap-6 $gap-5;
+        color: $gray-6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: $gap-3;
+        height: 210px;
+
+        img {
+            width: 50px;
+            display: block;
+            margin-bottom: $gap-3;
+        }
+    }
+
+    .toggles {
+        text-align: left;
+        margin: -$gap-2;
+        margin-bottom: $gap-3 - $gap-2;
+
+        .toggle {
+            display: flex;
+            align-items: center;
+            display: inline-flex;
+            margin: $gap-2;
+
+            label {
+                font-size: $font-size-2;
+                margin-left: $gap-2;
+            }
+        }
     }
 
     .options {
@@ -44,6 +85,12 @@
                 margin: 0;
                 padding: 0 $gap-2;
             }
+        }
+    }
+
+    @media (min-width: 900px) {
+        .predict-grid {
+            grid-template-columns: 1fr 1fr;
         }
     }
 }
