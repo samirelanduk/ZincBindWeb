@@ -40,6 +40,10 @@
             display: block;
             margin-bottom: $gap-3;
         }
+
+        input {
+            display: none;
+        }
     }
 
     .toggles {
