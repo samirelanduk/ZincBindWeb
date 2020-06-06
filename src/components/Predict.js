@@ -89,9 +89,9 @@ const Predict = props => {
 
     const [searchStructure, searchStructureMutation] = useMutation(SEARCH_STRUCTURE, {
         client: predictClient,
-        onError: () => setSequenceError("Sorry, an error occured."),
+        onError: () => setStructureError("Sorry, an error occured."),
         onCompleted: response => {
-            //props.history.push(`/structure-jobs/${response.searchStructure.jobId}/`);
+            props.history.push(`/structure-jobs/${response.searchStructure.jobId}/`);
         }
     });
     

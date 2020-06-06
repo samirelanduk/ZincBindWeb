@@ -38,8 +38,8 @@
         }
     }
 
-    .sequences {
-        .predicted-sequence {
+    .sequences, .structures {
+        .predicted-sequence, .predicted-structure {
             margin: $gap-5 0;
 
             .info {
@@ -49,6 +49,7 @@
                 .family {
                     margin-right: $gap-3;
                     line-height: 1;
+                    font-weight: 600;
                 }
 
                 .probability {
@@ -63,6 +64,36 @@
                     color: $gray-9;
                 }
             }
+        }
+
+        
+    }
+
+    .structures {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: $gap-4;
+
+        .predicted-structure {
+            border: 1px solid $gray-3;
+            padding: $gap-4 $gap-3;
+            margin: 0;
+            margin-bottom: $gap-2;
+            margin-right: $gap-2;
+
+            .info {
+                margin-bottom: $gap-2;
+                font-weight: 300;
+            }
+
+            .site {
+                display: flex;
+                font-size: $font-size-2;
+
+                .residue {
+                    margin-right: $gap-1;
+                }
+            } 
         }
     }
 
