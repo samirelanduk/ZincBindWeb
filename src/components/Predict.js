@@ -32,8 +32,7 @@ const SEARCH_STRUCTURE = gql`mutation(
 const uploadLink = createUploadLink({
     uri: "http://localhost:7001", headers: {"keep-alive": "true"}
 })
-const httpLink = createHttpLink({ uri: "http://localhost:7001/" });
-const link = ApolloLink.from([uploadLink, httpLink]);
+const link = ApolloLink.from([uploadLink]);
 const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link});
 
 const Predict = props => {
@@ -174,7 +173,7 @@ const Predict = props => {
                                 checked={searchByFamily} 
                                 onChange={() => setSearchByFamily(!searchByFamily)}
                             />
-                            <label htmlFor="location">Search by family</label>
+                            <label htmlFor="family">Search by family</label>
                         </div>
                         <div className="toggle">
                             <Toggle
@@ -182,7 +181,7 @@ const Predict = props => {
                                 checked={searchHalfSites}
                                 onChange={() => setSearchHalfSites(!searchHalfSites)}
                             />
-                            <label htmlFor="location">Search for half-sites</label>
+                            <label htmlFor="half">Search for half-sites</label>
                         </div>
 
                     </div>
