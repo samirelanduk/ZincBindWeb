@@ -5,6 +5,7 @@ import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from 'apollo-link';
 import { createHttpLink } from "apollo-link-http";
+import roundTo from "round-to";
 import Box from "./Box";
 
 const JOB = gql`query($id: String!) {
@@ -52,7 +53,7 @@ const SequenceJob = props => {
                       <div className="predicted-sequence" key={s}>
                         <div className="info">
                           <div className="family">{site.family}</div>
-                          <div className="probability">p={site.probability}</div>
+                          <div className="probability">p={roundTo(site.probability, 2)}</div>
                         </div>
                         <div className="sequence">{site.residues.split("").map(
                           (x, i) => <span key={i} className={x.toUpperCase() === x ? "upper" : "lower"}>{x}</span>

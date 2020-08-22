@@ -22,7 +22,8 @@
     "react-scripts": "3.0.1",
     "react-select": "^3.1.0",
     "react-spinners": "^0.8.0",
-    "react-toggle": "^4.1.1"
+    "react-toggle": "^4.1.1",
+    "round-to": "^4.1.0"
   },
   "scripts": {
     "start": "BROWSER=none PORT=3003 react-scripts start",
