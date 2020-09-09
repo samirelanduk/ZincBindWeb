@@ -53,19 +53,33 @@ const Predict = props => {
     const [structureError, setStructureError] = useState("");
 
     const sequenceFamilies = [
-        {value: "H3", label: "H3"},
+        {value: "C2H1", label: "C2H1"},
+        {value: "C2H2", label: "C2H2"},
+        {value: "C3", label: "C3"},
+        {value: "C3H1", label: "C3H1"},
         {value: "C4", label: "C4"},
-        {value: "H2C2", label: "H2C2"},
+        {value: "D1H1", label: "D1H1"},
+        {value: "D1H2", label: "D1H2"},
+        {value: "E1H1", label: "E1H1"},
+        {value: "E1H2", label: "E1H2"},
+        {value: "H3", label: "H3"},
     ]
 
     const structureFamilies = [
-        {value: "H3", label: "H3"},
+        {value: "C2H1", label: "C2H1"},
+        {value: "C2H2", label: "C2H2"},
+        {value: "C3", label: "C3"},
+        {value: "C3H1", label: "C3H1"},
         {value: "C4", label: "C4"},
-        {value: "H2C2", label: "H2C2"},
+        {value: "D1H1", label: "D1H1"},
+        {value: "D1H2", label: "D1H2"},
+        {value: "E1H1", label: "E1H1"},
+        {value: "E1H2", label: "E1H2"},
+        {value: "H3", label: "H3"},
     ]
 
     const sequenceFamiliesUpdated = selection => {
-        setSelectedSequenceFamilies(selection.map(s => s.value))
+        setSelectedSequenceFamilies(selection ? selection.map(s => s.value) : []);
     }
 
     const structureFileAdded = e => {
@@ -75,7 +89,7 @@ const Predict = props => {
     }
 
     const structureFamiliesUpdated = selection => {
-        setSelectedStructureFamilies(selection.map(s => s.value))
+        setSelectedStructureFamilies(selection ? selection.map(s => s.value) : []);
     }
 
     const [searchSequence, searchSequenceMutation] = useMutation(SEARCH_SEQUENCE, {
