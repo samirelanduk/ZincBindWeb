@@ -47,7 +47,7 @@ const Predict = props => {
     const fileRef = useRef(null);
     const [fileName, setFileName] = useState("");
     const [selectedStructureFamilies, setSelectedStructureFamilies] = useState([]);
-    const [searchByLocation, setSearchByLocation] = useState(true);
+    const [searchByLocation, setSearchByLocation] = useState(false);
     const [searchByFamily, setSearchByFamily] = useState(true);
     const [searchHalfSites, setSearchHalfSites] = useState(false);
     const [structureError, setStructureError] = useState("");
@@ -158,7 +158,7 @@ const Predict = props => {
                         <input type="file" id="file" ref={fileRef} onChange={structureFileAdded} />
                         <label>{fileName || "Upload Structure File (.pdb, .cif or .mmtf)"}</label>
                     </div>
-                    <div className="toggles">
+                    {/* <div className="toggles">
                         <div className="toggle">
                             <Toggle
                                 id="location"
@@ -184,7 +184,7 @@ const Predict = props => {
                             <label htmlFor="half">Search for half-sites</label>
                         </div>
 
-                    </div>
+                    </div> */}
                     <div className="options">
                         <Select
                             isMulti
