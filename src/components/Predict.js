@@ -10,6 +10,7 @@ import "react-toggle/style.css"
 import ReactGA from "react-ga";
 import Select from "react-select";
 import Toggle from "react-toggle";
+import { predictUrl } from "../api";
 import Box from "./Box";
 import fileUpload from "../images/file-upload.svg"
 
@@ -27,10 +28,11 @@ const SEARCH_STRUCTURE = gql`mutation(
         structure: $structure, families: $families, findHalf: $findHalf,
         useFamiliesModels: $useFamiliesModels, useLocationModels: $useLocationModels
     ) { jobId }
-}`
+}`;
 
 const uploadLink = createUploadLink({
-    uri: "http://localhost:7001", headers: {"keep-alive": "true"}
+    uri: predictUrl(),
+    headers: {"keep-alive": "true"}
 })
 const link = ApolloLink.from([uploadLink]);
 const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link});

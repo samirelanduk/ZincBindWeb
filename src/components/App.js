@@ -6,6 +6,7 @@ import { ApolloLink } from 'apollo-link';
 import { createHttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
 import { Route, Switch } from "react-router";
+import { apiUrl } from "../api";
 import Nav from "./Nav";
 import Home from "./Home";
 import Search from "./Search";
@@ -25,17 +26,9 @@ import StructureJob from "./StructureJob";
 import Footer from "./Footer";
 import NotFound from "./NotFound";
 
-export const isDevelopment = () => {
-  /**
-   * Returns true if app is running locally.
-   */
-  return !process.env.NODE_ENV || process.env.NODE_ENV === "development";
-}
-
-
 class App extends React.Component {
 
-	httpLink = createHttpLink({ uri: "https://api.zincbind.net/" });
+	httpLink = createHttpLink({ uri: apiUrl() });
     link = ApolloLink.from([this.httpLink]);
 	client = new ApolloClient({cache: new InMemoryCache(), link: this.link});
 	

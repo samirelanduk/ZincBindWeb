@@ -6,6 +6,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from 'apollo-link';
 import { createHttpLink } from "apollo-link-http";
 import roundTo from "round-to";
+import { predictUrl } from "../api";
 import Box from "./Box";
 
 const JOB = gql`query($id: String!) {
@@ -16,7 +17,7 @@ const JOB = gql`query($id: String!) {
   }
 }`
 
-const httpLink = createHttpLink({ uri: "http://localhost:7001/" });
+const httpLink = createHttpLink({ uri: predictUrl(), });
 const link = ApolloLink.from([httpLink]);
 const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link});
 
