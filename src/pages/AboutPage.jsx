@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import Box from "./Box";
-import wellcome from '../images/wellcome.jpg';
-import ismb from '../images/ismb.png';
-import ucl from '../images/ucl.png';
-import birkbeck from '../images/birkbeck.jpg';
-import django from '../images/django.png';
-import graphql from '../images/graphql.png';
-import react from '../images/react.jpg';
-import highcharts from '../images/highcharts.png';
-import ngl from '../images/ngl.png';
-import blast from '../images/blast.jpg';
+import Box from "../components/Box";
+import wellcome from "../images/wellcome.jpg";
+import ismb from "../images/ismb.png";
+import ucl from "../images/ucl.png";
+import birkbeck from "../images/birkbeck.jpg";
+import django from "../images/django.png";
+import graphql from "../images/graphql.png";
+import react from "../images/react.jpg";
+import highcharts from "../images/highcharts.png";
+import ngl from "../images/ngl.png";
+import blast from "../images/blast.jpg";
 import ReactGA from "react-ga";
 
-class About extends Component {
+class AboutPage extends Component {
     
     render() {
         document.title = "About - ZincBind";
@@ -20,7 +20,7 @@ class About extends Component {
         ReactGA.pageview(window.location.pathname + window.location.search);
         
         return (
-            <main className="about">
+            <main className="about-page">
                 <Box>
                     <h1>About</h1>
                 </Box>
@@ -49,4 +49,4 @@ class About extends Component {
     }
 }
  
-export default About;
+export default AboutPage;

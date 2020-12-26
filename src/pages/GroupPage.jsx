@@ -1,12 +1,12 @@
 import React, { Fragment, Component } from "react";
-import Box from "./Box";
-import ZincSites from "./ZincSites";
+import Box from "../components/Box";
+import ZincSites from "../components/ZincSites";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ReactGA from "react-ga";
 
-class Group extends Component {
+class GroupPage extends Component {
     
     render() {
 
@@ -62,4 +62,4 @@ class Group extends Component {
     }
 }
 
-export default Group;
+export default GroupPage;

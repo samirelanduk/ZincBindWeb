@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Box from "./Box";
+import Box from "../components/Box";
 import ReactGA from "react-ga";
 
-class Help extends Component {
+class HelpPage extends Component {
     
     render() {
         document.title = "Help - ZincBind";
@@ -11,7 +11,7 @@ class Help extends Component {
         ReactGA.pageview(window.location.pathname + window.location.search);
         
         return (
-            <main className="help">
+            <main className="help-page">
                 <Box>
                     <h1>Help</h1>
                 </Box>
@@ -140,4 +140,4 @@ class Help extends Component {
     }
 }
  
-export default Help;
+export default HelpPage;

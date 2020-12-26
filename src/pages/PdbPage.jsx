@@ -1,14 +1,14 @@
 import React, { Fragment, Component } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import Box from "./Box";
-import ZincSites from "./ZincSites";
-import PdbInfo from "./PdbInfo";
-import NglInterface from "./NglInterface";
+import Box from "../components/Box";
+import ZincSites from "../components/ZincSites";
+import PdbInfo from "../components/PdbInfo";
+import NglInterface from "../components/NglInterface";
 import { BarLoader } from "react-spinners";
 import ReactGA from "react-ga";
 
-class Pdb extends Component {
+class PdbPage extends Component {
     
     render() {
         const code = this.props.match.params.code;
@@ -173,4 +173,4 @@ class Pdb extends Component {
     }
 }
  
-export default Pdb;
+export default PdbPage;

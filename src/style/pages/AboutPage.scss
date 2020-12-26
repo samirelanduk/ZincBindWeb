@@ -1,4 +1,4 @@
-.about {
+.about-page {
 
     max-width: 800px;
 
@@ -27,7 +27,7 @@
 }
 
 @media(min-width: 400px) {
-    .about {
+    .about-page {
         .box:nth-child(3) {
             grid-template-columns: 1fr 1fr;
             padding: $gap-5 $gap-6;
@@ -46,7 +46,7 @@
 }
 
 @media(min-width: 600px) {
-    .about {
+    .about-page {
         .box:nth-child(3) {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             grid-gap: $gap-5;

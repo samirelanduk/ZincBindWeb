@@ -2,16 +2,16 @@ import React, { Fragment, Component } from "react";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import Box from "./Box";
-import ZincSites from "./ZincSites";
-import PdbInfo from "./PdbInfo";
-import NglInterface from "./NglInterface";
+import Box from "../components/Box";
+import ZincSites from "../components/ZincSites";
+import PdbInfo from "../components/PdbInfo";
+import NglInterface from "../components/NglInterface";
 import { metalToNgl, residueToNgl } from "../index";
-import NotFound from "./NotFound";
+import NotFound from "./NotFoundPage";
 import { BarLoader } from "react-spinners";
 import ReactGA from "react-ga";
 
-class Site extends Component {
+class SitePage extends Component {
 
     elementClick(e) {
         
@@ -58,7 +58,7 @@ class Site extends Component {
         ReactGA.pageview(window.location.pathname + window.location.search);
 
         return (
-        <main className="site-page">
+        <main className="site-page-page">
             <Query query={QUERY} fetchPolicy='network-only' >
                 {
                     ({loading, data, error}) => {
@@ -160,4 +160,4 @@ class Site extends Component {
     }
 }
  
-export default Site;
+export default SitePage;

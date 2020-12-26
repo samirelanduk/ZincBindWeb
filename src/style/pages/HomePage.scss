@@ -1,4 +1,4 @@
-.home {
+.home-page {
     margin: 0px;
     padding: 0;
     width: 100%;
@@ -90,7 +90,7 @@
 }
 
 @media (min-width: 900px) {
-    .home {
+    .home-page {
         .home-row {
             display: grid;
             grid-template-columns: 1fr 1fr;

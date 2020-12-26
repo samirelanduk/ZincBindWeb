@@ -3,11 +3,11 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloLink } from 'apollo-link';
+import { ApolloLink } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import roundTo from "round-to";
 import { predictUrl } from "../api";
-import Box from "./Box";
+import Box from "../components/Box";
 
 const JOB = gql`query($id: String!) {
   sequenceJob(id: $id) {
@@ -19,7 +19,7 @@ const httpLink = createHttpLink({ uri: predictUrl(), });
 const link = ApolloLink.from([httpLink]);
 const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link});
 
-const SequenceJob = props => {
+const SequenceJobPage = props => {
 
   const { loading, data, stopPolling } = useQuery(JOB, {
     variables: {id: props.match.params.id},
@@ -33,7 +33,7 @@ const SequenceJob = props => {
 
 
   return (
-    <main className="sequence-job">
+    <main className="sequence-job-page">
       <Box className="heading"><h1>Sequence Job</h1></Box>
 
       {
@@ -76,4 +76,4 @@ const SequenceJob = props => {
   )
 }
 
-export default SequenceJob;
+export default SequenceJobPage;

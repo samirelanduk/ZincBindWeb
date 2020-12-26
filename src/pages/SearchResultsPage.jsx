@@ -1,14 +1,14 @@
 import React, { Fragment, Component } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import Box from "./Box";
-import SearchNav from "./SearchNav";
-import PdbResult from "./PdbResult";
-import SequenceResult from "./SequenceResult";
-import SiteResult from "./SiteResult";
-import NoResults from "./NoResults";
+import Box from "../components/Box";
+import SearchNav from "../components/SearchNav";
+import PdbResult from "../components/PdbResult";
+import SequenceResult from "../components/SequenceResult";
+import SiteResult from "../components/SiteResult";
+import NoResults from "../components/NoResults";
 
-class SearchResults extends Component {
+class SearchResultsPage extends Component {
 
     paramsObject = (string) => {
         let params = {};
@@ -91,7 +91,7 @@ class SearchResults extends Component {
         const QUERY = gql(query_string);
 
         return (
-            <main className="all-data search-results">
+            <main className="all-data search-results-page">
                 <Box>
                     <h1>{pdbQuery.length > 2 ? "Search Results" : "All Data"}</h1>
                 </Box>
@@ -234,4 +234,4 @@ class SearchResults extends Component {
     }
 }
 
-export default SearchResults;
+export default SearchResultsPage;

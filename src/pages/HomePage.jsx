@@ -6,7 +6,7 @@ import zincsite from "../images/zincsite.png";
 import deepLearning from "../images/deep-learning.svg";
 import ReactGA from "react-ga";
 
-class Home extends Component {
+class HomePage extends Component {
     
     render() {
         const QUERY = gql`{ stats { pdbCount allSiteCount uniqueSiteCount } }`;
@@ -14,7 +14,7 @@ class Home extends Component {
         ReactGA.pageview(window.location.pathname + window.location.search);
         
         return (
-            <main className="home">
+            <main className="home-page">
                 <div className="home-row home-1">
                     <div className="home-cell site-description">
                         <h1>The Database of Zinc Binding Sites</h1>
@@ -64,4 +64,4 @@ class Home extends Component {
     }
 }
  
-export default Home;
+export default HomePage;

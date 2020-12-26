@@ -1,4 +1,4 @@
-.families {
+.families-page {
 
     .box.heading {
         width: 100%;
@@ -49,7 +49,7 @@
 
 
 @media (min-width: 400px) {
-    .families {
+    .families-page {
         .families-grid {
             grid-template-columns: 1fr 1fr 1fr;
         }
@@ -58,7 +58,7 @@
 
 
 @media (min-width: 600px) {
-    .families {
+    .families-page {
         .families-grid {
             grid-template-columns: 1fr 1fr 1fr 1fr;
         }
@@ -67,7 +67,7 @@
 
 
 @media (min-width: 800px) {
-    .families {
+    .families-page {
         .families-grid {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         }
@@ -75,7 +75,7 @@
 }
 
 @media (min-width: 1000px) {
-    .families {
+    .families-page {
         .families-grid {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         }

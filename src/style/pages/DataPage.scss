@@ -1,4 +1,4 @@
-.data {
+.data-page {
     max-width: 1000px;
 
     .box {
@@ -28,7 +28,7 @@
 }
 
 @media (min-width: 800px) {
-    .data {
+    .data-page {
         .charts {
 
             .box {

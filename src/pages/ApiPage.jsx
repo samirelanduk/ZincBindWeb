@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Box from "./Box";
+import Box from "../components/Box";
 import ReactGA from "react-ga";
 
-class Api extends Component {
+class ApiPage extends Component {
     
     render() {
         document.title = "API - ZincBind";
@@ -10,7 +10,7 @@ class Api extends Component {
         ReactGA.pageview(window.location.pathname + window.location.search);
         
         return (
-            <main className="api">
+            <main className="api-page">
                 <Box>
                     <h1>API Access</h1>
                 </Box>
@@ -49,4 +49,4 @@ class Api extends Component {
     }
 }
  
-export default Api;
+export default ApiPage;

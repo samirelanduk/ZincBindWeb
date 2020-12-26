@@ -3,11 +3,11 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloLink } from 'apollo-link';
+import { ApolloLink } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import roundTo from "round-to";
 import { predictUrl } from "../api";
-import Box from "./Box";
+import Box from "../components/Box";
 
 const JOB = gql`query($id: String!) {
   structureJob(id: $id) {
@@ -21,7 +21,7 @@ const httpLink = createHttpLink({ uri: predictUrl(), });
 const link = ApolloLink.from([httpLink]);
 const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link});
 
-const StructureJob = props => {
+const StructureJobPage = props => {
 
   const { loading, data, stopPolling } = useQuery(JOB, {
     variables: {id: props.match.params.id},
@@ -40,7 +40,7 @@ const StructureJob = props => {
   sites.sort((s1, s2) => s2.probability - s1.probability)
 
   return (
-    <main className="structure-job">
+    <main className="structure-job-page">
       <Box className="heading"><h1>Structure Job</h1></Box>
 
       {
@@ -86,4 +86,4 @@ const StructureJob = props => {
   )
 }
 
-export default StructureJob;
+export default StructureJobPage;

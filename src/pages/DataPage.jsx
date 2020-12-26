@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
-import Box from "./Box";
-import Chart from "./Chart"
+import Box from "../components/Box";
+import Chart from "../components/Chart"
 import ReactGA from "react-ga";
 
-class Data extends Component {
+class DataPage extends Component {
     
     render() {
         document.title = "Data - ZincBind";
@@ -37,7 +37,7 @@ class Data extends Component {
         } } }`;
 
         return (
-            <main className="data">
+            <main className="data-page">
                 <Box>
                     <h1>ZincBind Data</h1>
                 </Box>
@@ -78,4 +78,4 @@ class Data extends Component {
     }
 }
  
-export default Data;
+export default DataPage;

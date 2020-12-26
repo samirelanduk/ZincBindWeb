@@ -4,14 +4,12 @@ import gql from "graphql-tag";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createUploadLink } from "apollo-upload-client";
-import { ApolloLink } from 'apollo-link';
-import { createHttpLink } from "apollo-link-http";
+import { ApolloLink } from "apollo-link";
 import "react-toggle/style.css"
 import ReactGA from "react-ga";
 import Select from "react-select";
-import Toggle from "react-toggle";
 import { predictUrl } from "../api";
-import Box from "./Box";
+import Box from "../components/Box";
 import fileUpload from "../images/file-upload.svg"
 
 const SEARCH_SEQUENCE = gql`mutation($sequence: String!, $families: [String]) {
@@ -37,7 +35,7 @@ const uploadLink = createUploadLink({
 const link = ApolloLink.from([uploadLink]);
 const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link});
 
-const Predict = props => {
+const PredictPage = props => {
     document.title = "Predict - ZincBind";
     ReactGA.initialize("UA-51790964-20");
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -219,4 +217,4 @@ const Predict = props => {
     </main> );
 }
  
-export default Predict;
+export default PredictPage;

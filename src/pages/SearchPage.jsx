@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Box from "./Box";
-import SearchResults from "./SearchResults";
+import Box from "../components/Box";
+import SearchResults from "./SearchResultsPage";
 import ReactGA from "react-ga";
 
-class Search extends Component {
+class SearchPage extends Component {
 
     constructor(props) {
         super(props);
@@ -126,7 +126,7 @@ class Search extends Component {
             return <SearchResults history={this.props.history} />
         }
         return (
-            <main className="search">
+            <main className="search-page">
                 <Box><h1>Advanced Search</h1></Box>
                 
                 <Box>
@@ -201,4 +201,4 @@ class Search extends Component {
     }
 }
  
-export default Search;
+export default SearchPage;

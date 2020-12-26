@@ -1,11 +1,11 @@
 import React, { Fragment, Component } from "react";
-import Box from "./Box";
+import Box from "../components/Box";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ReactGA from "react-ga";
 
-class Family extends Component {
+class FamilyPage extends Component {
     
     render() {
 
@@ -26,7 +26,7 @@ class Family extends Component {
         const QUERY = gql(query);
         
         return (
-            <main className="family">
+            <main className="family-page">
                 <Box className="heading">
                     <h1>{ family }</h1>
                 </Box>
@@ -60,4 +60,4 @@ class Family extends Component {
     }
 }
 
-export default Family;
+export default FamilyPage;
