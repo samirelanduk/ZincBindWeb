@@ -1,52 +1,51 @@
-import React, { Component } from "react";
-import Box from "../components/Box";
+import React, { useEffect } from "react";
 import ReactGA from "react-ga";
+import Box from "../components/Box";
 
-class ApiPage extends Component {
-    
-    render() {
-        document.title = "API - ZincBind";
-        ReactGA.initialize("UA-51790964-20");
-        ReactGA.pageview(window.location.pathname + window.location.search);
-        
-        return (
-            <main className="api-page">
-                <Box>
-                    <h1>API Access</h1>
-                </Box>
+const ApiPage = () => {
 
-                <Box>
-                    <p>ZincBind has two different APIs for delivering programmatic
-                    access to the data and tools available here. The ZincBindDB
-                    API allows access to the database of zinc binding sites
-                    itself, and the ZincBindPredict API gives access to the
-                    predictive models via its job system.
-                    </p>
+  useEffect(() => {
+    document.title = "API - ZincBind";
+    ReactGA.initialize("UA-51790964-20");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  })
 
-                    <p>The APIs are both <a href="https://graphql.org" target="_blank" rel="noopener noreferrer">GraphQL</a> APIs,
-                    which means that you can request as much or as little data per
-                    request as you like. Their HTML interfaces also provide autocomplete
-                    hints as to the kinds of queries and mutations you can make.
-                    </p>
+  return (
+    <main className="api-page">
+      <Box>
+        <h1>API Access</h1>
+      </Box>
 
-                </Box>
+      <Box>
+        <p>
+          ZincBind has two different APIs for delivering programmatic
+          access to the data and tools available here. The ZincBindDB
+          API allows access to the database of zinc binding sites
+          itself, and the ZincBindPredict API gives access to the
+          predictive models via its job system.
+        </p>
 
-                <Box>
-                    <h2>ZincBindDB</h2>
+        <p>
+          The APIs are both <a href="https://graphql.org" target="_blank" rel="noopener noreferrer">GraphQL</a> APIs,
+          which means that you can request as much or as little data per
+          request as you like. Their HTML interfaces also provide autocomplete
+          hints as to the kinds of queries and mutations you can make.
+        </p>
+      </Box>
 
-                    <p className="endpoint">Endpoint: <a href="https://api.zincbind.net">https://api.zincbind.net</a></p>
-                    <iframe src="https://api.zincbind.net" title="ZincBindDB"></iframe>
-                </Box>
+      <Box>
+        <h2>ZincBindDB</h2>
+        <p className="endpoint">Endpoint: <a href="https://api.zincbind.net">https://api.zincbind.net</a></p>
+        <iframe src="https://api.zincbind.net" title="ZincBindDB"></iframe>
+      </Box>
 
-                <Box>
-                    <h2>ZincBindPredict</h2>
-
-                    <p className="endpoint">Endpoint: <a href="https://predict.zincbind.net">https://predict.zincbind.net</a></p>
-                    <iframe src="https://predict.zincbind.net" title="ZincBindPredict"></iframe>
-                </Box>
-            </main>
-        );
-    }
+      <Box>
+        <h2>ZincBindPredict</h2>
+        <p className="endpoint">Endpoint: <a href="https://predict.zincbind.net">https://predict.zincbind.net</a></p>
+        <iframe src="https://predict.zincbind.net" title="ZincBindPredict"></iframe>
+      </Box>
+    </main>
+  );
 }
  
 export default ApiPage;

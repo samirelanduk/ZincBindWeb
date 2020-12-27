@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
+import ReactGA from "react-ga";
 import roundTo from "round-to";
 import { predictUrl } from "../api";
 import Box from "../components/Box";
@@ -22,6 +23,12 @@ const link = ApolloLink.from([httpLink]);
 const predictClient = new ApolloClient({cache: new InMemoryCache(), link: link});
 
 const StructureJobPage = props => {
+
+  useEffect(() => {
+    document.title = props.match.params.id + " Job - ZincBind";
+    ReactGA.initialize("UA-51790964-20");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  })
 
   const { loading, data, stopPolling } = useQuery(JOB, {
     variables: {id: props.match.params.id},
@@ -68,7 +75,6 @@ const StructureJobPage = props => {
                           return <div className="residue" key={residue.identifier}>{residue.name} {residue.identifier}</div>
                           }): site.location.join(", ")}
                         </div>
-                        
                       </div>
                     )
                   })
@@ -78,10 +84,6 @@ const StructureJobPage = props => {
           </>
         )
       }
-      
-      
-
-
     </main>
   )
 }

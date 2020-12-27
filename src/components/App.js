@@ -29,7 +29,7 @@ import NotFound from "../pages/NotFoundPage";
 class App extends React.Component {
 
 	httpLink = createHttpLink({ uri: apiUrl() });
-    link = ApolloLink.from([this.httpLink]);
+	link = ApolloLink.from([this.httpLink]);
 	client = new ApolloClient({cache: new InMemoryCache(), link: this.link});
 	
 	constructor(props) {
