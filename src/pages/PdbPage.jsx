@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useRouteMatch } from "react-router";
 import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 import Box from "../components/Box";
@@ -17,7 +16,8 @@ const PdbPage = () => {
     document.title = `PDB ${code} - ZincBind`;
   })
 
-  const code = useRouteMatch("/pdbs/:code").params.code;
+  const elements = window.location.href.split("/").filter(Boolean)
+  const code = elements[elements.length - 1];
 
   const query1 = `{ pdb(id: "${code}") {
       title classification keywords depositionDate technique organism

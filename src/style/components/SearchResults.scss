@@ -1,0 +1,14 @@
+.search-results {
+    max-width: 1000px;
+    
+    .results {
+        width: inherit;
+        max-width: inherit;
+        display: grid;
+        grid-gap: $gap-3;
+    }
+
+    .box:first-child {
+        margin-top: 0;;
+    }
+}

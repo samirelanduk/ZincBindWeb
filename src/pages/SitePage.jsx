@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
@@ -20,7 +19,8 @@ const SitePage = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   })
 
-  const id = useRouteMatch("/:id").params.id;
+  const elements = window.location.href.split("/").filter(Boolean)
+  const id = elements[elements.length - 1];
 
   const elementClick = (e) => {
     const selector = e.target.dataset.ngl;

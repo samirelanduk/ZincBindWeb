@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
@@ -15,10 +14,12 @@ const FamilyPage = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   })
 
-  const family = useRouteMatch("/families/:family").params.family;
+  const elements = window.location.href.split("/").filter(Boolean)
+  const family = elements[elements.length - 1];
+
   const query = `{
     groups(family: "${family}") {
-        edges { node { id siteCount classifications } }
+      edges { node { id siteCount classifications } }
     }
   }`
   const QUERY = gql(query);

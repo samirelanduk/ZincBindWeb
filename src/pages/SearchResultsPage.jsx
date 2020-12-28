@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import ReactGA from "react-ga";
 import Box from "../components/Box";
 import SearchNav from "../components/SearchNav";
 import PdbResult from "../components/PdbResult";
@@ -18,10 +19,8 @@ class SearchResultsPage extends Component {
     if (string) {
       let queries = string.slice(1).split("&");
       for (const query of queries) {
-        console.log(query)
         let [k, v] = query.split("=");
         v = v.replace("+", "%20");
-        console.log(k, v)
         params[k] = decodeURI(v);
       }
     }

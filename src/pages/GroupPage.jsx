@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useRouteMatch } from "react-router";
 import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -15,7 +14,9 @@ const GroupPage = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   })
 
-  const id = useRouteMatch("/groups/:group").params.group;
+  const elements = window.location.href.split("/").filter(Boolean)
+  const id = elements[elements.length - 1];
+
   const query = `{
     group(id: "${id}") {
       id keywords classifications zincsites { count edges { node { 
