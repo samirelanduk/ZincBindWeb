@@ -60,6 +60,10 @@ const StructureJobPage = props => {
             </Box>
             <Box>
               <h2> Predicted sites: { data.structureJob.sites.length + data.structureJob.locations.length }</h2>
+              {sites.length ? <p className="warning">
+                Note: no predictive model is perfect - predictions here are not guarantees of zinc binding.
+                Some may be false positives, and some false negatives may be missing.
+              </p> : ""}
               <div className="structures">
                 {
                   sites.map((site, s) => {
