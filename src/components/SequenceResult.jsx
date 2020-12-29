@@ -17,10 +17,10 @@ const SequenceResult = props => {
     sequenceRef.current.scrollLeft = hitOffset - (sequenceBoxWidth / 2) - padding + (hitWidth / 2);
   })
 
-    const preQuery = props.query.slice(0, props.sequence.queryFrom - 1).toLowerCase();
-    const postQuery = props.query.slice(props.sequence.queryTo).toLowerCase();
-    const preSequence = props.sequence.chain.sequence.slice(0, props.sequence.hitFrom - 1).toLowerCase();
-    const postSequence = props.sequence.chain.sequence.slice(props.sequence.hitTo).toLowerCase();
+    const preQuery = props.query.slice(0, props.sequence.queryFrom - 1).toUpperCase();
+    const postQuery = props.query.slice(props.sequence.queryTo).toUpperCase();
+    const preSequence = props.sequence.chain.sequence.slice(0, props.sequence.hitFrom - 1).toUpperCase();
+    const postSequence = props.sequence.chain.sequence.slice(props.sequence.hitTo).toUpperCase();
     
     let queryPad = "";
     let sequencePad = "";

@@ -1,13 +1,13 @@
 import React from "react";
 import Box from "./Box";
 
-const NoResults = () => {
+const NoResults = (props) => {
 
   let sentence = "Perhaps try a more vague search?";
-  if (this.props.q) {
+  if (props.q) {
     sentence = "Search is case-insensitive, and searches PDB codes (for exact matches) and PDB descriptions, classifications, organisms, and experimental techniques (for partial matches).";
   }
-  if (this.props.sequence) {
+  if (props.sequence) {
     sentence = "BLAST search currently requires peptide sequences only - did you submit a nucleotide sequence?";
   }
   return <Box><div className="no-results">

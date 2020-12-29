@@ -29,12 +29,27 @@
         font-size: $font-size-1;
         margin-bottom: $gap-2;
 
+        .loc {
+            display: inline-grid;
+            width: 7.5px;
+        }
+
         .upper, .lower {
             font-family: monospace;
         }
 
+        .lower {
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
         .upper {
             font-weight: bold;
+        }
+
+        .index {
+            white-space: nowrap;
+            color: $purple-3;
         }
     }
 

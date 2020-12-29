@@ -63,8 +63,20 @@ const SequenceJobPage = props => {
                           <div className="probability">p={roundTo(site.probability, 2)}</div>
                         </div>
                         <div className="sequence">{site.residues.split("").map(
-                          (x, i) => <span key={i} className={x.toUpperCase() === x ? "upper" : "lower"}>{x}</span>
-                        )}</div>
+                          (x, i) => {
+                            const resNum = i + 1;
+                            let label = " ";
+                            if (resNum % 10 === 0) label = resNum.toString();
+                            return (
+                              <React.Fragment key={i}>
+                                <div className="loc">
+                                  <div className={x.toUpperCase() === x ? "upper" : "lower"}>{x}</div>
+                                  <div className="index">{label}</div>
+                                </div>
+                              </React.Fragment>
+                            )
+                          })}
+                        </div>
                       </div>
                     )
                   })
