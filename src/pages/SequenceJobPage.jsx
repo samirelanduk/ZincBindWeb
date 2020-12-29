@@ -75,10 +75,10 @@ const SequenceJobPage = props => {
                 
               </div>
 
-              {data.sequenceJob.sites.length && <p className="warning">
+              {data.sequenceJob.sites.length ? <p className="warning">
                 Note: no predictive model is perfect - predictions here are not guarantees of zinc binding.
                 Some may be false positives, and some false negatives may be missing.
-              </p>}
+              </p> : ""}
               <div className="sequences">
                 {
                   data.sequenceJob.sites.map((site, s) => {
