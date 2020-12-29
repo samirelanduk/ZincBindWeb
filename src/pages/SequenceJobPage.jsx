@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import ApolloClient from "apollo-client";
@@ -6,6 +6,8 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import ReactGA from "react-ga";
+import Toggle from "react-toggle";
+import "react-toggle/style.css"
 import roundTo from "round-to";
 import { predictUrl } from "../api";
 import Box from "../components/Box";
@@ -27,6 +29,8 @@ const SequenceJobPage = props => {
     ReactGA.initialize("UA-51790964-20");
     ReactGA.pageview(window.location.pathname + window.location.search);
   })
+
+  const [sequenceStart, setSequenceStart] = useState(null);
 
   const { loading, data, stopPolling } = useQuery(JOB, {
     variables: {id: props.match.params.id},
@@ -53,6 +57,23 @@ const SequenceJobPage = props => {
             </Box>
             <Box>
               <h2> Predicted sites: { data.sequenceJob.sites.length }</h2>
+
+              <div className="sequence-option">
+                {sequenceStart !== null && <input
+                  value={sequenceStart}
+                  onChange={e => setSequenceStart(e.target.value)}
+                  type="number"
+                  placeholder="start"
+                  step="1"
+                />}
+                <Toggle
+                  id="sequenceStart"
+                  checked={sequenceStart !== null}
+                  onChange={() => setSequenceStart(sequenceStart === null ? "" : null)}
+                />
+                <label htmlFor="sequenceStart">Display residue number</label>
+                
+              </div>
               <div className="sequences">
                 {
                   data.sequenceJob.sites.map((site, s) => {
@@ -64,9 +85,11 @@ const SequenceJobPage = props => {
                         </div>
                         <div className="sequence">{site.residues.split("").map(
                           (x, i) => {
-                            const resNum = i + 1;
                             let label = " ";
-                            if (resNum % 10 === 0) label = resNum.toString();
+                            if (sequenceStart !== null) {
+                              const resNum = i + 1 + parseInt(sequenceStart || 0);
+                              if (resNum % 10 === 0) label = resNum.toString();
+                            }
                             return (
                               <React.Fragment key={i}>
                                 <div className="loc">

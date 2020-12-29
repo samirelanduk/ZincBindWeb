@@ -1,7 +1,8 @@
 .sequence-job-page, .structure-job-page {
-
+    
     .box {
         text-align: left;
+        position: relative;
     }
 
     h1 {
@@ -22,16 +23,57 @@
         margin-bottom: $gap-2;
     }
 
+    h2 {
+        display: inline-block;
+        width: 50%;
+    }
+
+    .sequence-option {
+        display: none;
+        align-items: center;
+        justify-content: flex-end;
+        position: absolute;
+        right: $gap-3;
+        height: 45px;
+
+        input {
+            width: 50px;
+            padding: $gap-1;
+            margin-right: $gap-3;
+        }
+
+        input::placeholder {
+            color: #c0c0c0;
+            font-weight: 300;
+        }
+
+        label {
+            font-size: $font-size-2;
+            margin-left: $gap-2;
+        }
+
+        .react-toggle--checked {
+            .react-toggle-track {
+                background-color: $purple-4;
+            }
+
+            .react-toggle-thumb {
+                border-color: $purple-4;
+            }
+        }
+    }
+
     .sequence {
         font-family: monospace;
         font-weight: light;
         word-break: break-all;
-        font-size: $font-size-1;
+        font-size: $font-size-2;
         margin-bottom: $gap-2;
 
         .loc {
             display: inline-grid;
             width: 7.5px;
+            background: none;
         }
 
         .upper, .lower {
@@ -119,8 +161,13 @@
         }
     
         .sequence {
-            font-size: $font-size-2;
             margin-bottom: $gap-3;
+        }
+    }
+
+    @media (min-width: 600px) {
+        .sequence-option {
+            display: inline-flex;
         }
     }
 }
