@@ -144,7 +144,7 @@ const SearchPage = props => {
                 })}
               </select>
               <input type="text" placeholder={pdbSelect[term[0]][2]} onChange={updateInput} onKeyDown={keyDown} value={term[1]}></input>{
-                pdbTerms.length > 1 && <button className="remove-term" onClick={removeTerm}>×</button>
+                pdbTerms.length > 1 && <button className="remove-term" data-type="pdb" onClick={removeTerm}>×</button>
               }
             </div>
           )
@@ -167,7 +167,7 @@ const SearchPage = props => {
                 })}
               </select>
               <input type="text" placeholder={siteSelect[term[0]][2]} onChange={updateInput} onKeyDown={keyDown} value={term[1]}></input>{
-                siteTerms.length > 1 && <button className="remove-term" onClick={removeTerm}>×</button>
+                siteTerms.length > 1 && <button className="remove-term" data-type="site" onClick={removeTerm}>×</button>
               }
             </div>
           )
