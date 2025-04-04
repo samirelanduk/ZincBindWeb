@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from "react";
 import Box from "./Box"
 import { TwitterPicker } from "react-color";
-import { Stage, Shape } from "ngl";
+import * as NGL from "ngl/dist/ngl.js";
 import { ClipLoader } from "react-spinners";
 import { metalToNgl, residueToNgl } from "../index";
 
@@ -101,7 +101,7 @@ class NglInterface extends Component {
       }
     }
 
-    this.stage = new Stage("ngl-container", {backgroundColor: "#ffffff"});
+    this.stage = new NGL.Stage("ngl-container", {backgroundColor: "#ffffff"});
     const assembly = this.props.assembly === null ? "AU" : "BU" + this.props.assembly;
     this.stage.assembly = assembly;
 
@@ -118,7 +118,8 @@ class NglInterface extends Component {
     window.addEventListener("resize", handleResize, false);
 
 
-    this.stage.loadFile("rcsb://" + this.props.code + ".mmtf").then((component) => {
+    //this.stage.loadFile("rcsb://" + this.props.code + ".cif").then((component) => {
+    this.stage.loadFile("https://files.rcsb.org/view/" + this.props.code + ".cif").then((component) => {
       this.setState({nglLoading: false})
       // Make the whole thing a cartoon
       try {
@@ -155,7 +156,7 @@ class NglInterface extends Component {
         }
         for (let x = 0; x < DIV; x++) {
           if (x % 3 !== 0) {
-            let shape = new Shape("shape", { disableImpostor: true });
+            let shape = new NGL.Shape("shape", { disableImpostor: true });
             shape.addCylinder(lines[x], lines[x + 1], [0.56, 0.37, 0.6], 0.1);
             let shapeComp = this.stage.addComponentFromObject(shape);
             shapeComp.addRepresentation("distance");

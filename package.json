@@ -10,7 +10,7 @@
     "graphql-tag": "^2.10.1",
     "highcharts": "^7.2.0",
     "highcharts-react-official": "^2.2.2",
-    "ngl": "github:arose/ngl",
+    "ngl": "github:nglviewer/ngl#d9b2914",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-apollo": "^3.1.0",
